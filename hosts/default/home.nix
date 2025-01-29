@@ -4,6 +4,7 @@
 
   imports = [
     ../../modules/home-manager/dev/git.nix
+    ../../modules/home-manager/dev/neovim.nix
   ];
 
   # Home Manager needs a bit of information about you and the paths it should

@@ -10,13 +10,29 @@
      };
   };
 
-  outputs = { self, nixpkgs, ... }@inputs: {
-    nixosConfigurations.default = nixpkgs.lib.nixosSystem {
-      specialArgs = {inherit inputs;};
-      modules = [
-        ./hosts/default/configuration.nix
-        inputs.home-manager.nixosModules.default
-      ];
+  outputs = { self, nixpkgs, home-manager, ... }@inputs: let 
+    system = "x86_64-linux";
+    user = "quentin";
+    allowed-unfree-packages = ["vscode" "nvidia-x11" "nvidia-settings"];
+    pkgs = nixpkgs.legacyPackages.${system};
+   
+    specialArgs = {inherit allowed-unfree-packages inputs user;};
+    extraSpecialArgs = {inherit allowed-unfree-packages user;};
+
+  in { 
+    nixosConfigurations."quentin-desktop" = nixpkgs.lib.nixosSystem {
+        inherit specialArgs system;
+        
+        modules = [
+          ./nixos/hosts/quentin-desktop/configuration.nix
+          home-manager.nixosModules.home-manager {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.users.${user} = import ./home-manager/users/${user}.nix;
+            home-manager.extraSpecialArgs =  extraSpecialArgs;
+
+	  }
+        ];
     };
   };
 }

@@ -1,11 +1,12 @@
-{ config, pkgs, ... }:
+{ allowed-unfree-packages, config, pkgs, lib, ... }: let
+    configHome = "abc"; # equivalent to config.xdg.configHome
+in {
 
-{
 
   imports = [
-    ../../modules/home-manager/dev/git.nix
-    ../../modules/home-manager/dev/neovim.nix
-    ../../modules/home-manager/dev/vscode.nix
+    ../modules/dev/git.nix
+    ../modules/dev/neovim.nix
+    ../modules/dev/vscode.nix
   ];
 
   # Home Manager needs a bit of information about you and the paths it should
@@ -78,6 +79,13 @@
     # EDITOR = "emacs";
   };
 
+  programs.vscode.enable = true;
+
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
+
+  nixpkgs.config = {
+    # allowUnfree = true;
+    allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) allowed-unfree-packages;
+   };
 }

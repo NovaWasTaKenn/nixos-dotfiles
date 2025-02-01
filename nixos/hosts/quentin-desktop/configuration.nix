@@ -2,21 +2,14 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, inputs, lib, ... }:
+{ allowed-unfree-packages, config, pkgs, inputs, lib, ... }:
 
 {
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      ../../modules/nixos/graphics/nvidia.nix
-      inputs.home-manager.nixosModules.default
+      ../../modules/graphics/nvidia.nix
     ];
-
-  #home-manager
-  home-manager = {
-   extraSpecialArgs = { inherit inputs; };
-   users = { "quentin"= import ./home.nix;};
-  };
 
 
   # Bootloader.
@@ -27,7 +20,7 @@
   # Nixos
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
-  networking.hostName = "nixos"; # Define your hostname.
+  networking.hostName = "quentin-desktop"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
@@ -112,9 +105,10 @@
   programs.zsh.enable = true;
 
   # Allow unfree packages
-  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
-    "vscode-1.96.2"
-  ];
+  nixpkgs.config = {
+    # allowUnfree = true;
+    allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) allowed-unfree-packages;
+  };
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget

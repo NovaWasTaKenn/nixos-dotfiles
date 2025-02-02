@@ -1,6 +1,21 @@
 {config, pkgs, lib, ...}:
 
 {
+    #Corrects previous prompt 
+    programs.thefuck = {
+        enable = true;
+        enableZshIntegration = true;
+    };
+
+    #Better cd
+    programs.zoxide = {
+        enable = true;
+        enableZshIntegration = true;
+        options = [
+
+        ];
+    };
+
     programs.zsh = {
         enable = true;
         autocd = true; 
@@ -19,6 +34,7 @@
           gc = "git commit -m";
           gs = "git status";
           gp = "git push";
+          ff = "fuck";
         };
 
         
@@ -36,16 +52,28 @@
 
         historySubstringSearch = {
             enable = true;
-            searchDownKey = [ "^[[N" ];
-            searchUpKey = [ "^[[P" ];
+            searchDownKey = [ "^N" ];
+            searchUpKey = [ "^P" ];
         };
         
         initExtra = lib.strings.concatStringsSep "\n" [
+            "zstyle ':completion:*' menu no" 
             "zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'"
             "zstyle ':completion:*' matcher-list 'm:{A-Z}={A-Za-z}'"
             "zstyle ':completion:*' list-colors \"\${(s.:.)LS_COLORS}\"" 
+            "zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color \$realpath'" 
+            "zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color \$realpath'" 
         ];
         
-        
+        antidote = {
+            enable = true;
+            plugins = [
+                "Aloxaf/fzf-tab"  
+                "ohmyzsh/ohmyzsh path:plugins/sudo"
+                "ohmyzsh/ohmyzsh path:plugins/command-not-found"    
+            ];
+        };
     };
+
+
 }

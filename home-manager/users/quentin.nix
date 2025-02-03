@@ -9,7 +9,7 @@ in {
     ../modules/dev/vscode.nix
     ../modules/dev/starship.nix
     ../modules/dev/zsh.nix
-    ../modules/dev/fzf.nix
+    ../modules/dev/tmux.nix
   ];
 
   # Home Manager needs a bit of information about you and the paths it should
@@ -52,6 +52,7 @@ in {
     thefuck
     zoxide
     ghostty
+    tmux
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage

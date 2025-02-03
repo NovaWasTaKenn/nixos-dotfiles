@@ -1,6 +1,12 @@
 {config, pkgs, lib, ...}:
 
 {
+    #Fuzzy finder
+    programs.fzf = {
+        enable = true;
+        enableZshIntegration = true;
+    };
+
     #Corrects previous prompt 
     programs.thefuck = {
         enable = true;

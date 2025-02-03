@@ -51,6 +51,7 @@ in {
     fzf
     thefuck
     zoxide
+    ghostty
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage

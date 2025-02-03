@@ -24,7 +24,6 @@
         syntaxHighlighting.enable = true;
         dotDir = ".config/zsh";
 
-
         shellAliases = {
           nrsd = "sudo nixos-rebuild switch --flake ./#quentin-desktop";
           nrsr = "sudo nixos-rebuild switch --flake ./#quentin-desktop --rollback";
@@ -71,6 +70,7 @@
                 "Aloxaf/fzf-tab"  
                 "ohmyzsh/ohmyzsh path:plugins/sudo"
                 "ohmyzsh/ohmyzsh path:plugins/command-not-found"    
+                "jeffreytse/zsh-vi-mode"
             ];
         };
     };

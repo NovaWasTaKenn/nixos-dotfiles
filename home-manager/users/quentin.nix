@@ -12,6 +12,8 @@ in {
     ../modules/dev/tmux.nix
   ];
 
+  fonts.fontconfig.enable = true;
+
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
   home.username = "quentin";
@@ -45,7 +47,7 @@ in {
     # (pkgs.writeShellScriptBin "my-hello" ''
     #   echo "Hello, ${config.home.username}!"
     # '')
-
+    nerdfonts
     starship
     yazi
     fzf

@@ -4,7 +4,6 @@
     #Fuzzy finder
     programs.fzf = {
         enable = true;
-        enableZshIntegration = true;
     };
 
     #Corrects previous prompt 
@@ -68,6 +67,15 @@
             "zstyle ':completion:*' list-colors \"\${(s.:.)LS_COLORS}\"" 
             "zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color \$realpath'" 
             "zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color \$realpath'" 
+            #Fix for fzf in vi insert mode. zsh-vim-mode needs to be cloned separately 
+            ''
+                source $HOME/.config/zsh/zsh-vim-mode/zsh-vim-mode.plugin.zsh
+
+                if [ -n ''\"''\${commands[fzf-share]}''\" ]; then
+                  source ''\"''\$(fzf-share)/key-bindings.zsh''\"
+                  source ''\"''\$(fzf-share)/completion.zsh''\"
+                fi
+            ''
         ];
         
         antidote = {
@@ -76,7 +84,6 @@
                 "Aloxaf/fzf-tab"  
                 "ohmyzsh/ohmyzsh path:plugins/sudo"
                 "ohmyzsh/ohmyzsh path:plugins/command-not-found"    
-                "jeffreytse/zsh-vi-mode"
             ];
         };
     };

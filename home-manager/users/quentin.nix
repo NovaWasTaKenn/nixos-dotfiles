@@ -1,9 +1,10 @@
-{ allowed-unfree-packages, config, pkgs, lib, ... }: let
+{ allowed-unfree-packages, inputs, config, pkgs, lib, ... }: let
     configHome = "abc"; # equivalent to config.xdg.configHome
 in {
 
 
   imports = [
+    inputs.nvf.homeManagerModules.default
     ../modules/dev/git.nix
     ../modules/dev/neovim.nix
     ../modules/dev/vscode.nix

@@ -9,7 +9,9 @@
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
       ../../modules/graphics/nvidia.nix
-
+        
+        
+      ../../modules/guacamole/guacamole.nix
       ../../modules/security/fail2ban.nix
       ../../modules/networking/ssh.nix
     ];

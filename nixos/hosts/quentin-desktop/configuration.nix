@@ -9,7 +9,12 @@
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
       ../../modules/graphics/nvidia.nix
+
+      ../../modules/security/fail2ban.nix
+      ../../modules/networking/ssh.nix
     ];
+   
+
 
 
   # Bootloader.
@@ -30,7 +35,10 @@
   # Enable networking
   networking.networkmanager.enable = true;
 
-  # Set your time zone.
+  # Open ports in the firewall.
+  networking.firewall.allowedTCPPorts = [ 22 ]; 
+  
+        # Set your time zone.
   time.timeZone = "Europe/Paris";
 
   # Select internationalisation properties.

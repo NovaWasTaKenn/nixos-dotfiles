@@ -1,0 +1,30 @@
+<user-mapping>
+
+    <authorize
+            username="quentin"
+            password="add password hash"
+            encoding="md5">
+
+        <!-- First authorized connection -->
+        <connection name="localhost">
+            <protocol>vnc</protocol>
+            <param name="hostname">127.0.0.1</param>
+            <param name="port">5900</param>
+        </connection>
+
+        <connection name="rdp">
+            <protocol>rdp</protocol>
+            <param name="hostname">127.0.0.1</param>
+            <param name="port">3389</param>
+            <param name="ignore-cert">true</param>
+        </connection>
+
+        <connection name="ssh">
+            <protocol>ssh</protocol>
+            <param name="hostname">127.0.0.1</param>
+            <param name="port">22</param>
+        </connection>
+
+    </authorize>
+
+</user-mapping>

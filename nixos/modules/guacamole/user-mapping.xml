@@ -2,7 +2,7 @@
 
     <authorize
             username="quentin"
-            password="add password hash"
+            password="578cd6dd025610b6191301e78a89cc53"
             encoding="md5">
 
         <!-- First authorized connection -->

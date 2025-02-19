@@ -10,12 +10,12 @@
     enable = true;
     settings = {
       guacd-port = 4822;
-      guacd-hostname = "127.0.0.1";
+      guacd-hostname = "localhost";
     };
   };
 
   services.caddy.enable = true;
-  services.caddy.virtualHosts."localnetworkip".extraConfig = ''
+  services.caddy.virtualHosts."192.168.1.51".extraConfig = ''
     tls internal
     handle_path /* {
       rewrite * /guacamole{path}
@@ -28,6 +28,6 @@
   services.xrdp = {
     enable = true;
     defaultWindowManager = "startplasma-x11";
-    openFirewall = true;
+    openFirewall = true; 
   };
 }

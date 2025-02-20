@@ -14,7 +14,10 @@
       ../../modules/guacamole/guacamole.nix
       ../../modules/security/fail2ban.nix
       ../../modules/networking/ssh.nix
-    ];
+    
+      ../../modules/networking/general.nix
+    
+                ];
    
 
 
@@ -27,19 +30,7 @@
   # Nixos
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
-  networking.hostName = "quentin-desktop"; # Define your hostname.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-
-  # Enable networking
-  networking.networkmanager.enable = true;
-
-  # Open ports in the firewall.
-  networking.firewall.allowedTCPPorts = [ 22 ]; 
-  
+ 
         # Set your time zone.
   time.timeZone = "Europe/Paris";
 

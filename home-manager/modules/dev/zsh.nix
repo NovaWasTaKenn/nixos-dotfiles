@@ -30,14 +30,17 @@
         dotDir = ".config/zsh";
 
         shellAliases = {
-          nrsd = "sudo nixos-rebuild switch --flake ./#quentin-desktop";
-          nrsr = "sudo nixos-rebuild switch --flake ./#quentin-desktop --rollback";
-          nrsu = "sudo nixos-rebuild switch --flake ./#quentin-desktop --update";
+          nrsd = "nixos-rebuild switch --flake ./#quentin-desktop";
+          nrsr = "nixos-rebuild switch --flake ./#quentin-desktop --rollback";
+          nrsu = "nixos-rebuild switch --flake ./#quentin-desktop --update";
           ls = "ls --color";
           ga = "git add";
           gc = "git commit -m";
           gs = "git status";
           gp = "git push";
+          
+          gps = "git pull";
+          
           ff = "fuck";
         };
 

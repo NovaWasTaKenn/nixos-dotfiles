@@ -13,7 +13,9 @@
         name = "gruvbox";
         style = "dark";
         };
-
+        options = {
+                tabstop = 2;
+        };
         viAlias = false;
         vimAlias = true;
         lsp = {
@@ -29,9 +31,23 @@
 
           nix.enable = true;
         };
+        formatter.conform-nvim.setupOpts = {
+                        formatter_by_ft = {
+                                nix = ["alejandra"];
+                         
+                                markdown = ["prettier"];
+                                json = ["prettier"];
+                                     
+                        };
+                        format_on_save = {
+                                lsp_format = "fallback";
+                                timeout_ms = 500;
+                        };
+        
       };
     };
   };
+};
 }
 
 

@@ -15,6 +15,7 @@
         };
         options = {
                 tabstop = 2;
+                shiftwidth = 2;
         };
         viAlias = false;
         vimAlias = true;
@@ -45,6 +46,21 @@
                         };
         
       };
+        keymaps = [
+                {
+                        key = "<leader>mp";
+                        mode = ["n" "v"];
+                        lua = true;
+                        action = "function()
+                                      conform.format({
+                                        lsp_fallback = true,
+                                        async = false,
+                                        timeout_ms = 500,
+                                      })
+                                    end";
+                        desc = "Format file or range (In visual mode)";
+                }
+        ];
     };
   };
 };

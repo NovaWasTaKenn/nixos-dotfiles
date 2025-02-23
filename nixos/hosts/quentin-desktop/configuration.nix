@@ -9,16 +9,12 @@
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
       ../../modules/graphics/nvidia.nix
-        
-        
-      ../../modules/guacamole/guacamole.nix
       ../../modules/security/fail2ban.nix
       ../../modules/networking/ssh.nix
-    
       ../../modules/networking/general.nix
-    
-                ];
-   
+
+    ];
+
 
 
 
@@ -30,8 +26,8 @@
   # Nixos
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
- 
-        # Set your time zone.
+
+  # Set your time zone.
   time.timeZone = "Europe/Paris";
 
   # Select internationalisation properties.
@@ -96,7 +92,7 @@
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
       kdePackages.kate
-    #  thunderbird
+      #  thunderbird
     ];
   };
 
@@ -114,8 +110,8 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-  #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-  #  wget
+    #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+    #  wget
   ];
 
   fonts = {

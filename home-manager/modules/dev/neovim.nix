@@ -32,8 +32,11 @@
 
           nix.enable = true;
         };
-        formatter.conform-nvim.setupOpts = {
-                        formatter_by_ft = {
+
+        formatter.conform-nvim = {
+          enable = true;
+          setupOpts = {
+                                                                                  formatters_by_ft = {
                                 nix = ["alejandra"];
                          
                                 markdown = ["prettier"];
@@ -46,21 +49,22 @@
                         };
         
       };
+        };
         keymaps = [
                 {
                         key = "<leader>mp";
                         mode = ["n" "v"];
-                        lua = true;
-                        action = "function()
-                                      conform.format({
-                                        lsp_fallback = true,
-                                        async = false,
-                                        timeout_ms = 500,
-                                      })
-                                    end";
+                        action = ":lua require('conform').format({lsp_fallback = true,async = false,timeout_ms = 500})<CR>";
                         desc = "Format file or range (In visual mode)";
                 }
         ];
+
+        #        extraPlugins =  {
+        #          conform = {
+        #           package = "conform-nvim";
+        #            setup = "local conform = require('conform').setup {['default_format_opts'] = {['lsp_format'] = 'fallback'},['format_after_save'] = {['lsp_format'] = 'fallback'},['format_on_save'] = {['lsp_format'] = 'fallback',['timeout_ms'] = 500},['formatters_by_ft'] = {['json'] = {'prettier'},['markdown'] = {'prettier'},['nix'] = {'alejandra'}}}";
+        #          };
+        #        };
     };
   };
 };

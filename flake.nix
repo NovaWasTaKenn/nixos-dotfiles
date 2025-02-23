@@ -25,7 +25,7 @@
   outputs = { self, nixpkgs, home-manager, nvf,... }@inputs: let 
     system = "x86_64-linux";
     user = "quentin";
-    allowed-unfree-packages = ["vscode" "nvidia-x11" "nvidia-settings" "parsec-bin"];
+    allowed-unfree-packages = ["nvidia-x11" "nvidia-settings"];
     pkgs = nixpkgs.legacyPackages.${system};
    
     specialArgs = {inherit allowed-unfree-packages inputs user;};

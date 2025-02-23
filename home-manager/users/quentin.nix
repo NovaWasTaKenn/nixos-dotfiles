@@ -7,7 +7,6 @@ in {
     inputs.nvf.homeManagerModules.default
     ../modules/dev/git.nix
     ../modules/dev/neovim.nix
-    ../modules/dev/vscode.nix
     ../modules/dev/starship.nix
     ../modules/dev/zsh.nix
     ../modules/dev/tmux.nix
@@ -56,7 +55,7 @@ in {
     zoxide
     ghostty
     tmux
-
+    spotify-tui
         ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
@@ -91,10 +90,9 @@ in {
   #  /etc/profiles/per-user/quentin/etc/profile.d/hm-session-vars.sh
   #
   home.sessionVariables = {
-    # EDITOR = "emacs";
+    EDITOR = "nvim";
   };
 
-  programs.vscode.enable = true;
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;

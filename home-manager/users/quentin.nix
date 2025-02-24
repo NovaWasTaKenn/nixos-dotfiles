@@ -60,6 +60,8 @@ in {
     zoxide
     ghostty
     tmux
+    spotify-player
+       
   ];
 
   # Let Home Manager install and manage itself.

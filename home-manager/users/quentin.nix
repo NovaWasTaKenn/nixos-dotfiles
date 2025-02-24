@@ -1,8 +1,13 @@
-{ allowed-unfree-packages, inputs, config, pkgs, lib, ... }: let
-    configHome = "abc"; # equivalent to config.xdg.configHome
+{
+  allowed-unfree-packages,
+  inputs,
+  config,
+  pkgs,
+  lib,
+  ...
+}: let
+  configHome = "abc"; # equivalent to config.xdg.configHome
 in {
-
-
   imports = [
     inputs.nvf.homeManagerModules.default
     ../modules/dev/git.nix
@@ -55,8 +60,11 @@ in {
     zoxide
     ghostty
     tmux
-    spotify-tui
-        ];
+  ];
+
+  # Let Home Manager install and manage itself.
+  programs.home-manager.enable = true;
+  programs.jq.enable = true;
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
@@ -93,12 +101,8 @@ in {
     EDITOR = "nvim";
   };
 
-
-  # Let Home Manager install and manage itself.
-  programs.home-manager.enable = true;
-
   nixpkgs.config = {
     # allowUnfree = true;
     allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) allowed-unfree-packages;
-   };
+  };
 }

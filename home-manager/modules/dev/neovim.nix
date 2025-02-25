@@ -44,9 +44,10 @@ in {
           enable = true;
         };
 
-        mini = {
-          git.enable = true;
-        };
+        #mini = {
+          #git.enable = true;
+          #icon.enable = true;
+        #};
         
 
         ui = {

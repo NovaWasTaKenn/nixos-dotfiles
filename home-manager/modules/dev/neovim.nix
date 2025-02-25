@@ -45,6 +45,17 @@ in {
           setupOpts = {
             completion.nvim_cmp = true;
             daily_notes.dates_format = "%d/%m/%Y";
+            workspaces = [
+              {
+                name = "personal";
+                path = "~/Documents/personal";
+              }
+              {
+                name = "work";
+                path = "~/Documents/personal";
+              }
+            ];
+
           };
         };
 

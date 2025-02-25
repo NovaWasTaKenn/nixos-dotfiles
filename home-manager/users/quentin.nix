@@ -61,7 +61,7 @@ in {
     ghostty
     tmux
     spotify-player
-       
+    obsidian       
   ];
 
   # Let Home Manager install and manage itself.

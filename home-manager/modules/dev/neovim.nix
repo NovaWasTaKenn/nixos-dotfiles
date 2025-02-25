@@ -40,6 +40,14 @@ in {
           lspSignature.enable = true;
         };
 
+        notes.obsidian = {
+          enable = true;
+          setupOpts = {
+            completion.nvim_cmp = true;
+            daily_notes.dates_format = "%d/%m/%Y";
+          };
+        };
+
         keymaps = [
           {
             key = "<leader>lfj";

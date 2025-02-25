@@ -40,6 +40,27 @@ in {
           lspSignature.enable = true;
         };
 
+        git = {
+          enable = true;
+        };
+
+        mini = {
+          git.enable = true;
+        };
+        
+
+        ui = {
+          noice = {
+          enable = true;
+          };
+        };
+
+        binds = {
+          cheatsheet.enable = true;
+          whichKey.enable = true;
+        };
+
+
         notes.obsidian = {
           enable = true;
           setupOpts = {
@@ -55,7 +76,7 @@ in {
                 path = "~/Documents/personal";
               }
             ];
-
+            
           };
         };
 

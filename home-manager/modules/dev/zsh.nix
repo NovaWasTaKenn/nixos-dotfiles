@@ -77,7 +77,7 @@
       ''
         source $HOME/.config/zsh/zsh-vim-mode/zsh-vim-mode.plugin.zsh
 
-        if [ -n ''\"''\${commands [fzf-share]}''\" ]; then
+        if [ -n ''\"''\${commands[fzf-share]}''\" ]; then
           source ''\"''\$(fzf-share)/key-bindings.zsh''\"
           source ''\"''\$(fzf-share)/completion.zsh''\"
         fi

@@ -2,6 +2,9 @@
   lib,
   ...
 }: {
+
+  programs.ripgrep.enable = true;
+
   #Fuzzy finder
   programs.fzf = {
     enable = true;

@@ -3,31 +3,8 @@
   ...
 }: {
 
-  programs.ripgrep.enable = true;
 
-  #Fuzzy finder
-  programs.fzf = {
-    enable = true;
-  };
-
-  #Corrects previous prompt
-  programs.thefuck = {
-    enable = true;
-    enableZshIntegration = true;
-  };
-
-  #Better cd
-  programs.zoxide = {
-    enable = true;
-    enableZshIntegration = true;
-    options = [
-    ];
-  };
-
-  programs.lazygit = {
-    enable = true;
-  };
-
+  
   programs.zsh = {
     enable = true;
     autocd = true;

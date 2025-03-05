@@ -1,5 +1,5 @@
 {
-  lsp = {
+  programs.nvf.settings.vim.lsp = {
     enable = true;
     lspkind.enable = true;
     lsplines.enable = true;

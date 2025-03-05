@@ -1,7 +1,0 @@
-{
-  ui = {
-    noice = {
-      enable = true;
-    };
-  };
-}

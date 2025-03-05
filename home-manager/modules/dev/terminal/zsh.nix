@@ -1,11 +1,16 @@
-{
-  lib,
-  ...
-}: {
+{lib, ...}: {
+  imports = [
+    ./starship.nix
+    ./tmux.nix
+    ./yazi.nix
+    ./fzf.nix
+    ./lazygit.nix
+    ./zoxide.nix
+  ];
 
-
-  
   programs.zsh = {
+    #zsh plugins
+
     enable = true;
     autocd = true;
     enableCompletion = true;

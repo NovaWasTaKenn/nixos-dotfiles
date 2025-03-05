@@ -11,10 +11,10 @@ in {
   imports = [
     inputs.nvf.homeManagerModules.default
     ../modules/dev/git.nix
-    ../modules/dev/neovim.nix
-    ../modules/dev/starship.nix
-    ../modules/dev/zsh.nix
-    ../modules/dev/tmux.nix
+    ../modules/dev/neovim/neovim.nix
+    ../modules/dev/terminal/zsh.nix
+    ../modules/dev/terminal/ghostty.nix
+    ../modules/dev/ripgrep.nix
   ];
 
   fonts.fontconfig.enable = true;

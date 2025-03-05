@@ -1,10 +1,20 @@
-{lib, ...}: let
+{lib, pkgs, ...}: let
   #inherit (builtins) filter map toString;
   #inherit (lib.filesystem) listFilesRecursive;
   #inherit (lib.strings) hasSuffix fileContents;
   #inherit (lib.attrsets) genAttrs;
   #inherit (lib.nvim.dag) entryBefore;
 in {
+  imports = [
+    ./plugins/git.nix
+    ./plugins/mini.nix
+    ./plugins/obsidian.nix
+    ./plugins/binds.nix
+    ./plugins/lsp.nix
+    ./plugins/ui.nix
+    ./plugins/extra.nix 
+  ];
+
   programs.nvf = {
     enable = true;
     # your settings need to go into the settings attribute set
@@ -33,10 +43,7 @@ in {
           lua.enable = true;
         };
 
-        
-
-               
-              #luaConfigRC = let
+        #luaConfigRC = let
         ## get the name of each lua file in the lua directory, where setting files reside
         ## and import tham recursively
         #configPaths = filter (hasSuffix ".lua") (map toString (listFilesRecursive ./lua));

@@ -1,10 +1,14 @@
-{lib, inputs, ...}: let 
-inherit (inputs.nvf.lib.nvim.dag) entryBefore;
+{
+  lib,
+  inputs,
+  ...
+}: let
+  inherit (inputs.nvf.lib.nvim.dag) entryBefore;
 in {
   programs.nvf.settings.vim = {
-    luaConfigRC.addRequirePath = entryBefore [ "lazyConfigs" ] ''
-        package.path = package.path .. ";" .. os.getenv("HOME") .. "/.dotfiles/home-manager/modules/dev/neovim/?.lua"
-        '';
+    luaConfigRC.addRequirePath = entryBefore ["lazyConfigs"] ''
+      package.path = package.path .. ";" .. os.getenv("HOME") .. "/.dotfiles/home-manager/modules/dev/neovim/?.lua"
+    '';
     notes.obsidian = {
       enable = true;
       setupOpts = {
@@ -28,7 +32,6 @@ in {
         ];
         #From obsidan.nvim github example config
         note_id_func = lib.generators.mkLuaInline ''require("customLua.obsidian").noteIdFunc'';
-        
       };
     };
     keymaps = [
@@ -84,10 +87,34 @@ in {
       }
 
       {
-        key = "<leader>nda";
+        key = "<leader>oda";
         mode = "n";
         silent = false;
         action = ":ObsidianDailies<CR>";
+      }
+      {
+        key = "<leader>ott";
+        mode = "n";
+        silent = false;
+        action = ":lua require('customLua.obsidian').addTag('todo/checklist')<CR>";
+      }
+      {
+        key = "<leader>otr";
+        mode = "n";
+        silent = false;
+        action = ":lua require('customLua.obsidian').addTag('todo/rework')<CR>";
+      }
+      {
+        key = "<leader>oti";
+        mode = "n";
+        silent = false;
+        action = ":lua require('customLua.obsidian').addTag('todo/improvement')<CR>";
+      }
+      {
+        key = "<leader>ots";
+        mode = "n";
+        silent = false;
+        action = ":lua require('customLua.obsidian').addTag('todo/suggestion')<CR>";
       }
     ];
   };

@@ -1,4 +1,4 @@
-FrontmatterUpdate = { alias = {}, tags = {}, field = {} }
+FrontmatterUpdate = { alias = {}, tags = {}, fields = {} }
 --
 --modify the frontmatter in any way
 --
@@ -8,29 +8,36 @@ local function modifyFrontmatter(newFrontmatter)
   local client = require("obsidian").get_client()
 
   -- Get the `obsidian.Note` instance corresponding to the current buffer.
-  local note = assert(client:current_note())
+  local note = assert(client:current_note(), "Current obsidian note not found")
 
-  if not next(newFrontmatter.alias) == nil then
-    for i, v in ipairs(newFrontmatter.alias) do
+  print(vim.inspect(newFrontmatter))
+
+  if not newFrontmatter.alias == nil and not next(newFrontmatter.alias) == nil then
+    for _, v in ipairs(newFrontmatter.alias) do
       note.add_alias(v)
     end
   end
 
-  if not next(newFrontmatter.tags) == nil then
-    for i, v in ipairs(newFrontmatter.tags) do
-      note.add_tags(v)
+  print("new tags:".. vim.inspect(newFrontmatter.tags))
+  print("next tag:".. vim.inspect(next(newFrontmatter.tags)))
+  print("conditions: " .. vim.inspect(not (newFrontmatter.tags == nil)).. " and " .. vim.inspect(not (next(newFrontmatter.tags) == nil)))
+  if not (newFrontmatter.tags == nil) and not (next(newFrontmatter.tags) == nil) then
+    for _, v in ipairs(newFrontmatter.tags) do
+      print("tag: " .. vim.inspect(v))
+      print("note: " .. vim.inspect(note))
+      print("note has_tag: " .. vim.inspect(note.has_tag))
+      note.add_tag(note, v)
     end
   end
 
-  if not next(newFrontmatter.field) == nil then
-    for k, v in pairs(newFrontmatter.field) do
-      note.add_fields(k, v)
+  if not newFrontmatter.fields == nil and not next(newFrontmatter.fields) == nil then
+    for k, v in pairs(newFrontmatter.fields) do
+      note.add_field(k, v)
     end
   end
 
-  -- Add a field to the frontmatter.
-  note:add_tag("tags")
-
+  print(vim.inspect(note.tags))
+  print(vim.inspect(note.alias))
   -- Save the updated frontmatter back to the buffer.
   note:save_to_buffer()
 end

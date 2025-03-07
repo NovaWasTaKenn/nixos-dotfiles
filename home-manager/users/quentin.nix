@@ -15,6 +15,7 @@ in {
     ../modules/dev/terminal/zsh.nix
     ../modules/dev/terminal/ghostty.nix
     ../modules/dev/ripgrep.nix
+    ../modules/automation/default.nix
   ];
 
   fonts.fontconfig.enable = true;
@@ -63,6 +64,7 @@ in {
     spotify-player
     obsidian
     lazygit
+    libnotify
   ];
 
   # Let Home Manager install and manage itself.

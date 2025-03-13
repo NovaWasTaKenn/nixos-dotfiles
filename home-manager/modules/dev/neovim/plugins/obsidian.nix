@@ -7,6 +7,7 @@
 in {
   programs.nvf.settings.vim = {
     luaConfigRC.addRequirePath = entryBefore ["lazyConfigs"] ''
+      print(vim.inspect(package.path))
       package.path = package.path .. ";" .. os.getenv("HOME") .. "/.dotfiles/home-manager/modules/dev/neovim/?.lua"
     '';
     notes.obsidian = {
@@ -36,12 +37,11 @@ in {
         note_frontmatter_func = lib.generators.mkLuaInline ''require("customLua.obsidian").note_frontmatter_func'';
 
         #Templates
-        #templates = {
-        #folder = "~/Documents/templates";
-        #date-format = "%a-%d-%m-%Y";
-        #time_format = "%H:%M";
-        #};
-
+        templates = {
+          folder = "~/Documents/templates";
+          date-format = "%a-%d-%m-%Y";
+          time_format = "%H:%M";
+        };
       };
     };
 
@@ -103,39 +103,52 @@ in {
         mode = "n";
         silent = false;
         action = ":ObsidianLinksNew<CR>";
-        desc = "Obsidian backlincks";
+        desc = "Obsidian new link";
       }
 
-      # Dailies keybinds
+      # Periodic notes keybinds
       {
-        key = "<leader>odt";
+        key = "<leader>opt";
         mode = "n";
         silent = false;
-        action = ":ObsidianToday<CR>";
+        action = ":lua require('customLua.obsidian').periodic_notes('daily', os.time())<CR>";
         desc = "Obsidian daily today";
       }
       {
-        key = "<leader>odd";
+        key = "<leader>opd";
         mode = "n";
         silent = false;
-        action = ":ObsidianTomorrow<CR>";
+        action = ":lua require('customLua.obsidian').periodic_notes('daily', os.time()+86400)<CR>";
         desc = "Obsidian daily tomorrow";
       }
       {
-        key = "<leader>ody";
+        key = "<leader>opy";
         mode = "n";
         silent = false;
-        action = ":ObsidianYesterday<CR>";
+        action = ":lua require('customLua.obsidian').periodic_notes('daily', os.time()-86400)<CR>";
         desc = "Obsidian daily yesterday";
       }
       {
-        key = "<leader>oda";
+        key = "<leader>opm";
         mode = "n";
         silent = false;
-        action = ":ObsidianDailies<CR>";
-        desc = "Obsidian daily any";
+        action = ":lua require('customLua.obsidian').periodic_notes('monthly', os.time())<CR>";
+        desc = "Obsidian periodic monthly";
       }
-
+{
+        key = "<leader>opw";
+        mode = "n";
+        silent = false;
+        action = ":lua require('customLua.obsidian').periodic_notes('weekly', os.time())<CR>";
+        desc = "Obsidian periodic weekly";
+      }
+  {
+        key = "<leader>opa";
+        mode = "n";
+        silent = false;
+        action = ":lua require('customLua.obsidian').periodic_notes('yearly', os.time())<CR>";
+        desc = "Obsidian periodic yearly";
+      }    
       #Tags keybinds
       {
         key = "<leader>ot";

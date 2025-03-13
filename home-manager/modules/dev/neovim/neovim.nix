@@ -13,6 +13,7 @@ in {
     ./plugins/lsp.nix
     ./plugins/ui.nix
     ./plugins/extra.nix 
+    ./plugins/harpoon.nix 
   ];
 
   programs.nvf = {

@@ -21,8 +21,8 @@ in {
 
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
-  home.username = "quentin";
-  home.homeDirectory = "/home/quentin";
+  home.username = "nova-pro";
+  home.homeDirectory = "/home/nova-pro";
 
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release
@@ -105,4 +105,5 @@ in {
     EDITOR = "nvim";
   };
 
+  
 }

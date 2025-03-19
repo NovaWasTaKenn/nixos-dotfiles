@@ -2,16 +2,17 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ allowed-unfree-packages, config, pkgs, inputs, lib, ... }:
+{ config, pkgs, inputs, lib, ... }:
 
 {
   imports =
     [ # Include the results of the hardware scan.
+      ../../nixos/modules/wsl.nix
       ./hardware-configuration.nix
-      ../../modules/graphics/nvidia.nix
-      ../../modules/security/fail2ban.nix
-      ../../modules/networking/ssh.nix
-      ../../modules/networking/general.nix
+      ../../nixos/modules/graphics/nvidia.nix
+      ../../nixos/modules/security/fail2ban.nix
+      ../../nixos/modules/networking/ssh.nix
+      ../../nixos/modules/networking/general.nix
 
     ];
 
@@ -100,12 +101,6 @@
   # Install firefox.
   programs.firefox.enable = true;
   programs.zsh.enable = true;
-
-  # Allow unfree packages
-  nixpkgs.config = {
-    # allowUnfree = true;
-    allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) allowed-unfree-packages;
-  };
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget

@@ -8,7 +8,6 @@
   configHome = "abc"; # equivalent to config.xdg.configHome
 in {
   imports = [
-    inputs.nvf.homeManagerModules.default
     ../modules/dev/git.nix
     ../modules/dev/neovim/neovim.nix
     ../modules/dev/terminal/zsh.nix
@@ -21,7 +20,7 @@ in {
 
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
-  home.username = "nova-pro";
+  home.username = "quentin-pro";
   home.homeDirectory = "/home/nova-pro";
 
   # This value determines the Home Manager release that your configuration is

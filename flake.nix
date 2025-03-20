@@ -31,10 +31,12 @@
   outputs = inputs @ {self, ...}: let
     system = "x86_64-linux"; # Passer dans dossier profile
     user = "quentin"; # TODO : multi users
-    pkgs = inputs.nixpkgs.config {
+    pkgs = import inputs.nixpkgs {
       system = system;
-      allowUnfree = true;
-      allowUnfreePredicate = (_:true);
+      config = {
+        allowUnfree = true;
+        allowUnfreePredicate = _:true;
+      };
     };
     specialArgs = {inherit inputs pkgs;};
     extraSpecialArgs = {inherit inputs pkgs;};
@@ -44,31 +46,30 @@
       user = inputs.home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
         modules = [
+
+          inputs.nvf.homeManagerModules.default
           # load home.nix from selected PROFILE
-          inputs.home-manager.nixosModules.home-manager
-          {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.users.${user} = import (./. + "/profiles/users/" + ("/" + user) + ".nix");
-            home-manager.extraSpecialArgs = extraSpecialArgs;
-          }
+          (./. + "/profiles/users" + ("/" + user) + ".nix")
         ];
         extraSpecialArgs = {
           # pass config variables from above
-          inherit extraSpecialArgs;
+          inherit inputs;
+          inherit pkgs;
         };
       };
     };
 
     nixosConfigurations = {
-      system = pkgs.lib.nixosSystem {
+      system = inputs.nixpkgs.lib.nixosSystem {
         system = system;
         modules = [
           (./. + "/profiles/hosts" + ("/" + host) + "/configuration.nix")
         ]; # load configuration.nix from selected PROFILE
         specialArgs = {
           # pass config variables from above
-          inherit specialArgs system;
+          inherit inputs;
+          inherit system;
+          inherit pkgs;
         };
       };
     };

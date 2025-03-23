@@ -1,30 +1,31 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-
-{  config, pkgs, inputs, lib, ... }:
-
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-      ../../../nixos/modules/graphics/nvidia.nix
-      ../../../nixos/modules/networking/ssh.nix
-      ../../../nixos/modules/networking/general.nix
-
-    ];
-
+  config,
+  pkgs,
+  inputs,
+  lib,
+  ...
+}: {
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+    ../../../nixos/modules/graphics/nvidia.nix
+    ../../../nixos/modules/networking/ssh.nix
+    ../../../nixos/modules/networking/general.nix
+    ../../../globalCustomOptions.nix
+  ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
-  boot.loader.systemd-boot.configurationLimit = 5; 
+  boot.loader.systemd-boot.configurationLimit = 5;
   boot.loader.efi.canTouchEfiVariables = true;
 
   # Nixos
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = ["nix-command" "flakes"];
 
   nixpkgs.config.allowUnfree = true;
-
 
   # Set your time zone.
   time.timeZone = "Europe/Paris";
@@ -86,20 +87,18 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.quentin = {
     isNormalUser = true;
-    description = " quentin"; 
+    description = " quentin";
     shell = pkgs.zsh;
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = ["networkmanager" "wheel"];
     packages = with pkgs; [
       kdePackages.kate
       #  thunderbird
     ];
   };
 
-
   # Install firefox.
   programs.firefox.enable = true;
   programs.zsh.enable = true;
-
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
@@ -110,7 +109,7 @@
   ];
 
   fonts = {
-    packages = with pkgs; [ nerdfonts ];
+    packages = with pkgs; [nerdfonts];
     fontDir.enable = true;
   };
 
@@ -141,5 +140,4 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "24.11"; # Did you read the comment?
-
 }

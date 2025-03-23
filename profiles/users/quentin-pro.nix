@@ -8,12 +8,13 @@
   configHome = "abc"; # equivalent to config.xdg.configHome
 in {
   imports = [
-    ../modules/dev/git.nix
-    ../modules/dev/neovim/neovim.nix
-    ../modules/dev/terminal/zsh.nix
-    ../modules/dev/terminal/ghostty.nix
-    ../modules/dev/ripgrep.nix
-    ../modules/automation/default.nix
+    ../../home-manager/modules/dev/git.nix
+    ../../home-manager/modules/dev/neovim/neovim.nix #Separate obsidian and neovim 
+    ../../home-manager/modules/dev/terminal/zsh.nix
+    ../../home-manager/modules/dev/terminal/ghostty.nix
+    ../../home-manager/modules/dev/ripgrep.nix
+    ../../home-manager/modules/automation/default.nix
+    ../../globalCustomOptions.nix
   ];
 
   fonts.fontconfig.enable = true;

@@ -19,9 +19,14 @@
     dotDir = ".config/zsh";
 
     shellAliases = {
-      nrsd = "sudo nixos-rebuild switch --flake ./#quentin-desktop";
-      nrsr = "sudo nixos-rebuild switch --flake ./#quentin-desktop --rollback";
-      nrsu = "sudo nixos-rebuild switch --flake ./#quentin-desktop --update";
+      # TODO: Move to a management script
+      nrsd = "sudo nixos-rebuild switch --flake ./#system";
+      nrsr = "sudo nixos-rebuild switch --flake ./#system --rollback";
+      nrsu = "sudo nixos-rebuild switch --flake ./#system --update";
+      hrsd = "sudo home-manager switch --flake ./#user";
+      hrsr = "sudo home-manager switch --flake ./#user --rollback";
+      hrsu = "sudo home-manager switch --flake ./#user --update";
+
       ls = "ls --color";
       ga = "git add";
       gc = "git commit -m";
@@ -62,7 +67,7 @@
       ''
         source $HOME/.config/zsh/zsh-vim-mode/zsh-vim-mode.plugin.zsh
 
-        if [ -n ''\"''\${commands[fzf-share]}''\" ]; then
+        if [ -n ''\"''\${commands [fzf-share]}''\" ]; then
           source ''\"''\$(fzf-share)/key-bindings.zsh''\"
           source ''\"''\$(fzf-share)/completion.zsh''\"
         fi

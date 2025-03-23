@@ -14,6 +14,7 @@ in {
     ../../home-manager/modules/dev/terminal/ghostty.nix
     ../../home-manager/modules/dev/ripgrep.nix
     ../../home-manager/modules/automation/default.nix
+    ../../globalCustomOptions.nix
   ];
 
   programs.home-manager.enable = true;

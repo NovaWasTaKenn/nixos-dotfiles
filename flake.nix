@@ -30,7 +30,6 @@
 
   outputs = inputs @ {self, ...}: let
     system = "x86_64-linux"; # Passer dans dossier profile
-    user = "quentin"; # TODO : multi users
     pkgs = import inputs.nixpkgs {
       system = system;
       config = {
@@ -38,9 +37,10 @@
         allowUnfreePredicate = _:true;
       };
     };
-    specialArgs = {inherit inputs pkgs;};
-    extraSpecialArgs = {inherit inputs pkgs;};
+
+    user = "quentin"; # TODO : multi users
     host = "desktop";
+
   in {
     homeConfigurations = {
       user = inputs.home-manager.lib.homeManagerConfiguration {
@@ -55,6 +55,8 @@
           # pass config variables from above
           inherit inputs;
           inherit pkgs;
+          inherit user;
+          inherit host;
         };
       };
     };
@@ -70,6 +72,8 @@
           inherit inputs;
           inherit system;
           inherit pkgs;
+          inherit user;
+          inherit host;
         };
       };
     };

@@ -1,34 +1,26 @@
+{
+  pkgs,
+  lib,
+  inputs,
+  config,
+  ...
+}: let 
+  inherit (builtins) elemAt;
+in {
+  imports = [inputs.nixos-wsl.nixosModules.wsl];
 
-{pkgs, lib, inputs, config, builtins, ...}:
+  config = {
+    wsl = {
+      enable = true;
+      automountPath = "/mnt";
+      defaultUser = elemAt config.generalOptions.users 0;
+      startMenuLaunchers = true;
 
-{  
+      # Enable native Docker support
+      # docker-native.enable = true;
 
-  options.wsl = {
-    defaultUser = lib.mkOption {
-       type = lib.types.str;
-       default = builtins.elemAt config.generalOptions.users 0; 
-       description = "default wsl user";
-      readOnly = true;
-  
+      # Enable integration with Docker Desktop (needs to be installed)
+      # docker-desktop.enable = true;
     };
   };
-
-config = {
-
-  imports = [ inputs.nixos-wsl.nixosModules.wsl ];
-  wsl = {
-    enable = true;
-    automountPath = "/mnt";
-    defaultUser = config.wsl.defaultUser;
-    startMenuLaunchers = true;
-
-    # Enable native Docker support
-    # docker-native.enable = true;
-
-    # Enable integration with Docker Desktop (needs to be installed)
-    # docker-desktop.enable = true;
-
-  };
-
-};
 }

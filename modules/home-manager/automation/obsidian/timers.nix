@@ -7,10 +7,10 @@
       Timer = {
         Persistent = true;
         Unit = "notify-notes-inbox-full.service";
-        OnUnitActiveSec = 10800;
+        OnUnitActiveSec = "3hours";
       };
       Install = {
-        WantedBy = ["default.target"];
+        WantedBy = ["timers.target"];
       };
     };
   };

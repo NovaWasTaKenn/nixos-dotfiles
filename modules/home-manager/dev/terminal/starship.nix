@@ -6,9 +6,13 @@
     enableZshIntegration = true;
     settings = {
         add_newline = true;
-        format = "[░▒▓](#a3aed2)[  ](bg:#a3aed2 fg:#090c0c)[](bg:#769ff0 fg:#a3aed2)$directory[](fg:#769ff0 bg:#272b33) $character";
-        right_format = "[](fg:#769ff0 bg:#272b33)$all[](bg:#769ff0 fg:#a3aed2)$time[▓▒░](#a3aed2)";
+        format = "[░▒▓](#a3aed2)[  ](bg:#a3aed2 fg:#090c0c)[](bg:#769ff0 fg:#a3aed2)$directory[](fg:#769ff0 bg:#272b33)$fill[](fg:#769ff0 bg:#272b33)$all[](bg:#769ff0 fg:#a3aed2)$time[▓▒░](#a3aed2)$line_break$character";
 
+      fill = {
+        symbol = " ";
+        style = "";
+        disabled = false;
+      };
         directory = {
             style = "fg:#090c0c bg:#769ff0";
             format = "[ $path ]($style)";

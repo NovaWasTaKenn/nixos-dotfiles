@@ -23,9 +23,9 @@
       nrsd = "sudo nixos-rebuild switch --flake ./#system";
       nrsr = "sudo nixos-rebuild switch --flake ./#system --rollback";
       nrsu = "sudo nixos-rebuild switch --flake ./#system --update";
-      hrsd = "sudo home-manager switch --flake ./#user";
-      hrsr = "sudo home-manager switch --flake ./#user --rollback";
-      hrsu = "sudo home-manager switch --flake ./#user --update";
+      hrsd = "home-manager switch --flake ./#user";
+      hrsr = "home-manager switch --flake ./#user --rollback";
+      hrsu = "home-manager switch --flake ./#user --update";
 
       ls = "ls --color";
       ga = "git add";

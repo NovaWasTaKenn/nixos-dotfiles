@@ -11,9 +11,9 @@
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
-    ../../../nixos/modules/graphics/nvidia.nix
-    ../../../nixos/modules/networking/ssh.nix
-    ../../../nixos/modules/networking/general.nix
+    ../../../modules/nixos/graphics/nvidia.nix
+    ../../../modules/nixos/networking/ssh.nix
+    ../../../modules/nixos/networking/general.nix
     ../../../globalCustomOptions.nix
   ];
 

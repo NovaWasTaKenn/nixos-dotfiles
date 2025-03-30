@@ -8,7 +8,7 @@ in {
   programs.nvf.settings.vim = {
     luaConfigRC.addRequirePath = entryBefore ["lazyConfigs"] ''
       print(vim.inspect(package.path))
-      package.path = package.path .. ";" .. os.getenv("HOME") .. "/.dotfiles/home-manager/modules/dev/neovim/?.lua"
+      package.path = package.path .. ";" .. os.getenv("HOME") .. "/.dotfiles/modules/home-manager/dev/neovim/?.lua"
     '';
     notes.obsidian = {
       enable = true;

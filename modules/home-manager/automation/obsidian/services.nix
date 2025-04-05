@@ -6,7 +6,7 @@
       };
       Service = {
         Type = "oneshot";
-        ExecStart = "/home/quentin/.dotfiles/home-manager/modules/automation/obsidian/notifyInboxFull.sh";
+        ExecStart = "/home/quentin/.dotfiles/modules/home-manager/automation/obsidian/notifyInboxFull.sh";
         TimeoutSec = 5;
       };
       Install = {

@@ -5,9 +5,9 @@
         Description = "Run notify-notes-inbox-full every 3h";
       };
       Timer = {
-        Persistent = true;
         Unit = "notify-notes-inbox-full.service";
         OnUnitActiveSec = "3hours";
+        OnBootSec = "1min";
       };
       Install = {
         WantedBy = ["timers.target"];

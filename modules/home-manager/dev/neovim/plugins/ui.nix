@@ -1,5 +1,5 @@
 {
-  programs.nvf.settings.vim.ui = {
+  config.vim.ui = {
     noice = {
       enable = true;
       setupOpts.routes = [

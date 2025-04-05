@@ -1,5 +1,5 @@
 {
-  programs.nvf.settings.vim.git = {
+  config.vim.git = {
     enable = true;
   };
 }

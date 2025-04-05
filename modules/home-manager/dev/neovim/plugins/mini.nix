@@ -1,4 +1,5 @@
-{#programs.nvf.settings.vim.mini = {
+{
+  #config.vim.mini = {
         #git.enable = true;
         #icon.enable = true;
         #};

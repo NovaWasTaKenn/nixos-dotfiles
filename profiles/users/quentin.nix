@@ -10,7 +10,6 @@ in {
   imports = [
     ../../modules/home-manager/dev/git.nix
     ../../modules/home-manager/dev/dev-environnments.nix
-    ../../modules/home-manager/dev/neovim/neovim.nix
     ../../modules/home-manager/dev/terminal/zsh.nix
     ../../modules/home-manager/dev/terminal/ghostty.nix
     ../../modules/home-manager/dev/ripgrep.nix
@@ -67,6 +66,7 @@ in {
     obsidian
     lazygit
     libnotify
+    myBaseNvim
   ];
 
   # Let Home Manager install and manage itself.

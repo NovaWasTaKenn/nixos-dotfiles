@@ -9,45 +9,39 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # Required, nvf works best and only directly supports flakes
-    nvf = {
-      url = "github:notashelf/nvf";
-
-      # You can override the input nixpkgs to follow your system's
-      # instance of nixpkgs. This is safe to do as nvf does not depend
-      # on a binary cache.
-      inputs.nixpkgs.follows = "nixpkgs";
-      # Optionally, you can also override individual plugins
-      # for example:
-      #inputs.obsidian-nvim.follows = "obsidian-nvim"; # <- this will use the obsidian-nvim from your inputs
-    };
-
     nixos-wsl = {
       url = "github:nix-community/NixOS-WSL/main";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    nvimConfigs = {
+      url = "path:modules/home-manager/dev/neovim";
+      inputs.nixpkgs.follows = "nixpkgs"; # Suis le nixpkgs défini précédemment ou alors nixpkgs alias nix unstable ????
+    };
   };
 
   outputs = inputs @ {self, ...}: let
-    system = "x86_64-linux"; # Passer dans dossier profile
+    system = "x86_64-linux"; # Passer dans dossier profile / plus simple de laisser ici
+    user = "quentin"; # TODO : multi users
+    host = "desktop";
+
     pkgs = import inputs.nixpkgs {
       system = system;
       config = {
         allowUnfree = true;
         allowUnfreePredicate = _:true;
       };
+      overlays = [
+        (prev: final: {
+          myBaseNvim = inputs.nvimConfigs.packages.${system}.baseNvim;
+        })
+      ];
     };
-
-    user = "quentin"; # TODO : multi users
-    host = "desktop";
-
   in {
     homeConfigurations = {
       user = inputs.home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
         modules = [
-
-          inputs.nvf.homeManagerModules.default
           # load home.nix from selected PROFILE
           (./. + "/profiles/users" + ("/" + user) + ".nix")
         ];

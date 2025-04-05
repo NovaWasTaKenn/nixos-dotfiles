@@ -3,9 +3,9 @@
   inputs,
   ...
 }: let
-  inherit (inputs.nvf.lib.nvim.dag) entryBefore;
+  inherit (lib.nvim.dag) entryBefore;
 in {
-  programs.nvf.settings.vim = {
+  config.vim = {
     luaConfigRC.addRequirePath = entryBefore ["lazyConfigs"] ''
       print(vim.inspect(package.path))
       package.path = package.path .. ";" .. os.getenv("HOME") .. "/.dotfiles/modules/home-manager/dev/neovim/?.lua"

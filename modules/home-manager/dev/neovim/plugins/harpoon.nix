@@ -1,5 +1,5 @@
 {
-  programs.nvf.settings.vim = {
+  config.vim = {
     navigation.harpoon = {
       enable = true;
       mappings = {

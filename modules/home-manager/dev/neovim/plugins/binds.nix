@@ -1,10 +1,10 @@
 {
-  programs.nvf.settings.vim.binds = {
+  config.vim.binds = {
     cheatsheet.enable = true;
     whichKey.enable = true;
   };
 
-  programs.nvf.settings.vim.keymaps = [
+  config.vim.keymaps = [
     {
       key = "<leader>lfj";
       mode = "n";

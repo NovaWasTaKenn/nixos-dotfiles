@@ -70,7 +70,13 @@ in {
   ];
 
   # Let Home Manager install and manage itself.
+
+  #TODO move to appropriate config
   programs.jq.enable = true;
+
+  #TODO move to obsidian or notes config
+  programs.pandoc.enable = true;
+  programs.texlive.enable = true;
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.

@@ -10,18 +10,33 @@
       add_newline = true;
       format = "[░▒▓](#a3aed2)[ ](bg:#a3aed2 fg:#090c0c)[](bg:#769ff0 fg:#a3aed2)$directory[](fg:#769ff0 bg:#272b33)$fill[](fg:#769ff0 bg:#272b33)$all$nix_shell$direnv[](bg:#769ff0 fg:#a3aed2)$time[▓▒░](#a3aed2)$line_break$character";
 
+
       fill = {
         symbol = " ";
         style = "";
         disabled = false;
       };
+
+      lua = {
+        style = "fg:#090c0c bg:#769ff0";
+        format = "[via $symbol($version )]($style)";
+        disabled = false;
+      };
+
       nix_shell = {
         style = "fg:#090c0c bg:#769ff0";
-        format = "[via $symbol$state( \($name\)) ]($style)";
+        symbol = "";
+        format = "[via $symbol $state]($style)";
         disabled = false;
       };
       direnv = {
-        format = "[$symbol$loaded/$allowed ]($style)";
+        symbol = "󱁏";
+        allowed_msg = "";
+        loaded_msg = "";
+        unloaded_msg = "unloaded/";
+        not_allowed_msg = "not allowed";
+        denied_msg = "denied";
+        format = "[$symbol $loaded$allowed ]($style)";
         style = "fg:#090c0c bg:#769ff0";
         disabled = false;
       };

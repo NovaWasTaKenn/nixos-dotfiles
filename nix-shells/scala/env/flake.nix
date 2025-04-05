@@ -9,7 +9,10 @@
     self,
     nixpkgs,
   }: let
-    pkgs = nixpkgs.legacyPackages."x86_64-linux";
+    pkgs = import nixpkgs { 
+        system = "x86_64-linux";
+        overlays = import ./overlays.nix;
+      };
   in {
     # importing package example
     # packages."x86_64-linux".default =
@@ -17,15 +20,16 @@
 
     devShells."x86_64-linux".default = pkgs.mkShell {
       packages = with pkgs; [
-        ammonite
-        bloop
-        sbt
-        coursier
-        scala-cli
-        scalafmt
+          ammonite
+          sbt
+          coursier
+          scala-cli
+          scalafmt
+          metals
+          jdk23
       ];
 
-      #shellHook = '''';
+      shellHook = "welcome to a scala dev shell";
       #ENV_VAR = "";
     };
   };

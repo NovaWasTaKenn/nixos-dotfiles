@@ -1,5 +1,5 @@
 {
-  description = "Ephemeral scala dev env";
+  description = "Ephemeral python dev env";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
@@ -15,13 +15,7 @@
       system = system;
       overlays = [
         (final: prev: {
-          sbt = prev.sbt.overrideAttrs {postPatch = "";};
-        })
-
-        (final: prev: {
-          myBaseNvim = inputs.nvimConfigs.packages.${system}.baseNvim;
-          dotfilesNvim = inputs.nvimConfigs.packages.${system}.dotfilesNvim;
-          scalaNvim = inputs.nvimConfigs.packages.${system}.scalaNvim;
+          pythonNvim = inputs.nvimConfigs.packages.${system}.pythonNvim;
         })
       ];
     };
@@ -32,17 +26,13 @@
 
     devShells."x86_64-linux".default = pkgs.mkShell {
       packages = with pkgs; [
-        ammonite
-        sbt
-        coursier
-        scala-cli
-        scalafmt
-        metals
-        jdk23
-        scalaNvim
+        python313
+        #python313Packages.click
+        #python313Packages.cock
+        pythonNvim
       ];
 
-      shellHook = "echo 'welcome to a scala dev shell'";
+      shellHook = "echo 'welcome to a python dev shell'";
       #ENV_VAR = "";
     };
   };

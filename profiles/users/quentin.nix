@@ -19,6 +19,8 @@ in {
 
   programs.home-manager.enable = true;
 
+  services.mpris-proxy.enable = true;
+
   fonts.fontconfig.enable = true;
 
   # Home Manager needs a bit of information about you and the paths it should
@@ -67,6 +69,9 @@ in {
     lazygit
     libnotify
     myBaseNvim
+    pandoc
+    texliveFull
+    obsidian-export
   ];
 
   # Let Home Manager install and manage itself.
@@ -75,8 +80,8 @@ in {
   programs.jq.enable = true;
 
   #TODO move to obsidian or notes config
-  programs.pandoc.enable = true;
-  programs.texlive.enable = true;
+  #programs.pandoc.enable = true;
+  #programs.texlive.enable = true;
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.

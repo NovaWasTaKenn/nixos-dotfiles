@@ -1,0 +1,3 @@
+[submodule "cli/obsidian/mdpdf"]
+	path = cli/obsidian/mdpdf
+	url = https://github.com/niceiq/obsidian-mdpdf

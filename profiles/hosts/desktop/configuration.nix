@@ -14,6 +14,7 @@
     ../../../modules/nixos/graphics/nvidia.nix
     ../../../modules/nixos/networking/ssh.nix
     ../../../modules/nixos/networking/general.nix
+    ../../../modules/nixos/networking/bluetooth.nix
     ../../../globalCustomOptions.nix
   ];
 

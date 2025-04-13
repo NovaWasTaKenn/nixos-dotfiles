@@ -22,18 +22,47 @@
     host = "desktop";
     pkgs = inputs.nixpkgs.legacyPackages.${system};
 
-    baseConfig = import ./base.nix {
-      lib = pkgs.lib;
-      pkgs = pkgs;
+    # Use loops
+    nvimConfigs = {
+      baseConfig = import ./profiles/baseNvim.nix {
+        lib = pkgs.lib;
+        pkgs = pkgs;
+      };
+
+      dotfilesConfig = import ./profiles/dotfilesNvim.nix {
+        lib = pkgs.lib;
+        pkgs = pkgs;
+      };
+
+      scalaConfig = import ./profiles/scalaNvim.nix {
+        lib = pkgs.lib;
+        pkgs = pkgs;
+      };
+      pythonConfig = import ./profiles/pythonNvim.nix {
+        lib = pkgs.lib;
+        pkgs = pkgs;
+      };
     };
 
-    baseNvim = inputs.nvf.lib.neovimConfiguration {
-      inherit pkgs;
-      modules = [baseConfig];
+    builtNvim = {
+      baseNvim = inputs.nvf.lib.neovimConfiguration {
+        inherit pkgs;
+        modules = [nvimConfigs.baseConfig];
+      };
+      dotfilesNvim = inputs.nvf.lib.neovimConfiguration {
+        inherit pkgs;
+        modules = [nvimConfigs.dotfilesConfig];
+      };
+      scalaNvim = inputs.nvf.lib.neovimConfiguration {
+        inherit pkgs;
+        modules = [nvimConfigs.scalaConfig];
+      };
+      pythonNvim = inputs.nvf.lib.neovimConfiguration {
+        inherit pkgs;
+        modules = [nvimConfigs.pythonConfig];
+      };
     };
-
   in {
-    # This will make the package available as a flake output under 'packages'
-    packages.${system}.baseNvim = baseNvim.neovim;
+    packages.${system} = pkgs.lib.mapAttrs (packageName: packageConfig: packageConfig.neovim) builtNvim;
   };
 }

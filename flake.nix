@@ -34,6 +34,8 @@
       overlays = [
         (prev: final: {
           myBaseNvim = inputs.nvimConfigs.packages.${system}.baseNvim;
+          dotfilesNvim = inputs.nvimConfigs.packages.${system}.dotfilesNvim;
+          scalaNvim = inputs.nvimConfigs.packages.${system}.scalaNvim;
         })
       ];
     };

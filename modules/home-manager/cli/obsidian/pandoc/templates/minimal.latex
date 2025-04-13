@@ -1,0 +1,26 @@
+\documentclass[$fontsize$]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{hyperref}
+\usepackage{geometry}
+\geometry{a4paper, margin=1in}
+
+% Changer la police
+\usepackage{lmodern} % Utilise la police Latin Modern
+
+% Conserver les sauts de ligne
+\usepackage{parskip}
+\setlength{\parskip}{0.5\baselineskip}
+\setlength{\parindent}{0pt}
+
+% Définir la commande \tightlist pour les listes compactes
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+\begin{document}
+
+$body$
+
+\end{document}
+
+

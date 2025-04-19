@@ -4,7 +4,7 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
     nvimConfigs = {
-      url = "path:../../dev/neovim";
+      url = "path:../dev/neovim";
       inputs.nixpkgs.follows = "nixpkgs"; # Suis le nixpkgs défini précédemment ou alors nixpkgs alias nix unstable ????
     };
   };
@@ -34,6 +34,24 @@
 
       shellHook = "echo 'Welcome to a python dev env'";
       #ENV_VAR = "";
+    };
+
+    packages.${system}.default = pkgs.python3Packages.buildPythonPackage rec {
+      pname = "nova-cli";
+      version = "0.1.0";
+
+      src = ./.;
+
+      propagatedBuildInputs = [
+        pkgs.python3Packages.click
+      ];
+
+      meta = with pkgs.lib; {
+        description = "My personal CLI containing all the custom commands i need";
+        homepage = "https://github.com/NovaWassTakenn/nova-cli";
+        license = licenses.mit;
+        maintainers = with maintainers; [NovaWasTakenn];
+      };
     };
   };
 }

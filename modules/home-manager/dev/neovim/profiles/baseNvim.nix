@@ -12,5 +12,6 @@ in {
     ../plugins/harpoon.nix
     ../plugins/theme.nix
     ../plugins/general.nix
+    ./plugins/nixlang.nix
   ];
 }

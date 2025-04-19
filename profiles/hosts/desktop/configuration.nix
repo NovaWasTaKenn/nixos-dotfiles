@@ -74,6 +74,58 @@
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
+
+    wireplumber = {
+      enable = true;
+      extraConfig = {
+        "50-alsa-config" = {
+          "monitor.alsa.rules" = [
+            {
+              matches = [
+                # This matches the value of the 'node.name' property of the node.
+                {
+                  node.name = "~alsa_output.*";
+                }
+              ];
+              actions = {
+                # Apply all the desired node specific settings here.
+                update-props = {
+                  "api.alsa.period-size" = 1024;
+                  "api.alsa.headroom" = 8192;
+                };
+              };
+            }
+          ];
+        };
+        "log-level-debug" = {
+          "context.properties" = {
+            # Output Debug log messages as opposed to only the default level (Notice)
+            "log.level" = "D";
+          };
+        };
+        "wh-1000xm3-ldac-hq" = {
+          "monitor.bluez.rules" = [
+            {
+              matches = [
+                {
+                  # Match any bluetooth device with ids equal to that of a WH-1000XM3
+                  "device.name" = "~bluez_card.*";
+                  "device.product.id" = "0x0cd3";
+                  "device.vendor.id" = "usb:054c";
+                }
+              ];
+              actions = {
+                update-props = {
+                  # Set quality to high quality instead of the default of auto
+                  "bluez5.a2dp.ldac.quality" = "hq";
+                };
+              };
+            }
+          ];
+        };
+      };
+    };
+
     # If you want to use JACK applications, uncomment this
     #jack.enable = true;
 

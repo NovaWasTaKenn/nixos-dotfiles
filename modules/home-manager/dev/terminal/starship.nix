@@ -10,10 +10,15 @@
       add_newline = true;
       format = "[░▒▓](#a3aed2)[ ](bg:#a3aed2 fg:#090c0c)[](bg:#769ff0 fg:#a3aed2)$directory[](fg:#769ff0 bg:#272b33)$fill[](fg:#769ff0 bg:#272b33)$all$nix_shell$direnv[](bg:#769ff0 fg:#a3aed2)$time[▓▒░](#a3aed2)$line_break$character";
 
-
       fill = {
         symbol = " ";
         style = "";
+        disabled = false;
+      };
+
+      python = {
+        format = "[via $symbol$pyenv_prefix($version )(\($virtualenv\) )]($style)";
+        style = "fg:#090c0c bg:#769ff0";
         disabled = false;
       };
 

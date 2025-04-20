@@ -1,5 +1,5 @@
 import click
-from config_mgmt.scripts.home_manager import home_manager
+from config_mgmt.scripts.rebuild import rebuild
 
 # @click.command()
 # @click.option("--count", default=1, help="Number of greetings.")
@@ -15,4 +15,4 @@ def mycli():
     pass
 
 
-mycli.add_command(home_manager)
+mycli.add_command(rebuild)

@@ -1,5 +1,6 @@
 import click
 from config_mgmt.scripts.rebuild import rebuild
+from obsidian.scripts.convert import convert
 
 # @click.command()
 # @click.option("--count", default=1, help="Number of greetings.")
@@ -16,3 +17,4 @@ def mycli():
 
 
 mycli.add_command(rebuild)
+mycli.add_command(convert)

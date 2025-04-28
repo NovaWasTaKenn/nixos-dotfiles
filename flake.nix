@@ -18,6 +18,11 @@
       url = "path:modules/home-manager/dev/neovim";
       inputs.nixpkgs.follows = "nixpkgs"; # Suis le nixpkgs défini précédemment ou alors nixpkgs alias nix unstable ????
     };
+
+    myCli = {
+      url = "path:modules/home-manager/cli";
+      inputs.nixpkgs.follows = "nixpkgs"; # Suis le nixpkgs défini précédemment ou alors nixpkgs alias nix unstable ????
+    };
   };
 
   outputs = inputs @ {self, ...}: let
@@ -36,6 +41,7 @@
           myBaseNvim = inputs.nvimConfigs.packages.${system}.baseNvim;
           dotfilesNvim = inputs.nvimConfigs.packages.${system}.dotfilesNvim;
           scalaNvim = inputs.nvimConfigs.packages.${system}.scalaNvim;
+          myCli = inputs.myCli.packages.${system}.myCli;
         })
       ];
     };

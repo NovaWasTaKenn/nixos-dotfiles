@@ -12,6 +12,7 @@
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
     ../../../modules/nixos/graphics/nvidia.nix
+    ../../../modules/nixos/steam.nix
     ../../../modules/nixos/networking/ssh.nix
     ../../../modules/nixos/networking/general.nix
     ../../../modules/nixos/networking/bluetooth.nix

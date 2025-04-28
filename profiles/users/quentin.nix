@@ -72,6 +72,7 @@ in {
     pandoc
     texliveFull
     obsidian-export
+    myCli
   ];
 
   # Let Home Manager install and manage itself.

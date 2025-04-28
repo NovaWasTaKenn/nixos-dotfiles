@@ -36,7 +36,7 @@
       #ENV_VAR = "";
     };
 
-    packages.${system}.default = pkgs.python3Packages.buildPythonPackage rec {
+    packages.${system}.myCli = pkgs.python3Packages.buildPythonPackage rec {
       pname = "nova-cli";
       version = "0.1.0";
 

@@ -28,9 +28,14 @@
     options = ["fmask=0077" "dmask=0077"];
   };
 
-  fileSystems."/media/870EVO-ext4" = {
-    device = "/dev/disk/by-uuid/918a79e7-1027-0000-1b86-806e6f6e6963";
+  fileSystems."/870EVO-ext4" = {
+    device = "/dev/sda3";
     fsType = "ext4";
+  };
+
+  fileSystems."/870EVO-ntfs" = {
+    device = "/dev/sda2";
+    fsType = "ntfs3";
   };
 
   swapDevices = [];

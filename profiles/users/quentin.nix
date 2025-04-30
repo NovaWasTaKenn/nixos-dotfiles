@@ -15,6 +15,7 @@ in {
     ../../modules/home-manager/dev/ripgrep.nix
     ../../modules/home-manager/automation
     ../../globalCustomOptions.nix
+    ../../modules/home-manager/gaming.nix
   ];
 
   programs.home-manager.enable = true;

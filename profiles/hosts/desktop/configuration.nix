@@ -17,6 +17,7 @@
     ../../../modules/nixos/networking/general.nix
     ../../../modules/nixos/networking/bluetooth.nix
     ../../../globalCustomOptions.nix
+    ../../../modules/nixos/power/disableSuspend.nix
   ];
 
   # Bootloader.

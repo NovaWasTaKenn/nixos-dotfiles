@@ -148,7 +148,7 @@
       },
       "locked": {
         "lastModified": 1,
-        "narHash": "sha256-R0wreKKwNGACnHc65+Uh4egHXToMQj1ASVNvMw5ZkrA=",
+        "narHash": "sha256-JOSkoXnc/lEtB+5lAzCNRBGiLaYdfmLVY5nbGiIaxLo=",
         "path": "modules/home-manager/cli",
         "type": "path"
       },

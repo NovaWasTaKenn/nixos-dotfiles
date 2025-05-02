@@ -9,6 +9,41 @@ def rebuild():
 
 
 @rebuild.command()
+@click.argument("inputflakename", nargs=1, type=str)
+@click.option(
+    "--packagename",
+    help="Name of the package to build",
+    type=str,
+)
+def reload(inputflakename: str, packagename: str):
+    """Command that builds packageName package, updates the inputFlakeName flake input in the config and rebuilds the home config to reload the changes"""
+
+    subprocess.run(
+        ["nix", "build"] + ([f"./#{packagename}"] if packagename != "" else [])
+    ).check_returncode()
+
+    subprocess.run(
+        [
+            "nix",
+            "flake",
+            "update",
+            inputflakename,
+            "--flake",
+            os.path.expanduser("~/.dotfiles/"),
+        ]
+    ).check_returncode()
+
+    subprocess.run(
+        [
+            "home-manager",
+            "switch",
+            "--flake",
+            os.path.expanduser("~/.dotfiles/#user"),
+        ]
+    ).check_returncode()
+
+
+@rebuild.command()
 @click.option(
     "--rollback/--no-update",
     default=False,

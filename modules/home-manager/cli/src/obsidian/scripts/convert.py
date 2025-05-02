@@ -12,13 +12,29 @@ def convert():
 @click.argument("input_file", nargs=1, type=click.Path(exists=True, dir_okay=False))
 @click.argument("output_file", nargs=1, type=click.Path(exists=False, dir_okay=False))
 @click.option(
-    "--font_size",
+    "--doctype",
+    default="simple",
+    show_default=True,
+    type=str,
+    help="Sets the general document style",
+)
+@click.option(
+    "--fontsize",
     default="10pt",
     show_default=True,
     type=str,
     help="Sets the pdf font size",
 )
-def mdpdf_pandoc(input_file, output_file, font_size: str) -> None:
+@click.option(
+    "--lang",
+    default="fr-FR",
+    show_default=True,
+    type=str,
+    help="Sets the pdf's language",
+)
+def mdpdf_pandoc(
+    input_file, output_file, fontsize: str, doctype: str, lang: str
+) -> None:
     """Converts gf markdown to pdf using pandoc"""
 
     click.echo(f"output type : {type(output_file)}")
@@ -28,28 +44,44 @@ def mdpdf_pandoc(input_file, output_file, font_size: str) -> None:
 
     click.echo(f"current working dir: {os.getcwd()}")
 
-    pandoc_args: list[str] = [
+    args: list[str] = [
         "pandoc",
         input_file,
+        "-o",
+        f"{output_file}",
         "--from=gfm+hard_line_breaks",
         "--to=pdf",
         "--pdf-engine=xelatex",
-        "-V",
-        f"fontsize={font_size}",
         "--standalone",
-        "-o",
-        f"{output_file}",
-        "--template=/home/quentin/.dotfiles/cli/obsidian/pandoc/templates/eisvogel.latex",
+        "--template=/home/quentin/.dotfiles/modules/home-manager/cli/src/obsidian/pandoc/templates/eisvogel.latex",
         "--listings",
         "-V",
-        "disable-header-and-footer=true",
+        f"lang={lang}",
         "-V",
-        "lang=fr-FR",
+        f"fontsize={fontsize}",
         "-V",
         "colorlinks=true",
     ]
 
-    completedProcess = subprocess.run(pandoc_args, text=True, capture_output=True)
+    if doctype == "simple":
+        args += [
+            "-V",
+            "pagestyle=empty",
+            "-V",
+            "disable-header-and-footer=true",
+        ]
+
+    if doctype == "report":
+        args += [
+            "--toc",
+            "-V",
+            "toc-own-page",
+            "-V",
+            "titlepage",
+        ]
+
+    click.echo(f"pandoc args : {args}")
+    completedProcess = subprocess.run(args, text=True, capture_output=True)
     click.echo(f"pandoc stdout: {completedProcess.stdout}")
     click.echo(f"pandoc stderr: {completedProcess.stderr}")
     completedProcess.check_returncode()

@@ -74,6 +74,12 @@ in {
     texliveFull
     obsidian-export
     myCli
+    unrar-free
+    stremio
+    proton-pass
+    protonvpn-gui
+    protonvpn-cli
+    protonmail-desktop
   ];
 
   # Let Home Manager install and manage itself.

@@ -8,7 +8,10 @@
         description = "A scala development flake";
       };
 
-      defaultTemplate = self.templates.trivial;
+      python-cli = {
+        path = ./python-cli;
+        description = "A python cli development flake using click";
+      };
     };
   };
 }

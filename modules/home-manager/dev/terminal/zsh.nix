@@ -20,12 +20,12 @@
 
     shellAliases = {
       # TODO: Move to a management script
-      nrsd = "sudo nixos-rebuild switch --flake ./#system";
-      nrsr = "sudo nixos-rebuild switch --flake ./#system --rollback";
-      nrsu = "sudo nixos-rebuild switch --flake ./#system --update";
-      hrsd = "home-manager switch --flake ./#user";
-      hrsr = "home-manager switch --flake ./#user --rollback";
-      hrsu = "home-manager switch --flake ./#user --update";
+      nrsd = "mycli rebuild system --switch";
+      nrsr = "mycli rebuild system --switch --rollback";
+      nrsu = "mycli rebuild system --switch --update";
+      hrsd = "mycli rebuild user --switch";
+      hrsr = "mycli rebuild user --switch --rollback";
+      hrsu = "mycli rebuild user --switch --update";
 
       ls = "ls --color";
       ga = "git add";

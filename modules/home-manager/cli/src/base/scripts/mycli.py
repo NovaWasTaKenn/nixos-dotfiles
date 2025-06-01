@@ -1,5 +1,5 @@
 import click
-from config_mgmt.scripts.rebuild import rebuild
+from config_mgmt.scripts.config import config
 from obsidian.scripts.convert import convert
 
 # @click.command()
@@ -16,5 +16,5 @@ def mycli():
     pass
 
 
-mycli.add_command(rebuild)
+mycli.add_command(config)
 mycli.add_command(convert)

@@ -19,6 +19,12 @@ def convert():
     help="Sets the general document style",
 )
 @click.option(
+    "--latex/--no-latex",
+    default=False,
+    type=bool,
+    help="Outputs the intermediate latex instead",
+)
+@click.option(
     "--fontsize",
     default="10pt",
     show_default=True,
@@ -33,7 +39,7 @@ def convert():
     help="Sets the pdf's language",
 )
 def mdpdf_pandoc(
-    input_file, output_file, fontsize: str, doctype: str, lang: str
+        input_file, output_file, fontsize: str, doctype: str, lang: str, latex: bool
 ) -> None:
     """Converts gf markdown to pdf using pandoc"""
 
@@ -44,13 +50,20 @@ def mdpdf_pandoc(
 
     click.echo(f"current working dir: {os.getcwd()}")
 
+    if latex and not output_file.endswith(".latex"):
+        raise Exception("output file must be .latex if --latex is true")
+    if not latex and not output_file.endswith(".pdf"):
+        raise Exception("output file must be .md if --latex is false")
+
+    dest_format = "latex" if latex else "pdf"
+
     args: list[str] = [
         "pandoc",
         input_file,
         "-o",
         f"{output_file}",
-        "--from=gfm+hard_line_breaks",
-        "--to=pdf",
+        "--from=markdown+hard_line_breaks+raw_tex",
+        f"--to={dest_format}",
         "--pdf-engine=xelatex",
         "--standalone",
         "--template=/home/quentin/.dotfiles/modules/home-manager/cli/src/obsidian/pandoc/templates/eisvogel.latex",

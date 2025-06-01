@@ -148,7 +148,7 @@
       },
       "locked": {
         "lastModified": 1,
-        "narHash": "sha256-JOSkoXnc/lEtB+5lAzCNRBGiLaYdfmLVY5nbGiIaxLo=",
+        "narHash": "sha256-zA58uiI2DzteQ00Oyu3Lhlublu9LWVDuwoYi9uh+IHA=",
         "path": "modules/home-manager/cli",
         "type": "path"
       },
@@ -364,7 +364,7 @@
       },
       "locked": {
         "lastModified": 1,
-        "narHash": "sha256-lWq0eCxInOaX+0CYOPvEiodfREs+6m7AAHa/ppxwVVA=",
+        "narHash": "sha256-OuetUlLfS6bA0Q6zSYObcr/yioQzJo6rYaY17ywtWkY=",
         "path": "modules/home-manager/dev/neovim",
         "type": "path"
       },

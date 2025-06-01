@@ -60,7 +60,6 @@ in {
     obsidian
     nerdfonts
     spotify-player
-    obsidian
     libnotify
     myBaseNvim
     pandoc

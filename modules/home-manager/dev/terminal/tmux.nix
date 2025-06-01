@@ -4,6 +4,7 @@
   lib,
   ...
 }: {
+  home.packages = with pkgs; [tmux];
   programs.tmux = {
     enable = true;
     keyMode = "vi";

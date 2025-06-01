@@ -57,17 +57,10 @@ in {
     # (pkgs.writeShellScriptBin "my-hello" ''
     #   echo "Hello, ${config.home.username}!"
     # '')
+    obsidian
     nerdfonts
-    starship
-    yazi
-    fzf
-    thefuck
-    zoxide
-    ghostty
-    tmux
     spotify-player
     obsidian
-    lazygit
     libnotify
     myBaseNvim
     pandoc

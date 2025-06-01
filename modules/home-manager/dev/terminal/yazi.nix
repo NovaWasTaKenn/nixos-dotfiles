@@ -1,6 +1,10 @@
-{config, pkgs, lib, ...}:
-
 {
+  config,
+  pkgs,
+  lib,
+  ...
+}: {
+  home.packages = with pkgs; [yazi];
   programs.yazi = {
     enable = true;
     enableZshIntegration = true;
@@ -16,9 +20,7 @@
           sort_dir_first = true;
           sort_reverse = true;
         };
-
       };
     };
   };
-
 }

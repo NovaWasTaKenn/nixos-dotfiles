@@ -1,6 +1,7 @@
 {
   lib,
   inputs,
+  pkgs,
   ...
 }: let
   inherit (lib.nvim.dag) entryBefore;
@@ -135,20 +136,20 @@ in {
         action = ":lua require('customLua.obsidian').periodic_notes('monthly', os.time())<CR>";
         desc = "Obsidian periodic monthly";
       }
-{
+      {
         key = "<leader>opw";
         mode = "n";
         silent = false;
         action = ":lua require('customLua.obsidian').periodic_notes('weekly', os.time())<CR>";
         desc = "Obsidian periodic weekly";
       }
-  {
+      {
         key = "<leader>opa";
         mode = "n";
         silent = false;
         action = ":lua require('customLua.obsidian').periodic_notes('yearly', os.time())<CR>";
         desc = "Obsidian periodic yearly";
-      }    
+      }
       #Tags keybinds
       {
         key = "<leader>ot";

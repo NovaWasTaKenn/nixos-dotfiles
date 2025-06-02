@@ -41,11 +41,11 @@ def update(flakeinput: str, flakepath: str):
 def reload(flakeinput: str, packagename: str):
     """Command that builds packageName package, updates the inputFlakeName flake input in the config and rebuilds the home config to reload the changes"""
 
-    packagename= packagename if packagename != "" else flakeinput 
+    packagename = (
+        packagename if (packagename != "" and packagename is not None) else flakeinput
+    )
 
-    subprocess.run(
-        ["nix", "build"] + [f"./#{packagename}"]
-    ).check_returncode()
+    subprocess.run(["nix", "build"] + [f"./#{packagename}"]).check_returncode()
 
     subprocess.run(
         [

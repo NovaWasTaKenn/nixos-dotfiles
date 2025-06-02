@@ -1,4 +1,7 @@
+import sys
+
 import click
+
 from config_mgmt.scripts.config import config
 from obsidian.scripts.convert import convert
 
@@ -14,6 +17,11 @@ from obsidian.scripts.convert import convert
 @click.group
 def mycli():
     pass
+
+
+# @mycli.command
+# def test():
+#    print(sys.path)
 
 
 mycli.add_command(config)

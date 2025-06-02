@@ -20,12 +20,12 @@
 
     shellAliases = {
       # TODO: Move to a management script
-      nrsd = "mycli rebuild system --switch";
-      nrsr = "mycli rebuild system --switch --rollback";
-      nrsu = "mycli rebuild system --switch --update";
-      hrsd = "mycli rebuild user --switch";
-      hrsr = "mycli rebuild user --switch --rollback";
-      hrsu = "mycli rebuild user --switch --update";
+      nrsd = "mycli config system --switch";
+      nrsr = "mycli config system --switch --rollback";
+      nrsu = "mycli config system --switch --update";
+      hrsd = "mycli config user --switch";
+      hrsr = "mycli config user --switch --rollback";
+      hrsu = "mycli config user --switch --update";
 
       ls = "ls --color";
       ga = "git add";

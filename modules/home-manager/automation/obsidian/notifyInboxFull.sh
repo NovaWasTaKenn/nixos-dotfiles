@@ -14,7 +14,7 @@ do
   if [ -d "./$workspace/10-Inbox" ]; then 
     cd "./$workspace/10-Inbox"
   else 
-   break 
+   continue 
   fi
 
   inboxCount=$(ls | wc -l)

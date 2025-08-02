@@ -58,12 +58,11 @@ in {
     #   echo "Hello, ${config.home.username}!"
     # '')
     obsidian
-    nerdfonts
     spotify-player
     libnotify
     myBaseNvim
-    pandoc
     texliveFull
+    pandoc
     obsidian-export
     myCli
     unrar-free
@@ -72,7 +71,11 @@ in {
     protonvpn-gui
     protonvpn-cli
     protonmail-desktop
-  ];
+    (discord.override {
+      withOpenASAR = true; # can do this here too
+      withVencord = true;
+    })
+  ]++ builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts);
 
   # Let Home Manager install and manage itself.
 

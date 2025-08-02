@@ -77,7 +77,7 @@ in {
         desc = "Obsidian new note";
       }
       {
-        key = "<leader>oq";
+        key = "<leader>ov";
         mode = "n";
         silent = false;
         action = ":ObsidianQuickSwitch<CR>";
@@ -236,6 +236,20 @@ in {
         silent = false;
         action = '':lua require("customLua.obsidian").add_or_update_field("status","done")<CR>'';
         desc = "Obsidian make quality 'done'";
+      }
+      {
+        key = ''<leader>oqn"'';
+        mode = "n";
+        silent = false;
+        action = '':lua require("customLua.obsidian").quick_note()<CR>'';
+        desc = "Obsidian quick note";
+      }
+      {
+        key = ''<leader>oqc"'';
+        mode = "n";
+        silent = false;
+        action = '':! tmux kill-window<CR>'';
+        desc = "Obsidian quick note";
       }
     ];
   };

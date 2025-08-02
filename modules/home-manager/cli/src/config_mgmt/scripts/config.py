@@ -9,6 +9,27 @@ def config():
 
 
 @config.command()
+def system_clean():
+    nix_clean = "sudo nix-collect-garbage -d".split(" ")
+    home_clean = "home-manager expire-generations -d".split(" ")
+    nix_orphans = "nix store gc && sudo nix store optimize".split(" ")
+    nix_wipe = "sudo nix profile wipe-history".split(" ")
+    hm_clean_old = "home-manager remove-generations old".split(" ")
+
+    subprocess.run(
+        nix_clean
+        + ["&&"]
+        + home_clean
+        + ["&&"]
+        + nix_orphans
+        + ["&&"]
+        + nix_wipe
+        + ["&&"]
+        + hm_clean_old
+    ).check_returncode()
+
+
+@config.command()
 @click.argument("flakeinput", nargs=1, type=str)
 @click.option(
     "--flakepath",

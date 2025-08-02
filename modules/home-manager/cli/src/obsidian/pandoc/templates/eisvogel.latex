@@ -40,9 +40,6 @@
 % https://github.com/Wandmalfarbe/pandoc-latex-template
 %%
 % Options for packages loaded elsewhere
-
-\usepackage{graphicx}
-
 \PassOptionsToPackage{unicode$for(hyperrefoptions)$,$hyperrefoptions$$endfor$}{hyperref}
 \PassOptionsToPackage{hyphens}{url}
 \PassOptionsToPackage{dvipsnames,svgnames,x11names,table}{xcolor}

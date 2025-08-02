@@ -69,43 +69,107 @@
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
+  #security.pam.loginLimits = [
+  #{
+  #domain = "rtkit";
+  #item = "rtprio";
+  #type = "-";
+  #value = "89";
+  #}
+  #{
+  #domain = "rtkit";
+  #item = "nice";
+  #type = "-";
+  #value = "-12";
+  #}
+  #{
+  #domain = "@audio";
+  #item = "rtprio";
+  #type = "-";
+  #value = "89";
+  #}
+  #{
+  #domain = "@audio";
+  #item = "nice";
+  #type = "-";
+  #value = "-12";
+  #}
+  #{
+  #domain = "@audio";
+  #item = "memlock";
+  #type = "-";
+  #value = "unlimited";
+  #}
+  #];
+
   # Enable sound with pipewire.
-  hardware.pulseaudio.enable = false;
+  services.pulseaudio.enable = true;
   security.rtkit.enable = true;
   services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
+    enable = false;
+    alsa.enable = false;
+    alsa.support32Bit = false;
+    pulse.enable = false;
+
+    extraConfig.pipewire = {
+      "context.properties" = [
+        {
+          "log.level" = 5;
+        }
+      ];
+    };
+
+    #configPackages = [
+    #(pkgs.writeTextDir "share/pipewire/pipewire.conf.d/my-rt-args.conf" ''
+    #context.modules = [
+    #{
+    #name = libpipewire-module-rt
+    #args = {
+    #nice.level   = 20
+    #rt.prio      = 88
+    #rt.time.soft = -1
+    #rt.time.hard = -1
+    #rlimits.enabled = true
+    #rtportal.enabled = true
+    #rtkit.enabled = true
+    #uclamp.min = 0
+    #uclamp.max = 1024
+    #}
+    #flags = [ ifexists nofail ]
+    #}
+    #]
+    #'')
+    #];
 
     wireplumber = {
-      enable = true;
+      enable = false;
       extraConfig = {
-        "50-alsa-config" = {
-          "monitor.alsa.rules" = [
-            {
-              matches = [
-                # This matches the value of the 'node.name' property of the node.
-                {
-                  node.name = "~alsa_output.*";
-                }
-              ];
-              actions = {
-                # Apply all the desired node specific settings here.
-                update-props = {
-                  "api.alsa.period-size" = 1024;
-                  "api.alsa.headroom" = 8192;
-                };
-              };
-            }
-          ];
-        };
+        #"50-alsa-config" = {
+        #"monitor.alsa.rules" = [
+        #{
+        #matches = [
+        ## This matches the value of the 'node.name' property of the node.
+        #{
+        #node.name = "~alsa_output.*";
+        #}
+        #];
+        #actions = {
+        ## Apply all the desired node specific settings here.
+        #update-props = {
+        #"api.alsa.period-size" = 1024;
+        #"api.alsa.headroom" = 8192;
+        #};
+        #};
+        #}
+        #];
+        #};
         "log-level-debug" = {
           "context.properties" = {
             # Output Debug log messages as opposed to only the default level (Notice)
-            "log.level" = "D";
+            "log.level" = "T";
           };
         };
+        #
       };
     };
 
@@ -119,6 +183,7 @@
 
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
+  #users.groups.audio = {};
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.quentin = {
@@ -144,10 +209,11 @@
     home-manager
     wineWowPackages.full
     winetricks
+    protonup-qt
   ];
 
   fonts = {
-    packages = with pkgs; [nerdfonts];
+    packages = []++ builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts);
     fontDir.enable = true;
   };
 

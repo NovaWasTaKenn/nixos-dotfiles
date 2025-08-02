@@ -2,10 +2,10 @@
   description = "Nixos config flake";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
 
     home-manager = {
-      url = "github:nix-community/home-manager/release-24.11";
+      url = "github:nix-community/home-manager/release-25.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -15,12 +15,12 @@
     };
 
     nvimConfigs = {
-      url = "path:modules/home-manager/dev/neovim";
+      url = "path:/home/quentin/.dotfiles/modules/home-manager/dev/neovim";
       inputs.nixpkgs.follows = "nixpkgs"; # Suis le nixpkgs défini précédemment ou alors nixpkgs alias nix unstable ????
     };
 
     myCli = {
-      url = "path:modules/home-manager/cli";
+      url = "path:/home/quentin/.dotfiles/modules/home-manager/cli";
       inputs.nixpkgs.follows = "nixpkgs"; # Suis le nixpkgs défini précédemment ou alors nixpkgs alias nix unstable ????
     };
   };

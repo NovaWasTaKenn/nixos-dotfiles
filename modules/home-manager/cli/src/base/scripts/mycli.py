@@ -3,7 +3,8 @@ import sys
 import click
 
 from config_mgmt.scripts.config import config
-from obsidian.scripts.convert import convert
+
+from obsidian.scripts.notes import notes
 
 # @click.command()
 # @click.option("--count", default=1, help="Number of greetings.")
@@ -19,10 +20,10 @@ def mycli():
     pass
 
 
-# @mycli.command
-# def test():
-#    print(sys.path)
+@mycli.command
+def test():
+    print(sys.path)
 
 
 mycli.add_command(config)
-mycli.add_command(convert)
+mycli.add_command(notes)

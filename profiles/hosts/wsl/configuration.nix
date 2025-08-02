@@ -13,6 +13,7 @@
   imports = [
     # Include the results of the hardware scan.
     ../../../modules/nixos/wsl.nix
+    ../../../modules/nixos/networking/bluetooth.nix
     ./hardware-configuration.nix
     #../../nixos/modules/graphics/nvidia.nix
     #../../nixos/modules/security/fail2ban.nix
@@ -73,7 +74,7 @@
     services.printing.enable = true;
 
     # Enable sound with pipewire.
-    hardware.pulseaudio.enable = false;
+    services.pulseaudio.enable = false;
     security.rtkit.enable = true;
     services.pipewire = {
       enable = true;

@@ -95,16 +95,16 @@
         ]
       },
       "locked": {
-        "lastModified": 1743808813,
-        "narHash": "sha256-2lDQBOmlz9ggPxcS7/GvcVdzXMIiT+PpMao6FbLJSr0=",
+        "lastModified": 1752208517,
+        "narHash": "sha256-aRY1cYOdVdXdNjcL/Twpa27CknO7pVHxooPsBizDraE=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "a9f8b3db211b4609ddd83683f9db89796c7f6ac6",
+        "rev": "c6a01e54af81b381695db796a43360bf6db5702f",
         "type": "github"
       },
       "original": {
         "owner": "nix-community",
-        "ref": "release-24.11",
+        "ref": "release-25.05",
         "repo": "home-manager",
         "type": "github"
       }
@@ -147,13 +147,13 @@
         "nvimConfigs": "nvimConfigs"
       },
       "locked": {
-        "lastModified": 1,
-        "narHash": "sha256-aKsmFlfbKVT3n6ZU3MDeykfk7QUZItW0V727knG2pjM=",
-        "path": "modules/home-manager/cli",
+        "lastModified": 1753728106,
+        "narHash": "sha256-eWZgVnMUo11ITLnvEK+MFJUibBfExUi6ZG6dZoWPXcw=",
+        "path": "/home/quentin/.dotfiles/modules/home-manager/cli",
         "type": "path"
       },
       "original": {
-        "path": "modules/home-manager/cli",
+        "path": "/home/quentin/.dotfiles/modules/home-manager/cli",
         "type": "path"
       }
     },
@@ -239,16 +239,16 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1743703532,
-        "narHash": "sha256-s1KLDALEeqy+ttrvqV3jx9mBZEvmthQErTVOAzbjHZs=",
+        "lastModified": 1752162966,
+        "narHash": "sha256-3MxxkU8ZXMHXcbFz7UE4M6qnIPTYGcE/7EMqlZNnVDE=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "bdb91860de2f719b57eef819b5617762f7120c70",
+        "rev": "10e687235226880ed5e9f33f1ffa71fe60f2638a",
         "type": "github"
       },
       "original": {
         "owner": "nixos",
-        "ref": "nixos-24.11",
+        "ref": "nixos-25.05",
         "repo": "nixpkgs",
         "type": "github"
       }
@@ -363,13 +363,13 @@
         "nvf": "nvf_2"
       },
       "locked": {
-        "lastModified": 1,
-        "narHash": "sha256-OuetUlLfS6bA0Q6zSYObcr/yioQzJo6rYaY17ywtWkY=",
-        "path": "modules/home-manager/dev/neovim",
+        "lastModified": 1749399559,
+        "narHash": "sha256-SnDCLMryG2RGCovn4mkNo64ruh5F8uPY5ITQwhkfcr8=",
+        "path": "/home/quentin/.dotfiles/modules/home-manager/dev/neovim",
         "type": "path"
       },
       "original": {
-        "path": "modules/home-manager/dev/neovim",
+        "path": "/home/quentin/.dotfiles/modules/home-manager/dev/neovim",
         "type": "path"
       }
     },

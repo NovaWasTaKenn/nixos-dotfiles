@@ -20,12 +20,12 @@
 
     shellAliases = {
       # TODO: Move to a management script
-      nrsd = "mycli config system --switch";
-      nrsr = "mycli config system --switch --rollback";
-      nrsu = "mycli config system --switch --update";
-      hrsd = "mycli config user --switch";
-      hrsr = "mycli config user --switch --rollback";
-      hrsu = "mycli config user --switch --update";
+      nrsd = "mycli config rebuild-system --switch";
+      nrsr = "mycli config rebuild-system --switch --rollback";
+      nrsu = "mycli config rebuild-system --switch --update";
+      hrsd = "mycli config rebuild-user --switch";
+      hrsr = "mycli config rebuild-user --switch --rollback";
+      hrsu = "mycli config rebuild-user --switch --update";
 
       ls = "ls --color";
       ga = "git add";
@@ -56,7 +56,7 @@
       searchUpKey = ["^P"];
     };
 
-    initExtra = lib.strings.concatStringsSep "\n" [
+    initContent = lib.strings.concatStringsSep "\n" [
       "zstyle ':completion:*' menu no"
       "zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'"
       "zstyle ':completion:*' matcher-list 'm:{A-Z}={A-Za-z}'"

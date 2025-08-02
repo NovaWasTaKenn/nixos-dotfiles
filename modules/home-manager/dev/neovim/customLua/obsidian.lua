@@ -210,5 +210,12 @@ function periodicNotes(periodicity, datetime, opts)
   client.open_note(client, note)
 end
 
+function quickNote()
+    local name = vim.fn.input("Enter quick note name: ")
+    if name ~= "" then
+        vim.cmd("!mycli notes quick" .. name)
+    end
+end
+
 return { note_id_func = noteIdFunc, add_tag = addTag, note_frontmatter_func = noteFrontmatterFunc, add_or_update_field =
-addOrUpdateField, periodic_notes = periodicNotes}
+addOrUpdateField, periodic_notes = periodicNotes, quick_note = quickNote}

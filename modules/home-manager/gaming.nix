@@ -5,6 +5,7 @@
     lutris
     heroic
     bottles
+    steamtinkerlaunch
   ];
 
   home.sessionVariables = {

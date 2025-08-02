@@ -4,11 +4,31 @@ import os
 
 
 @click.group()
-def convert():
+def notes():
     pass
 
 
-@convert.command()
+@notes.command()
+@click.argument("name")
+@click.option("--pane", is_flag=True, help="Use a pane instead of a window.")
+def quick(name, pane):
+    try:
+        if pane:
+            # Split the current pane vertically and send the command to the new pane
+            completedProcess = subprocess.run(
+                ["tmux", "split-window", "-v", f'nvim "+ObsidianNew {name}"']
+            )
+        else:
+            # Create a new tmux window and open Neovim with the command
+            completedProcess = subprocess.run(
+                ["tmux", "new-window", f'nvim "+ObsidianNew {name}"']
+            )
+        completedProcess.check_returncode()
+    except Exception as e:
+        click.echo(f"An error occurred: {e}")
+
+
+@notes.command()
 @click.argument("input_file", nargs=1, type=click.Path(exists=True, dir_okay=False))
 @click.argument("output_file", nargs=1, type=click.Path(exists=False, dir_okay=False))
 @click.option(
@@ -39,7 +59,7 @@ def convert():
     help="Sets the pdf's language",
 )
 def mdpdf_pandoc(
-        input_file, output_file, fontsize: str, doctype: str, lang: str, latex: bool
+    input_file, output_file, fontsize: str, doctype: str, lang: str, latex: bool
 ) -> None:
     """Converts gf markdown to pdf using pandoc"""
 
@@ -85,13 +105,7 @@ def mdpdf_pandoc(
         ]
 
     if doctype == "report":
-        args += [
-            "--toc",
-            "-V",
-            "toc-own-page",
-            "-V",
-            "titlepage",
-        ]
+        args += ["--toc", "-V", "toc-own-page", "-V", "titlepage"]
 
     click.echo(f"pandoc args : {args}")
     completedProcess = subprocess.run(args, text=True, capture_output=True)
@@ -100,7 +114,7 @@ def mdpdf_pandoc(
     completedProcess.check_returncode()
 
 
-@convert.command()
+@notes.command()
 @click.argument("src", nargs=1, type=click.Path(exists=True))
 @click.argument("dest", nargs=1, type=click.Path(exists=False))
 @click.option(

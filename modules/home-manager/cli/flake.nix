@@ -4,7 +4,7 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
     nvimConfigs = {
-      url = "path:../dev/neovim";
+      url = "path:/home/quentin/.dotfiles/modules/home-manager/dev/neovim";
       inputs.nixpkgs.follows = "nixpkgs"; # Suis le nixpkgs défini précédemment ou alors nixpkgs alias nix unstable ????
     };
   };

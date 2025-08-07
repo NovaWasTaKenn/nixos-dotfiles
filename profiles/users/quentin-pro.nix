@@ -10,7 +10,7 @@ in {
   imports = [
     ../../modules/home-manager/dev/git.nix
     ../../modules/home-manager/dev/dev-environnments.nix
-    ../../modules/home-manager/dev/neovim/neovim.nix #Separate obsidian and neovim
+    ../../modules/home-manager/dev/neovim/nvimConfigs/neovim.nix #Separate obsidian and neovim
     ../../modules/home-manager/dev/terminal/zsh.nix
     ../../modules/home-manager/dev/terminal/ghostty.nix
     ../../modules/home-manager/dev/ripgrep.nix

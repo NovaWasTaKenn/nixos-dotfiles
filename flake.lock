@@ -147,14 +147,18 @@
         "nvimConfigs": "nvimConfigs"
       },
       "locked": {
-        "lastModified": 1754209516,
-        "narHash": "sha256-P5ZrvvCTDDTYWH4+jv93MWDN+XmlrM/wONBKWbE2U8U=",
-        "path": "/home/quentin/.dotfiles/modules/home-manager/cli",
-        "type": "path"
+        "lastModified": 1754242429,
+        "narHash": "sha256-3kk2WtbqInjS2Dc8/yEXwUtGb9+tq2vOBmIvlT/MTkI=",
+        "owner": "NovaWasTakenn",
+        "repo": "myCli",
+        "rev": "b95439da1aacdbc15349b859c68ec3e14ab431a0",
+        "type": "github"
       },
       "original": {
-        "path": "/home/quentin/.dotfiles/modules/home-manager/cli",
-        "type": "path"
+        "owner": "NovaWasTakenn",
+        "ref": "main",
+        "repo": "myCli",
+        "type": "github"
       }
     },
     "nil": {
@@ -363,14 +367,18 @@
         "nvf": "nvf_2"
       },
       "locked": {
-        "lastModified": 1749399559,
-        "narHash": "sha256-SnDCLMryG2RGCovn4mkNo64ruh5F8uPY5ITQwhkfcr8=",
-        "path": "/home/quentin/.dotfiles/modules/home-manager/dev/neovim",
-        "type": "path"
+        "lastModified": 1754241943,
+        "narHash": "sha256-sFprkh7SYl594hyAkhLhN0B+If6TJ1cSGW7ZIfpA77Q=",
+        "owner": "NovaWasTakenn",
+        "repo": "nvimConfigs",
+        "rev": "dc7bfedeb809c8899ad17b63b921f65987db6e85",
+        "type": "github"
       },
       "original": {
-        "path": "/home/quentin/.dotfiles/modules/home-manager/dev/neovim",
-        "type": "path"
+        "owner": "NovaWasTakenn",
+        "ref": "main",
+        "repo": "nvimConfigs",
+        "type": "github"
       }
     },
     "root": {

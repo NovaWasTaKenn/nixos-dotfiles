@@ -1,3 +1,12 @@
 [submodule "cli/obsidian/mdpdf"]
 	path = cli/obsidian/mdpdf
 	url = https://github.com/niceiq/obsidian-mdpdf
+[submodule "modules/home-manager/cli"]
+        path = modules/home-manager/cli
+        url = git@github.com:NovaWasTaKenn/myCli.git
+[submodule "modules/home-manager/dev/nvimConfigs"]
+	path = modules/home-manager/dev/nvimConfigs
+	url = git@github.com:NovaWasTaKenn/nvimConfigs.git
+[submodule "nvimConfigs"]
+	path = modules/home-manager/dev/neovim/nvimConfigs
+	url = git@github.com:NovaWasTaKenn/nvimConfigs.git

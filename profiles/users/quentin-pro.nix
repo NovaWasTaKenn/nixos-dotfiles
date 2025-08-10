@@ -10,7 +10,6 @@ in {
   imports = [
     ../../modules/home-manager/dev/git.nix
     ../../modules/home-manager/dev/dev-environnments.nix
-    ../../modules/home-manager/dev/neovim/nvimConfigs/neovim.nix #Separate obsidian and neovim
     ../../modules/home-manager/dev/terminal/zsh.nix
     ../../modules/home-manager/dev/terminal/ghostty.nix
     ../../modules/home-manager/dev/ripgrep.nix
@@ -19,6 +18,9 @@ in {
   ];
 
   fonts.fontconfig.enable = true;
+
+  # Proxy forwarding bluetooth MIDI controls via MPRIS2 to control media player 
+  services.mpris-proxy.enable = true;
 
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
@@ -53,21 +55,16 @@ in {
     # (pkgs.writeShellScriptBin "my-hello" ''
     #   echo "Hello, ${config.home.username}!"
     # '')
-    nerdfonts
-    starship
-    yazi
-    fzf
-    thefuck
-    zoxide
-    ghostty
-    tmux
-    spotify-player
     obsidian
-    lazygit
+    spotify-player
     libnotify
     myBaseNvim
+    texliveFull
+    pandoc
+    obsidian-export
     myCli
-  ];
+    unrar-free
+  ]++ builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts);
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;

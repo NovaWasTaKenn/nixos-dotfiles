@@ -1,4 +1,4 @@
-{
+{user, ... }: {
   systemd.user.services = {
     notify-notes-inbox-full = {
       Unit = {
@@ -6,7 +6,7 @@
       };
       Service = {
         Type = "oneshot";
-        ExecStart = "/home/quentin/.dotfiles/modules/home-manager/automation/obsidian/notifyInboxFull.sh";
+        ExecStart = "/home/${user}/.dotfiles/modules/home-manager/automation/obsidian/notifyInboxFull.sh";
         TimeoutSec = 5;
       };
       Install = {

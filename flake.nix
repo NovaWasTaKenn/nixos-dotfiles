@@ -59,6 +59,7 @@
           inherit pkgs;
           inherit user;
           inherit host;
+          inherit system;
         };
       };
     };

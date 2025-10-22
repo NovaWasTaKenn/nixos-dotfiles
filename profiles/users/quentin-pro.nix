@@ -64,6 +64,7 @@ in {
     obsidian-export
     myCli
     unrar-free
+    libreoffice-qt6-fresh
   ]++ builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts);
 
   # Let Home Manager install and manage itself.

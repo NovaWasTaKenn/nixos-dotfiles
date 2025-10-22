@@ -57,6 +57,9 @@ in {
     # (pkgs.writeShellScriptBin "my-hello" ''
     #   echo "Hello, ${config.home.username}!"
     # '')
+    unetbootin
+    gparted
+    ntfs3g
     obsidian
     spotify-player
     libnotify
@@ -71,6 +74,8 @@ in {
     protonvpn-gui
     protonvpn-cli
     protonmail-desktop
+    libreoffice-qt6-fresh
+    syncthing
     (discord.override {
       withOpenASAR = true; # can do this here too
       withVencord = true;

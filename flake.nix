@@ -4,6 +4,11 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
 
+    lanzaboote = {
+      url =  "github:nix-community/lanzaboote/v0.4.2";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     home-manager = {
       url = "github:nix-community/home-manager/release-25.05";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -67,6 +72,7 @@
       system = inputs.nixpkgs.lib.nixosSystem {
         system = system;
         modules = [
+          inputs.lanzaboote.nixosModules.lanzaboote
           (./. + "/profiles/hosts" + ("/" + host) + "/configuration.nix")
         ]; # load configuration.nix from selected PROFILE
         specialArgs = {

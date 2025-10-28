@@ -16,6 +16,7 @@ in {
     ../../modules/home-manager/automation
     ../../globalCustomOptions.nix
     ../../modules/home-manager/gaming.nix
+    ../../modules/home-manager/syncthing.nix
   ];
 
   programs.home-manager.enable = true;
@@ -75,7 +76,6 @@ in {
     protonvpn-cli
     protonmail-desktop
     libreoffice-qt6-fresh
-    syncthing
     (discord.override {
       withOpenASAR = true; # can do this here too
       withVencord = true;

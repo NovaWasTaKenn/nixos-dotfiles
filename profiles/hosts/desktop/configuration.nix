@@ -15,6 +15,7 @@
     ../../../modules/nixos/steam.nix
     ../../../modules/nixos/networking/ssh.nix
     ../../../modules/nixos/networking/general.nix
+    ../../../modules/nixos/networking/printers.nix
     ../../../modules/nixos/networking/bluetooth.nix
     ../../../globalCustomOptions.nix
     ../../../modules/nixos/power/disableSuspend.nix

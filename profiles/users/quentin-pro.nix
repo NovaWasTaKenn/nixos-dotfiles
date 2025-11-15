@@ -14,12 +14,13 @@ in {
     ../../modules/home-manager/dev/terminal/ghostty.nix
     ../../modules/home-manager/dev/ripgrep.nix
     ../../modules/home-manager/automation
+    ../../modules/home-manager/dev/terminal/ia.nix
     ../../globalCustomOptions.nix
   ];
 
   fonts.fontconfig.enable = true;
 
-  # Proxy forwarding bluetooth MIDI controls via MPRIS2 to control media player 
+  # Proxy forwarding bluetooth MIDI controls via MPRIS2 to control media player
   services.mpris-proxy.enable = true;
 
   # Home Manager needs a bit of information about you and the paths it should
@@ -38,33 +39,36 @@ in {
 
   # The home.packages option allows you to install Nix packages into your
   # environment.
-  home.packages = with pkgs; [
-    # # Adds the 'hello' command to your environment. It prints a friendly
-    # # "Hello, world!" when run.
-    # pkgs.hello
+  home.packages = with pkgs;
+    [
+      # # Adds the 'hello' command to your environment. It prints a friendly
+      # # "Hello, world!" when run.
+      # pkgs.hello
 
-    # # It is sometimes useful to fine-tune packages, for example, by applying
-    # # overrides. You can do that directly here, just don't forget the
-    # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
-    # # fonts?
-    # (pkgs.nerdfonts.override { fonts = [ "FantasqueSansMono" ]; })
+      # # It is sometimes useful to fine-tune packages, for example, by applying
+      # # overrides. You can do that directly here, just don't forget the
+      # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
+      # # fonts?
+      # (pkgs.nerdfonts.override { fonts = [ "FantasqueSansMono" ]; })
 
-    # # You can also create simple shell scripts directly inside your
-    # # configuration. For example, this adds a command 'my-hello' to your
-    # # environment:
-    # (pkgs.writeShellScriptBin "my-hello" ''
-    #   echo "Hello, ${config.home.username}!"
-    # '')
-    obsidian
-    spotify-player
-    libnotify
-    myBaseNvim
-    texliveFull
-    pandoc
-    obsidian-export
-    myCli
-    unrar-free
-  ]++ builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts);
+      # # You can also create simple shell scripts directly inside your
+      # # configuration. For example, this adds a command 'my-hello' to your
+      # # environment:
+      # (pkgs.writeShellScriptBin "my-hello" ''
+      #   echo "Hello, ${config.home.username}!"
+      # '')
+      obsidian
+      spotify-player
+      libnotify
+      myBaseNvim
+      texliveFull
+      pandoc
+      obsidian-export
+      myCli
+      unrar-free
+      libreoffice-qt6-fresh
+    ]
+    ++ builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts);
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;

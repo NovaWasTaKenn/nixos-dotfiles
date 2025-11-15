@@ -93,7 +93,7 @@
     # services.xserver.libinput.enable = true;
 
     # Define a user account. Don't forget to set a password with ‘passwd’.
-    users.users.quentin = {
+    users.users.quentin-pro = {
       isNormalUser = true;
       description = " quentin-pro";
       shell = pkgs.zsh;

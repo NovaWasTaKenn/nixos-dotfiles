@@ -13,5 +13,6 @@ in {
     ../plugins/theme.nix
     ../plugins/general.nix
     ./plugins/nixlang.nix
+    ../plugins/ia.nix
   ];
 }

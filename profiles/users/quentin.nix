@@ -12,10 +12,12 @@ in {
     ../../modules/home-manager/dev/dev-environnments.nix
     ../../modules/home-manager/dev/terminal/zsh.nix
     ../../modules/home-manager/dev/terminal/ghostty.nix
+    ../../modules/home-manager/dev/terminal/ia.nix
     ../../modules/home-manager/dev/ripgrep.nix
     ../../modules/home-manager/automation
     ../../globalCustomOptions.nix
     ../../modules/home-manager/gaming.nix
+    ../../modules/home-manager/syncthing.nix
   ];
 
   programs.home-manager.enable = true;
@@ -57,6 +59,9 @@ in {
     # (pkgs.writeShellScriptBin "my-hello" ''
     #   echo "Hello, ${config.home.username}!"
     # '')
+    unetbootin
+    gparted
+    ntfs3g
     obsidian
     spotify-player
     libnotify
@@ -71,6 +76,7 @@ in {
     protonvpn-gui
     protonvpn-cli
     protonmail-desktop
+    libreoffice-qt6-fresh
     (discord.override {
       withOpenASAR = true; # can do this here too
       withVencord = true;

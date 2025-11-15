@@ -1,4 +1,4 @@
-{config, pkgs, ...}:
+{config, pkgs, user, ...}:
 
 {
   programs.git = {
@@ -8,7 +8,7 @@
     extraConfig = {
       credential.helper = "${pkgs.git.override { withLibsecret = true; }}/bin/git-credential-libsecret";
       init.defaultBranch = "main";
-      safe.directory = "/home/quentin/.dotfiles";
+      safe.directory = "/home/${user}/.dotfiles";
     };
   };
 }

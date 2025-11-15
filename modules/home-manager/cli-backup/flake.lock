@@ -144,15 +144,14 @@
         "nvf": "nvf"
       },
       "locked": {
-        "lastModified": 1,
-        "narHash": "sha256-tHqpyLiLRmDd+78/PLpNrr0uvuglEVeOk3rCdCfThew=",
         "path": "../dev/neovim",
         "type": "path"
       },
       "original": {
         "path": "../dev/neovim",
         "type": "path"
-      }
+      },
+      "parent": []
     },
     "root": {
       "inputs": {

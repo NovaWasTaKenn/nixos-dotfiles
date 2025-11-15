@@ -93,9 +93,9 @@
     # services.xserver.libinput.enable = true;
 
     # Define a user account. Don't forget to set a password with ‘passwd’.
-    users.users.quentin = {
+    users.users.quentin-pro = {
       isNormalUser = true;
-      description = " quentin";
+      description = " quentin-pro";
       shell = pkgs.zsh;
       extraGroups = ["networkmanager" "wheel"];
       packages = with pkgs; [
@@ -118,7 +118,7 @@
     ];
 
     fonts = {
-      packages = with pkgs; [nerdfonts];
+      packages = with pkgs; [] ++ builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts);
       fontDir.enable = true;
     };
 

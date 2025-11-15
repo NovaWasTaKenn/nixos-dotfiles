@@ -483,11 +483,11 @@
         "nvf": "nvf_2"
       },
       "locked": {
-        "lastModified": 1760479150,
-        "narHash": "sha256-uKmPjOFm+W2MVFJKCRrWVteW36xtFIWj3/iKs+pNR8k=",
+        "lastModified": 1763159071,
+        "narHash": "sha256-yjvL1OvzN7VBb2mGfKdIMln6f9aKI3MiD1dTIzyTELY=",
         "owner": "NovaWasTakenn",
         "repo": "nvimConfigs",
-        "rev": "9d573c5ba17832d20e7d2735bcf588db1a202bed",
+        "rev": "afec23385d8e6a799f7a2d2f7cec1fec03e5808a",
         "type": "github"
       },
       "original": {

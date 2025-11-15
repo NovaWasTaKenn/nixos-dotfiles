@@ -6,6 +6,8 @@
     heroic
     bottles
     steamtinkerlaunch
+    teamspeak6-client
+    teamspeak3
   ];
 
   home.sessionVariables = {

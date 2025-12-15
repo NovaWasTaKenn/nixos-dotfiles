@@ -138,6 +138,13 @@
         fi
 
         source $venvPath/bin/activate
+
+
+        alias prs='python manage.py runserver'
+        alias pcs='python manage.py collectstatic'
+        alias pmm='python manage.py makemigrations'
+        alias pmi='python manage.py migrate'
+
         echo "🔌 Virtual environment activated"
 
         echo ""

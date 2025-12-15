@@ -5,7 +5,7 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
 
     lanzaboote = {
-      url =  "github:nix-community/lanzaboote/v0.4.2";
+      url = "github:nix-community/lanzaboote/v0.4.2";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -39,7 +39,7 @@
       system = system;
       config = {
         allowUnfree = true;
-        allowUnfreePredicate = _:true;
+        allowUnfreePredicate = _: true;
       };
       overlays = [
         (prev: final: {

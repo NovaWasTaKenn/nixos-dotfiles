@@ -12,6 +12,7 @@ in {
     ../../modules/home-manager/dev/dev-environnments.nix
     ../../modules/home-manager/dev/terminal/zsh.nix
     ../../modules/home-manager/dev/terminal/ghostty.nix
+    ../../modules/home-manager/dev/terminal/dev-tools.nix
     ../../modules/home-manager/dev/ripgrep.nix
     ../../modules/home-manager/automation
     ../../modules/home-manager/dev/terminal/ia.nix

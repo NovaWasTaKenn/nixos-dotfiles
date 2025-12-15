@@ -1,0 +1,8 @@
+{pkgs, ...}: {
+  home.packages = with pkgs; [
+    azure-cli
+    databricks-cli
+    azure-storage-azcopy
+    kubectl
+  ];
+}

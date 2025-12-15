@@ -138,7 +138,9 @@
           echo "♻️  Using existing Python virtual environment"
         fi
 
-        source $venvPath/bin/activate
+        source '$venvPath/bin/activate'
+
+        echo "🔌 Virtual environment activated"
 
 
         alias prs='python manage.py runserver'
@@ -146,7 +148,7 @@
         alias pmm='python manage.py makemigrations'
         alias pmi='python manage.py migrate'
 
-        echo "🔌 Virtual environment activated"
+        echo "🔌 Aliases set"
 
         echo ""
         echo "🎊 Tada! Nix environment setup complete! 🚀"

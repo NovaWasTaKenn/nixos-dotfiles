@@ -2,7 +2,7 @@
   description = "Django dev shell with Python 3.10, pyodbc, pycairo, zsh, FreeTDS";
 
   inputs = {
-    nixpkgs-unstable = "github:nixos/nixpkgs?ref=nixos-unstable";
+    nixpkgs-unstable.url = "github:nixos/nixpkgs?ref=nixos-unstable";
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
     nixpkgs-25-05.url = "github:NixOS/nixpkgs/nixos-25.05";
     nvimConfigs = {
@@ -138,7 +138,7 @@
           echo "♻️  Using existing Python virtual environment"
         fi
 
-        source '$venvPath/bin/activate'
+        source $venvPath/bin/activate
 
         echo "🔌 Virtual environment activated"
 

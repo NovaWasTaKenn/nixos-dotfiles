@@ -2,11 +2,12 @@
   description = "Django dev shell with Python 3.10, pyodbc, pycairo, zsh, FreeTDS";
 
   inputs = {
+    nixpkgs-unstable = "github:nixos/nixpkgs?ref=nixos-unstable";
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
     nixpkgs-25-05.url = "github:NixOS/nixpkgs/nixos-25.05";
     nvimConfigs = {
       url = "github:NovaWasTakenn/nvimConfigs/main";
-      inputs.nixpkgs.follows = "nixpkgs-25-05";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
   };
 

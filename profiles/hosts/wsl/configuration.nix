@@ -20,6 +20,7 @@
     #../../nixos/modules/networking/ssh.nix
     ../../../modules/nixos/networking/general.nix
     ../../../globalCustomOptions.nix
+    ../../../modules/nixos/work/dev.nix
   ];
 
   config = {

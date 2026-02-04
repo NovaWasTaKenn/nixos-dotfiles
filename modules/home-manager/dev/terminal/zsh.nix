@@ -37,7 +37,7 @@
 
       ff = "fuck";
 
-      ka = "kubectl apply";
+      ka = "kubectl apply -f";
       kd = "kubectl delete";
       k = "kubectl";
       kg = "kubectl get";

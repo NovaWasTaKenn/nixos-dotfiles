@@ -1,0 +1,1500 @@
+
+
+
+
+-- SECTION: addRequirePath
+print(vim.inspect(package.path))
+package.path = package.path .. ";" .. os.getenv("HOME") .. "/.dotfiles/modules/home-manager/dev/neovim/nvimConfigs/?.lua"
+
+
+-- SECTION: theme
+
+-- Gruvbox theme
+require("gruvbox").setup({
+  terminal_colors = true, -- add neovim terminal colors
+  undercurl = true,
+  underline = true,
+  bold = true,
+  italic = {
+  strings = true,
+  emphasis = true,
+  comments = true,
+  operators = false,
+  folds = true,
+  },
+  strikethrough = true,
+  invert_selection = false,
+  invert_signs = false,
+  invert_tabline = false,
+  invert_intend_guides = false,
+  inverse = true,
+  contrast = "",
+  palette_overrides = {},
+  overrides = {},
+  dim_inactive = false,
+  transparent_mode = false,
+})
+vim.o.background = "dark"
+vim.cmd("colorscheme gruvbox")
+
+
+
+
+-- SECTION: globalsScript
+vim.g.editorconfig = true
+vim.g.mapleader = " "
+vim.g.maplocalleader = ","
+
+
+-- SECTION: basic
+
+
+
+
+
+
+
+
+
+
+vim.o.smartcase = false
+vim.o.ignorecase = false
+
+
+
+-- SECTION: optionsScript
+vim.o.autoindent = true
+vim.o.backup = false
+vim.o.cmdheight = 1
+vim.o.cursorlineopt = "line"
+vim.o.encoding = "utf-8"
+vim.o.errorbells = false
+vim.o.expandtab = true
+vim.o.hidden = true
+vim.o.mouse = "nvi"
+vim.o.number = true
+vim.o.relativenumber = true
+vim.o.shiftwidth = 2
+vim.o.signcolumn = "yes"
+vim.o.splitbelow = true
+vim.o.splitright = true
+vim.o.swapfile = false
+vim.o.tabstop = 2
+vim.o.termguicolors = true
+vim.o.tm = 500
+vim.o.updatetime = 300
+vim.o.visualbell = false
+vim.o.wrap = true
+vim.o.writebackup = false
+
+
+-- SECTION: lazyConfigs
+require('lz.n').load({{"Preview.nvim",["after"] = function()
+  
+  require("Preview-nvim").setup({})
+  
+end
+,["cmd"] = {"PreviewNvimEnable"}},{"cheatsheet-nvim",["after"] = function()
+  
+  require("cheatsheet").setup({})
+  
+end
+,["before"] = function()
+  require('lz.n').trigger_load('telescope')
+end
+,["cmd"] = {"Cheatsheet","CheatsheetEdit"}},{"cmp-buffer",["after"] = function()
+  
+  
+  local path = vim.fn.globpath(vim.o.packpath, 'pack/*/opt/cmp-buffer')
+require("rtp_nvim").source_after_plugin_dir(path)
+
+end
+,["lazy"] = true},{"cmp-nvim-lsp",["after"] = function()
+  
+  
+  local path = vim.fn.globpath(vim.o.packpath, 'pack/*/opt/cmp-nvim-lsp')
+require("rtp_nvim").source_after_plugin_dir(path)
+
+end
+,["lazy"] = true},{"cmp-path",["after"] = function()
+  
+  
+  local path = vim.fn.globpath(vim.o.packpath, 'pack/*/opt/cmp-path')
+require("rtp_nvim").source_after_plugin_dir(path)
+
+end
+,["lazy"] = true},{"cmp-treesitter",["after"] = function()
+  
+  
+  local path = vim.fn.globpath(vim.o.packpath, 'pack/*/opt/cmp-treesitter')
+require("rtp_nvim").source_after_plugin_dir(path)
+
+end
+,["lazy"] = true},{"copilot-cmp",["after"] = function()
+  
+  
+  local path = vim.fn.globpath(vim.o.packpath, 'pack/*/opt/copilot-cmp')
+require("rtp_nvim").source_after_plugin_dir(path)
+
+end
+,["lazy"] = true},{"copilot-lua",["after"] = function()
+  
+  require("copilot").setup({["copilot_node_command"] = "/nix/store/rq7x1hbxg89b287mklhk9sqh3lj4jqll-nodejs-slim-22.20.0/bin/node",["panel"] = {["enabled"] = true,["keymap"] = {["accept"] = false,["jump_next"] = false,["jump_prev"] = false,["open"] = false,["refresh"] = false},["layout"] = {["position"] = "bottom",["ratio"] = 0.400000}},["suggestion"] = {["enabled"] = true,["keymap"] = {["accept"] = false,["accept_line"] = false,["accept_word"] = false,["dismiss"] = false,["next"] = false,["prev"] = false}}})
+  
+end
+,["cmd"] = {"Copilot","CopilotAuth","CopilotDetach","CopilotPanel","CopilotStop"},["event"] = {{["event"] = "User",["pattern"] = "LazyFile"}},["keys"] = {{"<CR>",function()
+  local s, _ = pcall(require("copilot.panel").accept)
+
+  if not s then
+    local termcode = vim.api.nvim_replace_termcodes("<CR>", true, false, true)
+
+    vim.fn.feedkeys(termcode, 'n')
+  end
+end
+,["desc"] = "[copilot] Accept suggestion",["expr"] = false,["mode"] = {"n"},["noremap"] = true,["nowait"] = false,["script"] = false,["silent"] = true,["unique"] = false},{"<leader>$",function()
+  local s, _ = pcall(require("copilot.panel").jump_next)
+
+  if not s then
+    local termcode = vim.api.nvim_replace_termcodes("<leader>$", true, false, true)
+
+    vim.fn.feedkeys(termcode, 'n')
+  end
+end
+,["desc"] = "[copilot] Next panel suggestion",["expr"] = false,["mode"] = {"n"},["noremap"] = true,["nowait"] = false,["script"] = false,["silent"] = true,["unique"] = false},{"<leader>^",function()
+  local s, _ = pcall(require("copilot.panel").jump_prev)
+
+  if not s then
+    local termcode = vim.api.nvim_replace_termcodes("<leader>^", true, false, true)
+
+    vim.fn.feedkeys(termcode, 'n')
+  end
+end
+,["desc"] = "[copilot] Previous panel suggestion",["expr"] = false,["mode"] = {"n"},["noremap"] = true,["nowait"] = false,["script"] = false,["silent"] = true,["unique"] = false},{"gr",function()
+  local s, _ = pcall(require("copilot.panel").refresh)
+
+  if not s then
+    local termcode = vim.api.nvim_replace_termcodes("gr", true, false, true)
+
+    vim.fn.feedkeys(termcode, 'n')
+  end
+end
+,["desc"] = "[copilot] Refresh suggestion",["expr"] = false,["mode"] = {"n"},["noremap"] = true,["nowait"] = false,["script"] = false,["silent"] = true,["unique"] = false},{"<M-CR>",function()
+  local s, _ = pcall(function() require("copilot.panel").open({ position = "bottom", ratio = 0.400000, }) end
+)
+
+  if not s then
+    local termcode = vim.api.nvim_replace_termcodes("<M-CR>", true, false, true)
+
+    vim.fn.feedkeys(termcode, 'n')
+  end
+end
+,["desc"] = "[copilot] Open Panel",["expr"] = false,["mode"] = {"n"},["noremap"] = true,["nowait"] = false,["script"] = false,["silent"] = true,["unique"] = false},{"<M-*>",function() require('copilot.suggestion').accept() end,["desc"] = "[copilot] Accept suggestion",["expr"] = false,["mode"] = {"i"},["noremap"] = true,["nowait"] = false,["script"] = false,["silent"] = true,["unique"] = false},{"<M-ù>",function() require('copilot.suggestion').dismiss() end,["desc"] = "[copilot] dismiss suggestion",["expr"] = false,["mode"] = {"i"},["noremap"] = true,["nowait"] = false,["script"] = false,["silent"] = true,["unique"] = false},{"<M-$>",function() require('copilot.suggestion').next() end,["desc"] = "[copilot] next suggestion",["expr"] = false,["mode"] = {"i"},["noremap"] = true,["nowait"] = false,["script"] = false,["silent"] = true,["unique"] = false},{"<M-^>",function() require('copilot.suggestion').prev() end,["desc"] = "[copilot] previous suggestion",["expr"] = false,["mode"] = {"i"},["noremap"] = true,["nowait"] = false,["script"] = false,["silent"] = true,["unique"] = false}}},{"harpoon",["after"] = function()
+  
+  require("harpoon").setup({["defaults"] = {["key"] = function()
+  return vim.loop.cwd()
+end
+,["save_on_toggle"] = false,["sync_on_ui_close"] = false}})
+  
+end
+,["cmd"] = {"Harpoon"},["keys"] = {{"<leader>a","<Cmd>lua require('harpoon'):list():add()<CR>",["desc"] = "Mark file [Harpoon]",["expr"] = false,["mode"] = "n",["noremap"] = true,["nowait"] = false,["script"] = false,["silent"] = true,["unique"] = false},{"<C-e>","<Cmd>lua require('harpoon').ui:toggle_quick_menu(require('harpoon'):list())<CR>",["desc"] = "List marked files [Harpoon]",["expr"] = false,["mode"] = "n",["noremap"] = true,["nowait"] = false,["script"] = false,["silent"] = true,["unique"] = false},{"<C-q>","<Cmd>lua require('harpoon'):list():select(1)<CR>",["desc"] = "Go to marked file 1 [Harpoon]",["expr"] = false,["mode"] = "n",["noremap"] = true,["nowait"] = false,["script"] = false,["silent"] = true,["unique"] = false},{"<C-s>","<Cmd>lua require('harpoon'):list():select(2)<CR>",["desc"] = "Go to marked file 2 [Harpoon]",["expr"] = false,["mode"] = "n",["noremap"] = true,["nowait"] = false,["script"] = false,["silent"] = true,["unique"] = false},{"<C-d>","<Cmd>lua require('harpoon'):list():select(3)<CR>",["desc"] = "Go to marked file 3 [Harpoon]",["expr"] = false,["mode"] = "n",["noremap"] = true,["nowait"] = false,["script"] = false,["silent"] = true,["unique"] = false},{"<C-f>","<Cmd>lua require('harpoon'):list():select(4)<CR>",["desc"] = "Go to marked file 4 [Harpoon]",["expr"] = false,["mode"] = "n",["noremap"] = true,["nowait"] = false,["script"] = false,["silent"] = true,["unique"] = false}}},{"nvim-cmp",["after"] = function()
+  
+  
+  
+local cmp = require("cmp")
+
+local kinds = require("cmp.types").lsp.CompletionItemKind
+local deprio = function(kind)
+  return function(e1, e2)
+    if e1:get_kind() == kind then
+      return false
+    end
+    if e2:get_kind() == kind then
+      return true
+    end
+    return nil
+  end
+end
+
+cmp.setup({["completion"] = {["completeopt"] = "menu,menuone,noinsert"},["formatting"] = {["format"] = require("lspkind").cmp_format({["before"] = function(entry, vim_item)
+  vim_item.menu = ({["copilot"] = "[Copilot]",["nvim_lsp"] = "[LSP]",["treesitter"] = "[Treesitter]"})[entry.source.name]
+  return vim_item
+end
+,["mode"] = "symbol_text"})
+},["mapping"] = {["<C-Space>"] = cmp.mapping.complete(),["<C-d>"] = cmp.mapping.scroll_docs(-4),["<C-e>"] = cmp.mapping.abort(),["<C-f>"] = cmp.mapping.scroll_docs(4),["<CR>"] = cmp.mapping.confirm({ select = true }),["<S-Tab>"] = cmp.mapping(function(fallback)
+  if cmp.visible() then
+    cmp.select_prev_item()
+    
+  else
+    fallback()
+  end
+end)
+,["<Tab>"] = cmp.mapping(function(fallback)
+  local has_words_before = function()
+    local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+    return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+  end
+
+  if cmp.visible() then
+    cmp.select_next_item()
+    
+  elseif has_words_before() then
+    cmp.complete()
+  else
+    fallback()
+  end
+end)
+},["sorting"] = {["comparators"] = {deprio(kinds.Text),deprio(kinds.Snippet),cmp.config.compare.offset,cmp.config.compare.exact,cmp.config.compare.score,cmp.config.compare.kind,cmp.config.compare.length,cmp.config.compare.sort_text}},["sources"] = {{["name"] = "copilot"},{["name"] = "nvim_lsp"},{["name"] = "treesitter"}}})
+
+require('lz.n').trigger_load("cmp-buffer")
+require('lz.n').trigger_load("cmp-path")
+require('lz.n').trigger_load("copilot-cmp")
+require('lz.n').trigger_load("cmp-treesitter")
+require('lz.n').trigger_load("cmp-nvim-lsp")
+
+end
+,["event"] = {"InsertEnter","CmdlineEnter"}},{"render-markdown.nvim",["after"] = function()
+  
+  require("render-markdown-nvim").setup({})
+  
+end
+,["cmd"] = {"RenderMarkdown"},["ft"] = {"markdown"}},{"telescope",["after"] = function()
+  
+  require("telescope").setup({["defaults"] = {["color_devicons"] = true,["entry_prefix"] = "  ",["file_ignore_patterns"] = {},["initial_mode"] = "insert",["layout_config"] = {["height"] = 0.800000,["horizontal"] = {["preview_width"] = 0.550000,["prompt_position"] = "top"},["preview_cutoff"] = 120,["vertical"] = {["mirror"] = false},["width"] = 0.800000},["layout_strategy"] = "horizontal",["path_display"] = {"absolute"},["prompt_prefix"] = "     ",["selection_caret"] = "  ",["selection_strategy"] = "reset",["set_env"] = {["COLORTERM"] = "truecolor"},["sorting_strategy"] = "ascending",["vimgrep_arguments"] = {"/nix/store/h6sbs3cv9n583h64zl2jsjlbk17azs49-ripgrep-14.1.1/bin/rg","--color=never","--no-heading","--with-filename","--line-number","--column","--smart-case","--hidden","--no-ignore"},["winblend"] = 0},["pickers"] = {["find_files"] = {["find_command"] = {"${pkgs.fd}/bin/fd","--type","f","--no-ignore","--color=auto","--hidden","--follow"}}}})
+  local telescope = require("telescope")
+telescope.load_extension('noice')
+
+
+
+end
+,["before"] = function()
+  vim.g.loaded_telescope = nil
+
+end
+,["cmd"] = {"Telescope"},["keys"] = {{"<leader>ff","<cmd>Telescope find_files<CR>",["desc"] = "Find files [Telescope]",["expr"] = false,["mode"] = "n",["noremap"] = true,["nowait"] = false,["script"] = false,["silent"] = true,["unique"] = false},{"<leader>fg","<cmd>Telescope live_grep<CR>",["desc"] = "Live grep [Telescope]",["expr"] = false,["mode"] = "n",["noremap"] = true,["nowait"] = false,["script"] = false,["silent"] = true,["unique"] = false},{"<leader>fb","<cmd>Telescope buffers<CR>",["desc"] = "Buffers [Telescope]",["expr"] = false,["mode"] = "n",["noremap"] = true,["nowait"] = false,["script"] = false,["silent"] = true,["unique"] = false},{"<leader>fh","<cmd>Telescope help_tags<CR>",["desc"] = "Help tags [Telescope]",["expr"] = false,["mode"] = "n",["noremap"] = true,["nowait"] = false,["script"] = false,["silent"] = true,["unique"] = false},{"<leader>ft","<cmd>Telescope<CR>",["desc"] = "Open [Telescope]",["expr"] = false,["mode"] = "n",["noremap"] = true,["nowait"] = false,["script"] = false,["silent"] = true,["unique"] = false},{"<leader>fr","<cmd>Telescope resume<CR>",["desc"] = "Resume (previous search) [Telescope]",["expr"] = false,["mode"] = "n",["noremap"] = true,["nowait"] = false,["script"] = false,["silent"] = true,["unique"] = false},{"<leader>fvcw","<cmd>Telescope git_commits<CR>",["desc"] = "Git commits [Telescope]",["expr"] = false,["mode"] = "n",["noremap"] = true,["nowait"] = false,["script"] = false,["silent"] = true,["unique"] = false},{"<leader>fvcb","<cmd>Telescope git_bcommits<CR>",["desc"] = "Git buffer commits [Telescope]",["expr"] = false,["mode"] = "n",["noremap"] = true,["nowait"] = false,["script"] = false,["silent"] = true,["unique"] = false},{"<leader>fvb","<cmd>Telescope git_branches<CR>",["desc"] = "Git branches [Telescope]",["expr"] = false,["mode"] = "n",["noremap"] = true,["nowait"] = false,["script"] = false,["silent"] = true,["unique"] = false},{"<leader>fvs","<cmd>Telescope git_status<CR>",["desc"] = "Git status [Telescope]",["expr"] = false,["mode"] = "n",["noremap"] = true,["nowait"] = false,["script"] = false,["silent"] = true,["unique"] = false},{"<leader>fvx","<cmd>Telescope git_stash<CR>",["desc"] = "Git stash [Telescope]",["expr"] = false,["mode"] = "n",["noremap"] = true,["nowait"] = false,["script"] = false,["silent"] = true,["unique"] = false},{"<leader>flsb","<cmd>Telescope lsp_document_symbols<CR>",["desc"] = "LSP Document Symbols [Telescope]",["expr"] = false,["mode"] = "n",["noremap"] = true,["nowait"] = false,["script"] = false,["silent"] = true,["unique"] = false},{"<leader>flsw","<cmd>Telescope lsp_workspace_symbols<CR>",["desc"] = "LSP Workspace Symbols [Telescope]",["expr"] = false,["mode"] = "n",["noremap"] = true,["nowait"] = false,["script"] = false,["silent"] = true,["unique"] = false},{"<leader>flr","<cmd>Telescope lsp_references<CR>",["desc"] = "LSP References [Telescope]",["expr"] = false,["mode"] = "n",["noremap"] = true,["nowait"] = false,["script"] = false,["silent"] = true,["unique"] = false},{"<leader>fli","<cmd>Telescope lsp_implementations<CR>",["desc"] = "LSP Implementations [Telescope]",["expr"] = false,["mode"] = "n",["noremap"] = true,["nowait"] = false,["script"] = false,["silent"] = true,["unique"] = false},{"<leader>flD","<cmd>Telescope lsp_definitions<CR>",["desc"] = "LSP Definitions [Telescope]",["expr"] = false,["mode"] = "n",["noremap"] = true,["nowait"] = false,["script"] = false,["silent"] = true,["unique"] = false},{"<leader>flt","<cmd>Telescope lsp_type_definitions<CR>",["desc"] = "LSP Type Definitions [Telescope]",["expr"] = false,["mode"] = "n",["noremap"] = true,["nowait"] = false,["script"] = false,["silent"] = true,["unique"] = false},{"<leader>fld","<cmd>Telescope diagnostics<CR>",["desc"] = "Diagnostics [Telescope]",["expr"] = false,["mode"] = "n",["noremap"] = true,["nowait"] = false,["script"] = false,["silent"] = true,["unique"] = false},{"<leader>fs","<cmd>Telescope treesitter<CR>",["desc"] = "Treesitter [Telescope]",["expr"] = false,["mode"] = "n",["noremap"] = true,["nowait"] = false,["script"] = false,["silent"] = true,["unique"] = false}}},{"telescope-zoxide",["after"] = function()
+  
+  require("telescope-zoxide").setup({})
+  
+end
+,["cmd"] = {"Telescope zoxide list"}},{"zoxide.vim",["after"] = function()
+  
+  require("zoxide-vim").setup({})
+  
+end
+,["cmd"] = {"Z","Lz","Tz","Zi","Lzi","Tzi"}}})
+require('lzn-auto-require').enable()
+
+
+-- SECTION: pluginConfigs
+-- SECTION: git-conflict
+require('git-conflict').setup({["default_mappings"] = false})
+
+
+-- SECTION: lightbulb
+local nvim_lightbulb = require("nvim-lightbulb")
+nvim_lightbulb.setup({})
+vim.api.nvim_create_autocmd({"CursorHold","CursorHoldI"}, {
+  pattern = "*",
+  callback = function()
+    nvim_lightbulb.update_lightbulb()
+  end,
+})
+
+
+
+-- SECTION: lsp-setup
+vim.g.formatsave = true;
+
+local attach_keymaps = function(client, bufnr)
+  vim.keymap.set('n', '<leader>lgD', vim.lsp.buf.declaration, {buffer=bufnr, noremap=true, silent=true, desc='Go to declaration'})
+  vim.keymap.set('n', '<leader>lgd', vim.lsp.buf.definition, {buffer=bufnr, noremap=true, silent=true, desc='Go to definition'})
+  vim.keymap.set('n', '<leader>lgt', vim.lsp.buf.type_definition, {buffer=bufnr, noremap=true, silent=true, desc='Go to type'})
+  vim.keymap.set('n', '<leader>lgi', vim.lsp.buf.implementation, {buffer=bufnr, noremap=true, silent=true, desc='List implementations'})
+  vim.keymap.set('n', '<leader>lgr', vim.lsp.buf.references, {buffer=bufnr, noremap=true, silent=true, desc='List references'})
+  vim.keymap.set('n', '<leader>lgn', vim.diagnostic.goto_next, {buffer=bufnr, noremap=true, silent=true, desc='Go to next diagnostic'})
+  vim.keymap.set('n', '<leader>lgp', vim.diagnostic.goto_prev, {buffer=bufnr, noremap=true, silent=true, desc='Go to previous diagnostic'})
+  vim.keymap.set('n', '<leader>le', vim.diagnostic.open_float, {buffer=bufnr, noremap=true, silent=true, desc='Open diagnostic float'})
+  vim.keymap.set('n', '<leader>lH', vim.lsp.buf.document_highlight, {buffer=bufnr, noremap=true, silent=true, desc='Document highlight'})
+  vim.keymap.set('n', '<leader>lS', vim.lsp.buf.document_symbol, {buffer=bufnr, noremap=true, silent=true, desc='List document symbols'})
+  vim.keymap.set('n', '<leader>lwa', vim.lsp.buf.add_workspace_folder, {buffer=bufnr, noremap=true, silent=true, desc='Add workspace folder'})
+  vim.keymap.set('n', '<leader>lwr', vim.lsp.buf.remove_workspace_folder, {buffer=bufnr, noremap=true, silent=true, desc='Remove workspace folder'})
+  vim.keymap.set('n', '<leader>lwl', function() vim.notify(vim.inspect(vim.lsp.buf.list_workspace_folders())) end, {buffer=bufnr, noremap=true, silent=true, desc='List workspace folders'})
+  vim.keymap.set('n', '<leader>lws', vim.lsp.buf.workspace_symbol, {buffer=bufnr, noremap=true, silent=true, desc='List workspace symbols'})
+  vim.keymap.set('n', '<leader>lh', vim.lsp.buf.hover, {buffer=bufnr, noremap=true, silent=true, desc='Trigger hover'})
+  vim.keymap.set('n', '<leader>ls', vim.lsp.buf.signature_help, {buffer=bufnr, noremap=true, silent=true, desc='Signature help'})
+  vim.keymap.set('n', '<leader>ln', vim.lsp.buf.rename, {buffer=bufnr, noremap=true, silent=true, desc='Rename symbol'})
+  vim.keymap.set('n', '<leader>la', vim.lsp.buf.code_action, {buffer=bufnr, noremap=true, silent=true, desc='Code action'})
+  vim.keymap.set('n', '<leader>lf', vim.lsp.buf.format, {buffer=bufnr, noremap=true, silent=true, desc='Format'})
+  vim.keymap.set('n', '<leader>ltf', function() vim.b.disableFormatSave = not vim.b.disableFormatSave end, {buffer=bufnr, noremap=true, silent=true, desc='Toggle format on save'})
+end
+
+-- Enable formatting
+local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
+
+format_callback = function(client, bufnr)
+  if vim.g.formatsave then
+    vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
+    vim.api.nvim_create_autocmd("BufWritePre", {
+      group = augroup,
+      buffer = bufnr,
+      callback = function()
+        
+              vim.lsp.buf.format({
+                bufnr = bufnr,
+              })
+        
+      end,
+    })
+  end
+end
+
+
+default_on_attach = function(client, bufnr)
+  attach_keymaps(client, bufnr)
+  format_callback(client, bufnr)
+  
+end
+
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+-- HACK: copied from cmp-nvim-lsp. If we ever lazy load lspconfig we
+-- should re-evaluate whether we can just use `default_capabilities`
+capabilities = {
+  textDocument = {
+    completion = {
+      dynamicRegistration = false,
+      completionItem = {
+        snippetSupport = true,
+        commitCharactersSupport = true,
+        deprecatedSupport = true,
+        preselectSupport = true,
+        tagSupport = {
+          valueSet = {
+            1, -- Deprecated
+          }
+        },
+        insertReplaceSupport = true,
+        resolveSupport = {
+          properties = {
+            "documentation",
+            "detail",
+            "additionalTextEdits",
+            "sortText",
+            "filterText",
+            "insertText",
+            "textEdit",
+            "insertTextFormat",
+            "insertTextMode",
+          },
+        },
+        insertTextModeSupport = {
+          valueSet = {
+            1, -- asIs
+            2, -- adjustIndentation
+          }
+        },
+        labelDetailsSupport = true,
+      },
+      contextSupport = true,
+      insertTextMode = 1,
+      completionList = {
+        itemDefaults = {
+          'commitCharacters',
+          'editRange',
+          'insertTextFormat',
+          'insertTextMode',
+          'data',
+        }
+      }
+    },
+  },
+}
+
+
+
+
+
+-- SECTION: lsp-signature
+-- Enable lsp signature viewer
+require("lsp_signature").setup({["bind"] = false,["handler_opts"] = {["border"] = "rounded"}})
+
+
+-- SECTION: lspconfig
+local lspconfig = require('lspconfig')
+
+
+
+
+-- SECTION: lualine
+local lualine = require('lualine')
+lualine.setup {["inactive_sections"] = {["lualine_a"] = {},["lualine_b"] = {},["lualine_c"] = {'filename'},["lualine_x"] = {'location'},["lualine_y"] = {},["lualine_z"] = {}},["options"] = {["always_divide_middle"] = true,["component_separators"] = {"",""},["globalstatus"] = true,["icons_enabled"] = true,["refresh"] = {["statusline"] = 1000,["tabline"] = 1000,["winbar"] = 1000},["section_separators"] = {"",""},["theme"] = "auto"},["sections"] = {["lualine_a"] = {{
+  "mode",
+  icons_enabled = true,
+  separator = {
+    left = '▎',
+    right = ''
+  },
+}
+,{
+  "",
+  draw_empty = true,
+  separator = { left = '', right = '' }
+}
+},["lualine_b"] = {{
+  "filetype",
+  colored = true,
+  icon_only = true,
+  icon = { align = 'left' }
+}
+,{
+  "filename",
+  symbols = {modified = ' ', readonly = ' '},
+  separator = {right = ''}
+}
+,{
+  "",
+  draw_empty = true,
+  separator = { left = '', right = '' }
+}
+},["lualine_c"] = {{
+  "diff",
+  colored = false,
+  diff_color = {
+    -- Same color values as the general color option can be used here.
+    added    = 'DiffAdd',    -- Changes the diff's added color
+    modified = 'DiffChange', -- Changes the diff's modified color
+    removed  = 'DiffDelete', -- Changes the diff's removed color you
+  },
+  symbols = {added = '+', modified = '~', removed = '-'}, -- Changes the diff symbols
+  separator = {right = ''}
+}
+},["lualine_x"] = {{
+  -- Lsp server name
+  function()
+    local buf_ft = vim.bo.filetype
+    local excluded_buf_ft = { toggleterm = true, NvimTree = true, ["neo-tree"] = true, TelescopePrompt = true }
+
+    if excluded_buf_ft[buf_ft] then
+      return ""
+      end
+
+    local bufnr = vim.api.nvim_get_current_buf()
+    local clients = vim.lsp.get_clients({ bufnr = bufnr })
+
+    if vim.tbl_isempty(clients) then
+      return "No Active LSP"
+    end
+
+    local active_clients = {}
+    for _, client in ipairs(clients) do
+      table.insert(active_clients, client.name)
+    end
+
+    return table.concat(active_clients, ", ")
+  end,
+  icon = ' ',
+  separator = {left = ''},
+}
+,{
+  "diagnostics",
+  sources = {'nvim_lsp', 'nvim_diagnostic', 'nvim_diagnostic', 'vim_lsp', 'coc'},
+  symbols = {error = '󰅙  ', warn = '  ', info = '  ', hint = '󰌵 '},
+  colored = true,
+  update_in_insert = false,
+  always_visible = false,
+  diagnostics_color = {
+    color_error = { fg = 'red' },
+    color_warn = { fg = 'yellow' },
+    color_info = { fg = 'cyan' },
+  },
+}
+},["lualine_y"] = {{
+  "",
+  draw_empty = true,
+  separator = { left = '', right = '' }
+}
+,{
+  'searchcount',
+  maxcount = 999,
+  timeout = 120,
+  separator = {left = ''}
+}
+,{
+  "branch",
+  icon = ' •',
+  separator = {left = ''}
+}
+},["lualine_z"] = {{
+  "",
+  draw_empty = true,
+  separator = { left = '', right = '' }
+}
+,{
+  "progress",
+  separator = {left = ''}
+}
+,{"location"}
+,{
+  "fileformat",
+  color = {fg='black'},
+  symbols = {
+    unix = '', -- e712
+    dos = '',  -- e70f
+    mac = '',  -- e711
+  }
+}
+}}}
+
+
+-- SECTION: mini-ai
+require("mini.ai").setup({})
+
+
+-- SECTION: mini-basics
+require("mini.basics").setup({})
+
+
+-- SECTION: mini-comment
+require("mini.comment").setup({})
+
+
+-- SECTION: mini-completion
+require("mini.completion").setup({})
+
+
+-- SECTION: mini-indentscope
+require("mini.indentscope").setup({["ignore_filetypes"] = {"help","neo-tree","notify","NvimTree","TelescopePrompt"}})
+
+
+-- SECTION: mini-map
+require("mini.map").setup({})
+
+
+-- SECTION: mini-notify
+require("mini.notify").setup({["window"] = {["config"] = {["border"] = "rounded"}}})
+vim.notify = MiniNotify.make_notify({["DEBUG"] = {["duration"] = 0,["hl_group"] = "DiagnosticHint"},["ERROR"] = {["duration"] = 5000,["hl_group"] = "DiagnosticError"},["INFO"] = {["duration"] = 5000,["hl_group"] = "DiagnosticInfo"},["OFF"] = {["duration"] = 0,["hl_group"] = "MiniNotifyNormal"},["TRACE"] = {["duration"] = 0,["hl_group"] = "DiagnosticOk"},["WARN"] = {["duration"] = 5000,["hl_group"] = "DiagnosticWarn"}})
+
+
+-- SECTION: mini-operators
+require("mini.operators").setup({})
+
+
+-- SECTION: mini-pairs
+require("mini.pairs").setup({})
+
+
+-- SECTION: mini-splitjoin
+require("mini.splitjoin").setup({})
+
+
+-- SECTION: mini-surround
+require("mini.surround").setup({})
+
+
+-- SECTION: nix-lsp
+lspconfig.nil_ls.setup{
+  capabilities = capabilities,
+on_attach = default_on_attach,
+  cmd = {"/nix/store/baai0iy8l2j08zx05ydwz4cf0qgyllx7-nil-2024-08-06/bin/nil"},
+settings = {
+  ["nil"] = {
+formatting = {
+  command = {"/nix/store/1crkydpxl0sh8214grfpxhafggbyd7fc-alejandra-4.0.0/bin/alejandra", "--quiet"},
+},
+
+
+  },
+},
+
+}
+
+
+-- SECTION: noice-nvim
+require("noice").setup({["format"] = {["cmdline"] = {["icon"] = "",["lang"] = "vim",["pattern"] = "^:"},["filter"] = {["icon"] = "",["lang"] = "bash",["pattern"] = "^:%s*!"},["help"] = {["icon"] = "󰋖",["pattern"] = "^:%s*he?l?p?%s+"},["lua"] = {["icon"] = "",["lang"] = "lua",["pattern"] = "^:%s*lua%s+"},["search_down"] = {["icon"] = " ",["kind"] = "search",["lang"] = "regex",["pattern"] = "^/"},["search_up"] = {["icon"] = " ",["kind"] = "search",["lang"] = "regex",["pattern"] = "^%?"}},["lsp"] = {["override"] = {["cmp.entry.get_documentation"] = true,["vim.lsp.util.convert_input_to_markdown_lines"] = true,["vim.lsp.util.stylize_markdown"] = true},["signature"] = {["enabled"] = false}},["presets"] = {["bottom_search"] = true,["command_palette"] = true,["inc_rename"] = false,["long_message_to_split"] = true,["lsp_doc_border"] = false},["routes"] = {{["filter"] = {["event"] = "msg_showmode"},["view"] = "notify"}}})
+
+
+-- SECTION: obsidian
+require("obsidian").setup({["completion"] = {["nvim_cmp"] = true},["daily_notes"] = {["dates_format"] = "%d-%m-%Y",["default_tags"] = {"daily_notes"},["folder"] = "11-Daily"},["note_frontmatter_func"] = require("customLua.obsidian").note_frontmatter_func,["note_id_func"] = require("customLua.obsidian").note_id_func,["notes_subdir"] = "10-Inbox",["templates"] = {["date-format"] = "%a-%d-%m-%Y",["folder"] = "~/Documents/templates",["time_format"] = "%H:%M"},["ui"] = {["enable"] = false},["workspaces"] = {{["name"] = "personal",["path"] = "~/Documents/personal"},{["name"] = "work",["path"] = "~/Documents/work"}}})
+
+
+-- SECTION: treesitter
+require('nvim-treesitter.configs').setup {
+  -- Disable imperative treesitter options that would attempt to fetch
+  -- grammars into the read-only Nix store. To add additional grammars here
+  -- you must use the `config.vim.treesitter.grammars` option.
+  auto_install = false,
+  sync_install = false,
+  ensure_installed = {},
+
+  -- Indentation module for Treesitter
+  indent = {
+    enable = true,
+    disable = {},
+  },
+
+  -- Highlight module for Treesitter
+  highlight = {
+    enable = true,
+    disable = {},
+    additional_vim_regex_highlighting = false,
+  },
+
+  -- Indentation module for Treesitter
+  -- Keymaps are set to false here as they are
+  -- handled by `vim.maps` entries calling lua
+  -- functions achieving the same functionality.
+  incremental_selection = {
+    enable = true,
+    disable = {},
+    keymaps = {
+      init_selection = false,
+      node_incremental = false,
+      scope_incremental = false,
+      node_decremental = false,
+
+    },
+  },
+}
+
+
+-- SECTION: whichkey
+local wk = require("which-key")
+wk.setup ({["notify"] = true,["preset"] = "modern",["replace"] = {["<cr>"] = "RETURN",["<leader>"] = "SPACE",["<space>"] = "SPACE",["<tab>"] = "TAB"},["win"] = {["border"] = "rounded"}})
+wk.add({{ '<leader>a', desc = 'Harpoon Mark' },{ '<leader>f', desc = '+Telescope' },{ '<leader>fl', desc = 'Telescope LSP' },{ '<leader>fm', desc = 'Cellular Automaton' },{ '<leader>fv', desc = 'Telescope Git' },{ '<leader>fvc', desc = 'Commits' },{ '<leader>o', desc = '+Notes' }})
+
+
+
+
+-- SECTION: augroups
+local nvf_autogroups = {}
+for _, group in ipairs({{["clear"] = true,["enable"] = true,["name"] = "nvf_lazy_file_hooks"}}) do
+  if group.name then
+    nvf_autogroups[group.name] = { clear = group.clear }
+  end
+end
+
+for group_name, options in pairs(nvf_autogroups) do
+  vim.api.nvim_create_augroup(group_name, options)
+end
+
+
+-- SECTION: autocmds
+local nvf_autocommands = {{["callback"] = function()
+  local ignore_filetypes = {"help","neo-tree","notify","NvimTree","TelescopePrompt"}
+  if vim.tbl_contains(ignore_filetypes, vim.bo.filetype) then
+    vim.b.miniindentscope_disable = true
+  end
+end
+,["desc"] = "Disable indentscope for certain filetypes",["enable"] = true,["event"] = {"FileType"},["nested"] = false,["once"] = false},{["command"] = "doautocmd User LazyFile",["enable"] = true,["event"] = {"BufReadPost","BufNewFile","BufWritePre"},["group"] = "nvf_lazy_file_hooks",["nested"] = false,["once"] = true}}
+for _, autocmd in ipairs(nvf_autocommands) do
+  vim.api.nvim_create_autocmd(
+    autocmd.event,
+    {
+      group     = autocmd.group,
+      pattern   = autocmd.pattern,
+      buffer    = autocmd.buffer,
+      desc      = autocmd.desc,
+      callback  = autocmd.callback,
+      command   = autocmd.command,
+      once      = autocmd.once,
+      nested    = autocmd.nested
+    }
+  )
+end
+
+
+
+-- SECTION: mappings
+vim.keymap.set("n", "<leader>lfj", ":%!jq .<CR>", {["expr"] = false,["noremap"] = true,["nowait"] = false,["script"] = false,["silent"] = false,["unique"] = false})
+vim.keymap.set("n", "<leader>lfc", "<cmd>lua require('conform').format({async = true})<CR>", {["expr"] = false,["noremap"] = true,["nowait"] = false,["script"] = false,["silent"] = false,["unique"] = false})
+vim.keymap.set("n", "<leader>p", ":bprevious<CR>", {["expr"] = false,["noremap"] = true,["nowait"] = false,["script"] = false,["silent"] = false,["unique"] = false})
+vim.keymap.set("n", "<leader>n", ":bnext<CR>", {["expr"] = false,["noremap"] = true,["nowait"] = false,["script"] = false,["silent"] = false,["unique"] = false})
+vim.keymap.set("n", "<leader>oss", ":ObsidianSearch<CR>", {["desc"] = "Obsidian search",["expr"] = false,["noremap"] = true,["nowait"] = false,["script"] = false,["silent"] = false,["unique"] = false})
+vim.keymap.set("n", "<leader>ost", ":ObsidianTags<CR>", {["desc"] = "Obsidian tags",["expr"] = false,["noremap"] = true,["nowait"] = false,["script"] = false,["silent"] = false,["unique"] = false})
+vim.keymap.set("n", "<leader>fo", ":ObsidianSearch<CR>", {["desc"] = "Obsidian search",["expr"] = false,["noremap"] = true,["nowait"] = false,["script"] = false,["silent"] = false,["unique"] = false})
+vim.keymap.set("n", "<leader>on", ":ObsidianNew<CR>", {["desc"] = "Obsidian new note",["expr"] = false,["noremap"] = true,["nowait"] = false,["script"] = false,["silent"] = false,["unique"] = false})
+vim.keymap.set("n", "<leader>ov", ":ObsidianQuickSwitch<CR>", {["desc"] = "Obsidian quick switch",["expr"] = false,["noremap"] = true,["nowait"] = false,["script"] = false,["silent"] = false,["unique"] = false})
+vim.keymap.set("n", "<leader>olb", ":ObsidianBacklinks<CR>", {["desc"] = "Obsidian backlinks",["expr"] = false,["noremap"] = true,["nowait"] = false,["script"] = false,["silent"] = false,["unique"] = false})
+vim.keymap.set("n", "<leader>oll", ":ObsidianLinks<CR>", {["desc"] = "Obsidian links",["expr"] = false,["noremap"] = true,["nowait"] = false,["script"] = false,["silent"] = false,["unique"] = false})
+vim.keymap.set("n", "<leader>oln", ":ObsidianLinksNew<CR>", {["desc"] = "Obsidian new link",["expr"] = false,["noremap"] = true,["nowait"] = false,["script"] = false,["silent"] = false,["unique"] = false})
+vim.keymap.set("n", "<leader>opt", ":lua require('customLua.obsidian').periodic_notes('daily', os.time())<CR>", {["desc"] = "Obsidian daily today",["expr"] = false,["noremap"] = true,["nowait"] = false,["script"] = false,["silent"] = false,["unique"] = false})
+vim.keymap.set("n", "<leader>opd", ":lua require('customLua.obsidian').periodic_notes('daily', os.time()+86400)<CR>", {["desc"] = "Obsidian daily tomorrow",["expr"] = false,["noremap"] = true,["nowait"] = false,["script"] = false,["silent"] = false,["unique"] = false})
+vim.keymap.set("n", "<leader>opy", ":lua require('customLua.obsidian').periodic_notes('daily', os.time()-86400)<CR>", {["desc"] = "Obsidian daily yesterday",["expr"] = false,["noremap"] = true,["nowait"] = false,["script"] = false,["silent"] = false,["unique"] = false})
+vim.keymap.set("n", "<leader>opm", ":lua require('customLua.obsidian').periodic_notes('monthly', os.time())<CR>", {["desc"] = "Obsidian periodic monthly",["expr"] = false,["noremap"] = true,["nowait"] = false,["script"] = false,["silent"] = false,["unique"] = false})
+vim.keymap.set("n", "<leader>opw", ":lua require('customLua.obsidian').periodic_notes('weekly', os.time())<CR>", {["desc"] = "Obsidian periodic weekly",["expr"] = false,["noremap"] = true,["nowait"] = false,["script"] = false,["silent"] = false,["unique"] = false})
+vim.keymap.set("n", "<leader>opa", ":lua require('customLua.obsidian').periodic_notes('yearly', os.time())<CR>", {["desc"] = "Obsidian periodic yearly",["expr"] = false,["noremap"] = true,["nowait"] = false,["script"] = false,["silent"] = false,["unique"] = false})
+vim.keymap.set("n", "<leader>ot", ":ObsidianTags<CR>", {["desc"] = "Obsidian search or add tags",["expr"] = false,["noremap"] = true,["nowait"] = false,["script"] = false,["silent"] = false,["unique"] = false})
+vim.keymap.set("n", "<leader>ott", ":lua require('customLua.obsidian').addTag('todo/checklist')<CR>", {["desc"] = "Obsidian add todo/checklist tag",["expr"] = false,["noremap"] = true,["nowait"] = false,["script"] = false,["silent"] = false,["unique"] = false})
+vim.keymap.set("n", "<leader>oti", ":lua require('customLua.obsidian').addTag('todo/improvement')<CR>", {["desc"] = "Obsidian add todo/improvement tag",["expr"] = false,["noremap"] = true,["nowait"] = false,["script"] = false,["silent"] = false,["unique"] = false})
+vim.keymap.set("n", "<leader>ots", ":lua require('customLua.obsidian').addTag('todo/suggestion')<CR>", {["desc"] = "Obsidian add todo/suggestion tag",["expr"] = false,["noremap"] = true,["nowait"] = false,["script"] = false,["silent"] = false,["unique"] = false})
+vim.keymap.set("n", "<leader>omq&", ":lua require(\"customLua.obsidian\").add_or_update_field(\"quality\",\"raw\")<CR>", {["desc"] = "Obsidian make quality 'raw'",["expr"] = false,["noremap"] = true,["nowait"] = false,["script"] = false,["silent"] = false,["unique"] = false})
+vim.keymap.set("n", "<leader>omqé", ":lua require(\"customLua.obsidian\").add_or_update_field(\"quality\",\"missing_informations\")<CR>", {["desc"] = "Obsidian make quality 'missing_informations'",["expr"] = false,["noremap"] = true,["nowait"] = false,["script"] = false,["silent"] = false,["unique"] = false})
+vim.keymap.set("n", "<leader>omq\"", ":lua require(\"customLua.obsidian\").add_or_update_field(\"quality\",\"missing_metadata\")<CR>", {["desc"] = "Obsidian make quality 'missing_metadata'",["expr"] = false,["noremap"] = true,["nowait"] = false,["script"] = false,["silent"] = false,["unique"] = false})
+vim.keymap.set("n", "<leader>omq'", ":lua require(\"customLua.obsidian\").add_or_update_field(\"quality\",\"missing_formating\")<CR>", {["desc"] = "Obsidian make quality 'missing_formating'",["expr"] = false,["noremap"] = true,["nowait"] = false,["script"] = false,["silent"] = false,["unique"] = false})
+vim.keymap.set("n", "<leader>omq(", ":lua require(\"customLua.obsidian\").add_or_update_field(\"quality\",\"final\")<CR>", {["desc"] = "Obsidian make quality 'final'",["expr"] = false,["noremap"] = true,["nowait"] = false,["script"] = false,["silent"] = false,["unique"] = false})
+vim.keymap.set("n", "<leader>oms&", ":lua require(\"customLua.obsidian\").add_or_update_field(\"status\",\"prospective\")<CR>", {["desc"] = "Obsidian make status 'prospective'",["expr"] = false,["noremap"] = true,["nowait"] = false,["script"] = false,["silent"] = false,["unique"] = false})
+vim.keymap.set("n", "<leader>omsé", ":lua require(\"customLua.obsidian\").add_or_update_field(\"status\",\"in progress\")<CR>", {["desc"] = "Obsidian make quality 'in progress'",["expr"] = false,["noremap"] = true,["nowait"] = false,["script"] = false,["silent"] = false,["unique"] = false})
+vim.keymap.set("n", "<leader>oms\"", ":lua require(\"customLua.obsidian\").add_or_update_field(\"status\",\"done\")<CR>", {["desc"] = "Obsidian make quality 'done'",["expr"] = false,["noremap"] = true,["nowait"] = false,["script"] = false,["silent"] = false,["unique"] = false})
+vim.keymap.set("n", "<leader>oqn\"", ":lua require(\"customLua.obsidian\").quick_note()<CR>", {["desc"] = "Obsidian quick note",["expr"] = false,["noremap"] = true,["nowait"] = false,["script"] = false,["silent"] = false,["unique"] = false})
+vim.keymap.set("n", "<leader>oqc\"", ":! tmux kill-window<CR>", {["desc"] = "Obsidian quick note",["expr"] = false,["noremap"] = true,["nowait"] = false,["script"] = false,["silent"] = false,["unique"] = false})
+vim.keymap.set({"n"}, "<leader>c0", "<Plug>(git-conflict-none)", {["desc"] = "Choose None [Git-Conflict]",["expr"] = false,["noremap"] = true,["nowait"] = false,["script"] = false,["silent"] = true,["unique"] = false})
+vim.keymap.set({"n"}, "<leader>cb", "<Plug>(git-conflict-both)", {["desc"] = "Choose Both [Git-Conflict]",["expr"] = false,["noremap"] = true,["nowait"] = false,["script"] = false,["silent"] = true,["unique"] = false})
+vim.keymap.set({"n"}, "<leader>co", "<Plug>(git-conflict-ours)", {["desc"] = "Choose Ours [Git-Conflict]",["expr"] = false,["noremap"] = true,["nowait"] = false,["script"] = false,["silent"] = true,["unique"] = false})
+vim.keymap.set({"n"}, "<leader>ct", "<Plug>(git-conflict-theirs)", {["desc"] = "Choose Theirs [Git-Conflict]",["expr"] = false,["noremap"] = true,["nowait"] = false,["script"] = false,["silent"] = true,["unique"] = false})
+vim.keymap.set({"n"}, "[x", "<Plug>(git-conflict-next-conflict)", {["desc"] = "Go to the next Conflict [Git-Conflict]",["expr"] = false,["noremap"] = true,["nowait"] = false,["script"] = false,["silent"] = true,["unique"] = false})
+vim.keymap.set({"n"}, "]x", "<Plug>(git-conflict-prev-conflict)", {["desc"] = "Go to the previous Conflict [Git-Conflict]",["expr"] = false,["noremap"] = true,["nowait"] = false,["script"] = false,["silent"] = true,["unique"] = false})
+vim.keymap.set({"n"}, "gnn", ":lua require('nvim-treesitter.incremental_selection').init_selection()<CR>", {["desc"] = "Init selection [treesitter]",["expr"] = false,["noremap"] = true,["nowait"] = false,["script"] = false,["silent"] = true,["unique"] = false})
+vim.keymap.set({"n","x"}, "grc", "<cmd>lua require('nvim-treesitter.incremental_selection').scope_incremental()<CR>", {["desc"] = "Increment selection by scope [treesitter]",["expr"] = false,["noremap"] = true,["nowait"] = false,["script"] = false,["silent"] = true,["unique"] = false})
+vim.keymap.set({"n","x"}, "grm", "<cmd>lua require('nvim-treesitter.incremental_selection').node_decremental()<CR>", {["desc"] = "Decrement selection by node [treesitter]",["expr"] = false,["noremap"] = true,["nowait"] = false,["script"] = false,["silent"] = true,["unique"] = false})
+vim.keymap.set({"n","x"}, "grn", "<cmd>lua require('nvim-treesitter.incremental_selection').node_incremental()<CR>", {["desc"] = "Increment selection by node [treesitter]",["expr"] = false,["noremap"] = true,["nowait"] = false,["script"] = false,["silent"] = true,["unique"] = false})
+
+
+
+
+
+
+
+-- SECTION: addRequirePath
+print(vim.inspect(package.path))
+package.path = package.path .. ";" .. os.getenv("HOME") .. "/.dotfiles/modules/home-manager/dev/neovim/nvimConfigs/?.lua"
+
+
+-- SECTION: theme
+
+-- Gruvbox theme
+require("gruvbox").setup({
+  terminal_colors = true, -- add neovim terminal colors
+  undercurl = true,
+  underline = true,
+  bold = true,
+  italic = {
+  strings = true,
+  emphasis = true,
+  comments = true,
+  operators = false,
+  folds = true,
+  },
+  strikethrough = true,
+  invert_selection = false,
+  invert_signs = false,
+  invert_tabline = false,
+  invert_intend_guides = false,
+  inverse = true,
+  contrast = "",
+  palette_overrides = {},
+  overrides = {},
+  dim_inactive = false,
+  transparent_mode = false,
+})
+vim.o.background = "dark"
+vim.cmd("colorscheme gruvbox")
+
+
+
+
+-- SECTION: globalsScript
+vim.g.editorconfig = true
+vim.g.mapleader = " "
+vim.g.maplocalleader = ","
+
+
+-- SECTION: basic
+
+
+
+
+
+
+
+
+
+
+vim.o.smartcase = false
+vim.o.ignorecase = false
+
+
+
+-- SECTION: optionsScript
+vim.o.autoindent = true
+vim.o.backup = false
+vim.o.cmdheight = 1
+vim.o.cursorlineopt = "line"
+vim.o.encoding = "utf-8"
+vim.o.errorbells = false
+vim.o.expandtab = true
+vim.o.hidden = true
+vim.o.mouse = "nvi"
+vim.o.number = true
+vim.o.relativenumber = true
+vim.o.shiftwidth = 2
+vim.o.signcolumn = "yes"
+vim.o.splitbelow = true
+vim.o.splitright = true
+vim.o.swapfile = false
+vim.o.tabstop = 2
+vim.o.termguicolors = true
+vim.o.tm = 500
+vim.o.updatetime = 300
+vim.o.visualbell = false
+vim.o.wrap = true
+vim.o.writebackup = false
+
+
+-- SECTION: lazyConfigs
+require('lz.n').load({{"Preview.nvim",["after"] = function()
+  
+  require("Preview-nvim").setup({})
+  
+end
+,["cmd"] = {"PreviewNvimEnable"}},{"cheatsheet-nvim",["after"] = function()
+  
+  require("cheatsheet").setup({})
+  
+end
+,["before"] = function()
+  require('lz.n').trigger_load('telescope')
+end
+,["cmd"] = {"Cheatsheet","CheatsheetEdit"}},{"cmp-buffer",["after"] = function()
+  
+  
+  local path = vim.fn.globpath(vim.o.packpath, 'pack/*/opt/cmp-buffer')
+require("rtp_nvim").source_after_plugin_dir(path)
+
+end
+,["lazy"] = true},{"cmp-nvim-lsp",["after"] = function()
+  
+  
+  local path = vim.fn.globpath(vim.o.packpath, 'pack/*/opt/cmp-nvim-lsp')
+require("rtp_nvim").source_after_plugin_dir(path)
+
+end
+,["lazy"] = true},{"cmp-path",["after"] = function()
+  
+  
+  local path = vim.fn.globpath(vim.o.packpath, 'pack/*/opt/cmp-path')
+require("rtp_nvim").source_after_plugin_dir(path)
+
+end
+,["lazy"] = true},{"cmp-treesitter",["after"] = function()
+  
+  
+  local path = vim.fn.globpath(vim.o.packpath, 'pack/*/opt/cmp-treesitter')
+require("rtp_nvim").source_after_plugin_dir(path)
+
+end
+,["lazy"] = true},{"copilot-cmp",["after"] = function()
+  
+  
+  local path = vim.fn.globpath(vim.o.packpath, 'pack/*/opt/copilot-cmp')
+require("rtp_nvim").source_after_plugin_dir(path)
+
+end
+,["lazy"] = true},{"copilot-lua",["after"] = function()
+  
+  require("copilot").setup({["copilot_node_command"] = "/nix/store/rq7x1hbxg89b287mklhk9sqh3lj4jqll-nodejs-slim-22.20.0/bin/node",["panel"] = {["enabled"] = true,["keymap"] = {["accept"] = false,["jump_next"] = false,["jump_prev"] = false,["open"] = false,["refresh"] = false},["layout"] = {["position"] = "bottom",["ratio"] = 0.400000}},["suggestion"] = {["enabled"] = true,["keymap"] = {["accept"] = false,["accept_line"] = false,["accept_word"] = false,["dismiss"] = false,["next"] = false,["prev"] = false}}})
+  
+end
+,["cmd"] = {"Copilot","CopilotAuth","CopilotDetach","CopilotPanel","CopilotStop"},["event"] = {{["event"] = "User",["pattern"] = "LazyFile"}},["keys"] = {{"<CR>",function()
+  local s, _ = pcall(require("copilot.panel").accept)
+
+  if not s then
+    local termcode = vim.api.nvim_replace_termcodes("<CR>", true, false, true)
+
+    vim.fn.feedkeys(termcode, 'n')
+  end
+end
+,["desc"] = "[copilot] Accept suggestion",["expr"] = false,["mode"] = {"n"},["noremap"] = true,["nowait"] = false,["script"] = false,["silent"] = true,["unique"] = false},{"<leader>$",function()
+  local s, _ = pcall(require("copilot.panel").jump_next)
+
+  if not s then
+    local termcode = vim.api.nvim_replace_termcodes("<leader>$", true, false, true)
+
+    vim.fn.feedkeys(termcode, 'n')
+  end
+end
+,["desc"] = "[copilot] Next panel suggestion",["expr"] = false,["mode"] = {"n"},["noremap"] = true,["nowait"] = false,["script"] = false,["silent"] = true,["unique"] = false},{"<leader>^",function()
+  local s, _ = pcall(require("copilot.panel").jump_prev)
+
+  if not s then
+    local termcode = vim.api.nvim_replace_termcodes("<leader>^", true, false, true)
+
+    vim.fn.feedkeys(termcode, 'n')
+  end
+end
+,["desc"] = "[copilot] Previous panel suggestion",["expr"] = false,["mode"] = {"n"},["noremap"] = true,["nowait"] = false,["script"] = false,["silent"] = true,["unique"] = false},{"gr",function()
+  local s, _ = pcall(require("copilot.panel").refresh)
+
+  if not s then
+    local termcode = vim.api.nvim_replace_termcodes("gr", true, false, true)
+
+    vim.fn.feedkeys(termcode, 'n')
+  end
+end
+,["desc"] = "[copilot] Refresh suggestion",["expr"] = false,["mode"] = {"n"},["noremap"] = true,["nowait"] = false,["script"] = false,["silent"] = true,["unique"] = false},{"<M-CR>",function()
+  local s, _ = pcall(function() require("copilot.panel").open({ position = "bottom", ratio = 0.400000, }) end
+)
+
+  if not s then
+    local termcode = vim.api.nvim_replace_termcodes("<M-CR>", true, false, true)
+
+    vim.fn.feedkeys(termcode, 'n')
+  end
+end
+,["desc"] = "[copilot] Open Panel",["expr"] = false,["mode"] = {"n"},["noremap"] = true,["nowait"] = false,["script"] = false,["silent"] = true,["unique"] = false},{"<M-*>",function() require('copilot.suggestion').accept() end,["desc"] = "[copilot] Accept suggestion",["expr"] = false,["mode"] = {"i"},["noremap"] = true,["nowait"] = false,["script"] = false,["silent"] = true,["unique"] = false},{"<M-ù>",function() require('copilot.suggestion').dismiss() end,["desc"] = "[copilot] dismiss suggestion",["expr"] = false,["mode"] = {"i"},["noremap"] = true,["nowait"] = false,["script"] = false,["silent"] = true,["unique"] = false},{"<M-$>",function() require('copilot.suggestion').next() end,["desc"] = "[copilot] next suggestion",["expr"] = false,["mode"] = {"i"},["noremap"] = true,["nowait"] = false,["script"] = false,["silent"] = true,["unique"] = false},{"<M-^>",function() require('copilot.suggestion').prev() end,["desc"] = "[copilot] previous suggestion",["expr"] = false,["mode"] = {"i"},["noremap"] = true,["nowait"] = false,["script"] = false,["silent"] = true,["unique"] = false}}},{"harpoon",["after"] = function()
+  
+  require("harpoon").setup({["defaults"] = {["key"] = function()
+  return vim.loop.cwd()
+end
+,["save_on_toggle"] = false,["sync_on_ui_close"] = false}})
+  
+end
+,["cmd"] = {"Harpoon"},["keys"] = {{"<leader>a","<Cmd>lua require('harpoon'):list():add()<CR>",["desc"] = "Mark file [Harpoon]",["expr"] = false,["mode"] = "n",["noremap"] = true,["nowait"] = false,["script"] = false,["silent"] = true,["unique"] = false},{"<C-e>","<Cmd>lua require('harpoon').ui:toggle_quick_menu(require('harpoon'):list())<CR>",["desc"] = "List marked files [Harpoon]",["expr"] = false,["mode"] = "n",["noremap"] = true,["nowait"] = false,["script"] = false,["silent"] = true,["unique"] = false},{"<C-q>","<Cmd>lua require('harpoon'):list():select(1)<CR>",["desc"] = "Go to marked file 1 [Harpoon]",["expr"] = false,["mode"] = "n",["noremap"] = true,["nowait"] = false,["script"] = false,["silent"] = true,["unique"] = false},{"<C-s>","<Cmd>lua require('harpoon'):list():select(2)<CR>",["desc"] = "Go to marked file 2 [Harpoon]",["expr"] = false,["mode"] = "n",["noremap"] = true,["nowait"] = false,["script"] = false,["silent"] = true,["unique"] = false},{"<C-d>","<Cmd>lua require('harpoon'):list():select(3)<CR>",["desc"] = "Go to marked file 3 [Harpoon]",["expr"] = false,["mode"] = "n",["noremap"] = true,["nowait"] = false,["script"] = false,["silent"] = true,["unique"] = false},{"<C-f>","<Cmd>lua require('harpoon'):list():select(4)<CR>",["desc"] = "Go to marked file 4 [Harpoon]",["expr"] = false,["mode"] = "n",["noremap"] = true,["nowait"] = false,["script"] = false,["silent"] = true,["unique"] = false}}},{"nvim-cmp",["after"] = function()
+  
+  
+  
+local cmp = require("cmp")
+
+local kinds = require("cmp.types").lsp.CompletionItemKind
+local deprio = function(kind)
+  return function(e1, e2)
+    if e1:get_kind() == kind then
+      return false
+    end
+    if e2:get_kind() == kind then
+      return true
+    end
+    return nil
+  end
+end
+
+cmp.setup({["completion"] = {["completeopt"] = "menu,menuone,noinsert"},["formatting"] = {["format"] = require("lspkind").cmp_format({["before"] = function(entry, vim_item)
+  vim_item.menu = ({["copilot"] = "[Copilot]",["nvim_lsp"] = "[LSP]",["treesitter"] = "[Treesitter]"})[entry.source.name]
+  return vim_item
+end
+,["mode"] = "symbol_text"})
+},["mapping"] = {["<C-Space>"] = cmp.mapping.complete(),["<C-d>"] = cmp.mapping.scroll_docs(-4),["<C-e>"] = cmp.mapping.abort(),["<C-f>"] = cmp.mapping.scroll_docs(4),["<CR>"] = cmp.mapping.confirm({ select = true }),["<S-Tab>"] = cmp.mapping(function(fallback)
+  if cmp.visible() then
+    cmp.select_prev_item()
+    
+  else
+    fallback()
+  end
+end)
+,["<Tab>"] = cmp.mapping(function(fallback)
+  local has_words_before = function()
+    local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+    return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+  end
+
+  if cmp.visible() then
+    cmp.select_next_item()
+    
+  elseif has_words_before() then
+    cmp.complete()
+  else
+    fallback()
+  end
+end)
+},["sorting"] = {["comparators"] = {deprio(kinds.Text),deprio(kinds.Snippet),cmp.config.compare.offset,cmp.config.compare.exact,cmp.config.compare.score,cmp.config.compare.kind,cmp.config.compare.length,cmp.config.compare.sort_text}},["sources"] = {{["name"] = "copilot"},{["name"] = "nvim_lsp"},{["name"] = "treesitter"}}})
+
+require('lz.n').trigger_load("cmp-buffer")
+require('lz.n').trigger_load("cmp-path")
+require('lz.n').trigger_load("copilot-cmp")
+require('lz.n').trigger_load("cmp-treesitter")
+require('lz.n').trigger_load("cmp-nvim-lsp")
+
+end
+,["event"] = {"InsertEnter","CmdlineEnter"}},{"render-markdown.nvim",["after"] = function()
+  
+  require("render-markdown-nvim").setup({})
+  
+end
+,["cmd"] = {"RenderMarkdown"},["ft"] = {"markdown"}},{"telescope",["after"] = function()
+  
+  require("telescope").setup({["defaults"] = {["color_devicons"] = true,["entry_prefix"] = "  ",["file_ignore_patterns"] = {},["initial_mode"] = "insert",["layout_config"] = {["height"] = 0.800000,["horizontal"] = {["preview_width"] = 0.550000,["prompt_position"] = "top"},["preview_cutoff"] = 120,["vertical"] = {["mirror"] = false},["width"] = 0.800000},["layout_strategy"] = "horizontal",["path_display"] = {"absolute"},["prompt_prefix"] = "     ",["selection_caret"] = "  ",["selection_strategy"] = "reset",["set_env"] = {["COLORTERM"] = "truecolor"},["sorting_strategy"] = "ascending",["vimgrep_arguments"] = {"/nix/store/h6sbs3cv9n583h64zl2jsjlbk17azs49-ripgrep-14.1.1/bin/rg","--color=never","--no-heading","--with-filename","--line-number","--column","--smart-case","--hidden","--no-ignore"},["winblend"] = 0},["pickers"] = {["find_files"] = {["find_command"] = {"${pkgs.fd}/bin/fd","--type","f","--no-ignore","--color=auto","--hidden","--follow"}}}})
+  local telescope = require("telescope")
+telescope.load_extension('noice')
+
+
+
+end
+,["before"] = function()
+  vim.g.loaded_telescope = nil
+
+end
+,["cmd"] = {"Telescope"},["keys"] = {{"<leader>ff","<cmd>Telescope find_files<CR>",["desc"] = "Find files [Telescope]",["expr"] = false,["mode"] = "n",["noremap"] = true,["nowait"] = false,["script"] = false,["silent"] = true,["unique"] = false},{"<leader>fg","<cmd>Telescope live_grep<CR>",["desc"] = "Live grep [Telescope]",["expr"] = false,["mode"] = "n",["noremap"] = true,["nowait"] = false,["script"] = false,["silent"] = true,["unique"] = false},{"<leader>fb","<cmd>Telescope buffers<CR>",["desc"] = "Buffers [Telescope]",["expr"] = false,["mode"] = "n",["noremap"] = true,["nowait"] = false,["script"] = false,["silent"] = true,["unique"] = false},{"<leader>fh","<cmd>Telescope help_tags<CR>",["desc"] = "Help tags [Telescope]",["expr"] = false,["mode"] = "n",["noremap"] = true,["nowait"] = false,["script"] = false,["silent"] = true,["unique"] = false},{"<leader>ft","<cmd>Telescope<CR>",["desc"] = "Open [Telescope]",["expr"] = false,["mode"] = "n",["noremap"] = true,["nowait"] = false,["script"] = false,["silent"] = true,["unique"] = false},{"<leader>fr","<cmd>Telescope resume<CR>",["desc"] = "Resume (previous search) [Telescope]",["expr"] = false,["mode"] = "n",["noremap"] = true,["nowait"] = false,["script"] = false,["silent"] = true,["unique"] = false},{"<leader>fvcw","<cmd>Telescope git_commits<CR>",["desc"] = "Git commits [Telescope]",["expr"] = false,["mode"] = "n",["noremap"] = true,["nowait"] = false,["script"] = false,["silent"] = true,["unique"] = false},{"<leader>fvcb","<cmd>Telescope git_bcommits<CR>",["desc"] = "Git buffer commits [Telescope]",["expr"] = false,["mode"] = "n",["noremap"] = true,["nowait"] = false,["script"] = false,["silent"] = true,["unique"] = false},{"<leader>fvb","<cmd>Telescope git_branches<CR>",["desc"] = "Git branches [Telescope]",["expr"] = false,["mode"] = "n",["noremap"] = true,["nowait"] = false,["script"] = false,["silent"] = true,["unique"] = false},{"<leader>fvs","<cmd>Telescope git_status<CR>",["desc"] = "Git status [Telescope]",["expr"] = false,["mode"] = "n",["noremap"] = true,["nowait"] = false,["script"] = false,["silent"] = true,["unique"] = false},{"<leader>fvx","<cmd>Telescope git_stash<CR>",["desc"] = "Git stash [Telescope]",["expr"] = false,["mode"] = "n",["noremap"] = true,["nowait"] = false,["script"] = false,["silent"] = true,["unique"] = false},{"<leader>flsb","<cmd>Telescope lsp_document_symbols<CR>",["desc"] = "LSP Document Symbols [Telescope]",["expr"] = false,["mode"] = "n",["noremap"] = true,["nowait"] = false,["script"] = false,["silent"] = true,["unique"] = false},{"<leader>flsw","<cmd>Telescope lsp_workspace_symbols<CR>",["desc"] = "LSP Workspace Symbols [Telescope]",["expr"] = false,["mode"] = "n",["noremap"] = true,["nowait"] = false,["script"] = false,["silent"] = true,["unique"] = false},{"<leader>flr","<cmd>Telescope lsp_references<CR>",["desc"] = "LSP References [Telescope]",["expr"] = false,["mode"] = "n",["noremap"] = true,["nowait"] = false,["script"] = false,["silent"] = true,["unique"] = false},{"<leader>fli","<cmd>Telescope lsp_implementations<CR>",["desc"] = "LSP Implementations [Telescope]",["expr"] = false,["mode"] = "n",["noremap"] = true,["nowait"] = false,["script"] = false,["silent"] = true,["unique"] = false},{"<leader>flD","<cmd>Telescope lsp_definitions<CR>",["desc"] = "LSP Definitions [Telescope]",["expr"] = false,["mode"] = "n",["noremap"] = true,["nowait"] = false,["script"] = false,["silent"] = true,["unique"] = false},{"<leader>flt","<cmd>Telescope lsp_type_definitions<CR>",["desc"] = "LSP Type Definitions [Telescope]",["expr"] = false,["mode"] = "n",["noremap"] = true,["nowait"] = false,["script"] = false,["silent"] = true,["unique"] = false},{"<leader>fld","<cmd>Telescope diagnostics<CR>",["desc"] = "Diagnostics [Telescope]",["expr"] = false,["mode"] = "n",["noremap"] = true,["nowait"] = false,["script"] = false,["silent"] = true,["unique"] = false},{"<leader>fs","<cmd>Telescope treesitter<CR>",["desc"] = "Treesitter [Telescope]",["expr"] = false,["mode"] = "n",["noremap"] = true,["nowait"] = false,["script"] = false,["silent"] = true,["unique"] = false}}},{"telescope-zoxide",["after"] = function()
+  
+  require("telescope-zoxide").setup({})
+  
+end
+,["cmd"] = {"Telescope zoxide list"}},{"zoxide.vim",["after"] = function()
+  
+  require("zoxide-vim").setup({})
+  
+end
+,["cmd"] = {"Z","Lz","Tz","Zi","Lzi","Tzi"}}})
+require('lzn-auto-require').enable()
+
+
+-- SECTION: pluginConfigs
+-- SECTION: git-conflict
+require('git-conflict').setup({["default_mappings"] = false})
+
+
+-- SECTION: lightbulb
+local nvim_lightbulb = require("nvim-lightbulb")
+nvim_lightbulb.setup({})
+vim.api.nvim_create_autocmd({"CursorHold","CursorHoldI"}, {
+  pattern = "*",
+  callback = function()
+    nvim_lightbulb.update_lightbulb()
+  end,
+})
+
+
+
+-- SECTION: lsp-setup
+vim.g.formatsave = true;
+
+local attach_keymaps = function(client, bufnr)
+  vim.keymap.set('n', '<leader>lgD', vim.lsp.buf.declaration, {buffer=bufnr, noremap=true, silent=true, desc='Go to declaration'})
+  vim.keymap.set('n', '<leader>lgd', vim.lsp.buf.definition, {buffer=bufnr, noremap=true, silent=true, desc='Go to definition'})
+  vim.keymap.set('n', '<leader>lgt', vim.lsp.buf.type_definition, {buffer=bufnr, noremap=true, silent=true, desc='Go to type'})
+  vim.keymap.set('n', '<leader>lgi', vim.lsp.buf.implementation, {buffer=bufnr, noremap=true, silent=true, desc='List implementations'})
+  vim.keymap.set('n', '<leader>lgr', vim.lsp.buf.references, {buffer=bufnr, noremap=true, silent=true, desc='List references'})
+  vim.keymap.set('n', '<leader>lgn', vim.diagnostic.goto_next, {buffer=bufnr, noremap=true, silent=true, desc='Go to next diagnostic'})
+  vim.keymap.set('n', '<leader>lgp', vim.diagnostic.goto_prev, {buffer=bufnr, noremap=true, silent=true, desc='Go to previous diagnostic'})
+  vim.keymap.set('n', '<leader>le', vim.diagnostic.open_float, {buffer=bufnr, noremap=true, silent=true, desc='Open diagnostic float'})
+  vim.keymap.set('n', '<leader>lH', vim.lsp.buf.document_highlight, {buffer=bufnr, noremap=true, silent=true, desc='Document highlight'})
+  vim.keymap.set('n', '<leader>lS', vim.lsp.buf.document_symbol, {buffer=bufnr, noremap=true, silent=true, desc='List document symbols'})
+  vim.keymap.set('n', '<leader>lwa', vim.lsp.buf.add_workspace_folder, {buffer=bufnr, noremap=true, silent=true, desc='Add workspace folder'})
+  vim.keymap.set('n', '<leader>lwr', vim.lsp.buf.remove_workspace_folder, {buffer=bufnr, noremap=true, silent=true, desc='Remove workspace folder'})
+  vim.keymap.set('n', '<leader>lwl', function() vim.notify(vim.inspect(vim.lsp.buf.list_workspace_folders())) end, {buffer=bufnr, noremap=true, silent=true, desc='List workspace folders'})
+  vim.keymap.set('n', '<leader>lws', vim.lsp.buf.workspace_symbol, {buffer=bufnr, noremap=true, silent=true, desc='List workspace symbols'})
+  vim.keymap.set('n', '<leader>lh', vim.lsp.buf.hover, {buffer=bufnr, noremap=true, silent=true, desc='Trigger hover'})
+  vim.keymap.set('n', '<leader>ls', vim.lsp.buf.signature_help, {buffer=bufnr, noremap=true, silent=true, desc='Signature help'})
+  vim.keymap.set('n', '<leader>ln', vim.lsp.buf.rename, {buffer=bufnr, noremap=true, silent=true, desc='Rename symbol'})
+  vim.keymap.set('n', '<leader>la', vim.lsp.buf.code_action, {buffer=bufnr, noremap=true, silent=true, desc='Code action'})
+  vim.keymap.set('n', '<leader>lf', vim.lsp.buf.format, {buffer=bufnr, noremap=true, silent=true, desc='Format'})
+  vim.keymap.set('n', '<leader>ltf', function() vim.b.disableFormatSave = not vim.b.disableFormatSave end, {buffer=bufnr, noremap=true, silent=true, desc='Toggle format on save'})
+end
+
+-- Enable formatting
+local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
+
+format_callback = function(client, bufnr)
+  if vim.g.formatsave then
+    vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
+    vim.api.nvim_create_autocmd("BufWritePre", {
+      group = augroup,
+      buffer = bufnr,
+      callback = function()
+        
+              vim.lsp.buf.format({
+                bufnr = bufnr,
+              })
+        
+      end,
+    })
+  end
+end
+
+
+default_on_attach = function(client, bufnr)
+  attach_keymaps(client, bufnr)
+  format_callback(client, bufnr)
+  
+end
+
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+-- HACK: copied from cmp-nvim-lsp. If we ever lazy load lspconfig we
+-- should re-evaluate whether we can just use `default_capabilities`
+capabilities = {
+  textDocument = {
+    completion = {
+      dynamicRegistration = false,
+      completionItem = {
+        snippetSupport = true,
+        commitCharactersSupport = true,
+        deprecatedSupport = true,
+        preselectSupport = true,
+        tagSupport = {
+          valueSet = {
+            1, -- Deprecated
+          }
+        },
+        insertReplaceSupport = true,
+        resolveSupport = {
+          properties = {
+            "documentation",
+            "detail",
+            "additionalTextEdits",
+            "sortText",
+            "filterText",
+            "insertText",
+            "textEdit",
+            "insertTextFormat",
+            "insertTextMode",
+          },
+        },
+        insertTextModeSupport = {
+          valueSet = {
+            1, -- asIs
+            2, -- adjustIndentation
+          }
+        },
+        labelDetailsSupport = true,
+      },
+      contextSupport = true,
+      insertTextMode = 1,
+      completionList = {
+        itemDefaults = {
+          'commitCharacters',
+          'editRange',
+          'insertTextFormat',
+          'insertTextMode',
+          'data',
+        }
+      }
+    },
+  },
+}
+
+
+
+
+
+-- SECTION: lsp-signature
+-- Enable lsp signature viewer
+require("lsp_signature").setup({["bind"] = false,["handler_opts"] = {["border"] = "rounded"}})
+
+
+-- SECTION: lspconfig
+local lspconfig = require('lspconfig')
+
+
+
+
+-- SECTION: lualine
+local lualine = require('lualine')
+lualine.setup {["inactive_sections"] = {["lualine_a"] = {},["lualine_b"] = {},["lualine_c"] = {'filename'},["lualine_x"] = {'location'},["lualine_y"] = {},["lualine_z"] = {}},["options"] = {["always_divide_middle"] = true,["component_separators"] = {"",""},["globalstatus"] = true,["icons_enabled"] = true,["refresh"] = {["statusline"] = 1000,["tabline"] = 1000,["winbar"] = 1000},["section_separators"] = {"",""},["theme"] = "auto"},["sections"] = {["lualine_a"] = {{
+  "mode",
+  icons_enabled = true,
+  separator = {
+    left = '▎',
+    right = ''
+  },
+}
+,{
+  "",
+  draw_empty = true,
+  separator = { left = '', right = '' }
+}
+},["lualine_b"] = {{
+  "filetype",
+  colored = true,
+  icon_only = true,
+  icon = { align = 'left' }
+}
+,{
+  "filename",
+  symbols = {modified = ' ', readonly = ' '},
+  separator = {right = ''}
+}
+,{
+  "",
+  draw_empty = true,
+  separator = { left = '', right = '' }
+}
+},["lualine_c"] = {{
+  "diff",
+  colored = false,
+  diff_color = {
+    -- Same color values as the general color option can be used here.
+    added    = 'DiffAdd',    -- Changes the diff's added color
+    modified = 'DiffChange', -- Changes the diff's modified color
+    removed  = 'DiffDelete', -- Changes the diff's removed color you
+  },
+  symbols = {added = '+', modified = '~', removed = '-'}, -- Changes the diff symbols
+  separator = {right = ''}
+}
+},["lualine_x"] = {{
+  -- Lsp server name
+  function()
+    local buf_ft = vim.bo.filetype
+    local excluded_buf_ft = { toggleterm = true, NvimTree = true, ["neo-tree"] = true, TelescopePrompt = true }
+
+    if excluded_buf_ft[buf_ft] then
+      return ""
+      end
+
+    local bufnr = vim.api.nvim_get_current_buf()
+    local clients = vim.lsp.get_clients({ bufnr = bufnr })
+
+    if vim.tbl_isempty(clients) then
+      return "No Active LSP"
+    end
+
+    local active_clients = {}
+    for _, client in ipairs(clients) do
+      table.insert(active_clients, client.name)
+    end
+
+    return table.concat(active_clients, ", ")
+  end,
+  icon = ' ',
+  separator = {left = ''},
+}
+,{
+  "diagnostics",
+  sources = {'nvim_lsp', 'nvim_diagnostic', 'nvim_diagnostic', 'vim_lsp', 'coc'},
+  symbols = {error = '󰅙  ', warn = '  ', info = '  ', hint = '󰌵 '},
+  colored = true,
+  update_in_insert = false,
+  always_visible = false,
+  diagnostics_color = {
+    color_error = { fg = 'red' },
+    color_warn = { fg = 'yellow' },
+    color_info = { fg = 'cyan' },
+  },
+}
+},["lualine_y"] = {{
+  "",
+  draw_empty = true,
+  separator = { left = '', right = '' }
+}
+,{
+  'searchcount',
+  maxcount = 999,
+  timeout = 120,
+  separator = {left = ''}
+}
+,{
+  "branch",
+  icon = ' •',
+  separator = {left = ''}
+}
+},["lualine_z"] = {{
+  "",
+  draw_empty = true,
+  separator = { left = '', right = '' }
+}
+,{
+  "progress",
+  separator = {left = ''}
+}
+,{"location"}
+,{
+  "fileformat",
+  color = {fg='black'},
+  symbols = {
+    unix = '', -- e712
+    dos = '',  -- e70f
+    mac = '',  -- e711
+  }
+}
+}}}
+
+
+-- SECTION: mini-ai
+require("mini.ai").setup({})
+
+
+-- SECTION: mini-basics
+require("mini.basics").setup({})
+
+
+-- SECTION: mini-comment
+require("mini.comment").setup({})
+
+
+-- SECTION: mini-completion
+require("mini.completion").setup({})
+
+
+-- SECTION: mini-indentscope
+require("mini.indentscope").setup({["ignore_filetypes"] = {"help","neo-tree","notify","NvimTree","TelescopePrompt"}})
+
+
+-- SECTION: mini-map
+require("mini.map").setup({})
+
+
+-- SECTION: mini-notify
+require("mini.notify").setup({["window"] = {["config"] = {["border"] = "rounded"}}})
+vim.notify = MiniNotify.make_notify({["DEBUG"] = {["duration"] = 0,["hl_group"] = "DiagnosticHint"},["ERROR"] = {["duration"] = 5000,["hl_group"] = "DiagnosticError"},["INFO"] = {["duration"] = 5000,["hl_group"] = "DiagnosticInfo"},["OFF"] = {["duration"] = 0,["hl_group"] = "MiniNotifyNormal"},["TRACE"] = {["duration"] = 0,["hl_group"] = "DiagnosticOk"},["WARN"] = {["duration"] = 5000,["hl_group"] = "DiagnosticWarn"}})
+
+
+-- SECTION: mini-operators
+require("mini.operators").setup({})
+
+
+-- SECTION: mini-pairs
+require("mini.pairs").setup({})
+
+
+-- SECTION: mini-splitjoin
+require("mini.splitjoin").setup({})
+
+
+-- SECTION: mini-surround
+require("mini.surround").setup({})
+
+
+-- SECTION: nix-lsp
+lspconfig.nil_ls.setup{
+  capabilities = capabilities,
+on_attach = default_on_attach,
+  cmd = {"/nix/store/baai0iy8l2j08zx05ydwz4cf0qgyllx7-nil-2024-08-06/bin/nil"},
+settings = {
+  ["nil"] = {
+formatting = {
+  command = {"/nix/store/1crkydpxl0sh8214grfpxhafggbyd7fc-alejandra-4.0.0/bin/alejandra", "--quiet"},
+},
+
+
+  },
+},
+
+}
+
+
+-- SECTION: noice-nvim
+require("noice").setup({["format"] = {["cmdline"] = {["icon"] = "",["lang"] = "vim",["pattern"] = "^:"},["filter"] = {["icon"] = "",["lang"] = "bash",["pattern"] = "^:%s*!"},["help"] = {["icon"] = "󰋖",["pattern"] = "^:%s*he?l?p?%s+"},["lua"] = {["icon"] = "",["lang"] = "lua",["pattern"] = "^:%s*lua%s+"},["search_down"] = {["icon"] = " ",["kind"] = "search",["lang"] = "regex",["pattern"] = "^/"},["search_up"] = {["icon"] = " ",["kind"] = "search",["lang"] = "regex",["pattern"] = "^%?"}},["lsp"] = {["override"] = {["cmp.entry.get_documentation"] = true,["vim.lsp.util.convert_input_to_markdown_lines"] = true,["vim.lsp.util.stylize_markdown"] = true},["signature"] = {["enabled"] = false}},["presets"] = {["bottom_search"] = true,["command_palette"] = true,["inc_rename"] = false,["long_message_to_split"] = true,["lsp_doc_border"] = false},["routes"] = {{["filter"] = {["event"] = "msg_showmode"},["view"] = "notify"}}})
+
+
+-- SECTION: obsidian
+require("obsidian").setup({["completion"] = {["nvim_cmp"] = true},["daily_notes"] = {["dates_format"] = "%d-%m-%Y",["default_tags"] = {"daily_notes"},["folder"] = "11-Daily"},["note_frontmatter_func"] = require("customLua.obsidian").note_frontmatter_func,["note_id_func"] = require("customLua.obsidian").note_id_func,["notes_subdir"] = "10-Inbox",["templates"] = {["date-format"] = "%a-%d-%m-%Y",["folder"] = "~/Documents/templates",["time_format"] = "%H:%M"},["ui"] = {["enable"] = false},["workspaces"] = {{["name"] = "personal",["path"] = "~/Documents/personal"},{["name"] = "work",["path"] = "~/Documents/work"}}})
+
+
+-- SECTION: treesitter
+require('nvim-treesitter.configs').setup {
+  -- Disable imperative treesitter options that would attempt to fetch
+  -- grammars into the read-only Nix store. To add additional grammars here
+  -- you must use the `config.vim.treesitter.grammars` option.
+  auto_install = false,
+  sync_install = false,
+  ensure_installed = {},
+
+  -- Indentation module for Treesitter
+  indent = {
+    enable = true,
+    disable = {},
+  },
+
+  -- Highlight module for Treesitter
+  highlight = {
+    enable = true,
+    disable = {},
+    additional_vim_regex_highlighting = false,
+  },
+
+  -- Indentation module for Treesitter
+  -- Keymaps are set to false here as they are
+  -- handled by `vim.maps` entries calling lua
+  -- functions achieving the same functionality.
+  incremental_selection = {
+    enable = true,
+    disable = {},
+    keymaps = {
+      init_selection = false,
+      node_incremental = false,
+      scope_incremental = false,
+      node_decremental = false,
+
+    },
+  },
+}
+
+
+-- SECTION: whichkey
+local wk = require("which-key")
+wk.setup ({["notify"] = true,["preset"] = "modern",["replace"] = {["<cr>"] = "RETURN",["<leader>"] = "SPACE",["<space>"] = "SPACE",["<tab>"] = "TAB"},["win"] = {["border"] = "rounded"}})
+wk.add({{ '<leader>a', desc = 'Harpoon Mark' },{ '<leader>f', desc = '+Telescope' },{ '<leader>fl', desc = 'Telescope LSP' },{ '<leader>fm', desc = 'Cellular Automaton' },{ '<leader>fv', desc = 'Telescope Git' },{ '<leader>fvc', desc = 'Commits' },{ '<leader>o', desc = '+Notes' }})
+
+
+
+
+-- SECTION: augroups
+local nvf_autogroups = {}
+for _, group in ipairs({{["clear"] = true,["enable"] = true,["name"] = "nvf_lazy_file_hooks"}}) do
+  if group.name then
+    nvf_autogroups[group.name] = { clear = group.clear }
+  end
+end
+
+for group_name, options in pairs(nvf_autogroups) do
+  vim.api.nvim_create_augroup(group_name, options)
+end
+
+
+-- SECTION: autocmds
+local nvf_autocommands = {{["callback"] = function()
+  local ignore_filetypes = {"help","neo-tree","notify","NvimTree","TelescopePrompt"}
+  if vim.tbl_contains(ignore_filetypes, vim.bo.filetype) then
+    vim.b.miniindentscope_disable = true
+  end
+end
+,["desc"] = "Disable indentscope for certain filetypes",["enable"] = true,["event"] = {"FileType"},["nested"] = false,["once"] = false},{["command"] = "doautocmd User LazyFile",["enable"] = true,["event"] = {"BufReadPost","BufNewFile","BufWritePre"},["group"] = "nvf_lazy_file_hooks",["nested"] = false,["once"] = true}}
+for _, autocmd in ipairs(nvf_autocommands) do
+  vim.api.nvim_create_autocmd(
+    autocmd.event,
+    {
+      group     = autocmd.group,
+      pattern   = autocmd.pattern,
+      buffer    = autocmd.buffer,
+      desc      = autocmd.desc,
+      callback  = autocmd.callback,
+      command   = autocmd.command,
+      once      = autocmd.once,
+      nested    = autocmd.nested
+    }
+  )
+end
+
+
+
+-- SECTION: mappings
+vim.keymap.set("n", "<leader>lfj", ":%!jq .<CR>", {["expr"] = false,["noremap"] = true,["nowait"] = false,["script"] = false,["silent"] = false,["unique"] = false})
+vim.keymap.set("n", "<leader>lfc", "<cmd>lua require('conform').format({async = true})<CR>", {["expr"] = false,["noremap"] = true,["nowait"] = false,["script"] = false,["silent"] = false,["unique"] = false})
+vim.keymap.set("n", "<leader>p", ":bprevious<CR>", {["expr"] = false,["noremap"] = true,["nowait"] = false,["script"] = false,["silent"] = false,["unique"] = false})
+vim.keymap.set("n", "<leader>n", ":bnext<CR>", {["expr"] = false,["noremap"] = true,["nowait"] = false,["script"] = false,["silent"] = false,["unique"] = false})
+vim.keymap.set("n", "<leader>oss", ":ObsidianSearch<CR>", {["desc"] = "Obsidian search",["expr"] = false,["noremap"] = true,["nowait"] = false,["script"] = false,["silent"] = false,["unique"] = false})
+vim.keymap.set("n", "<leader>ost", ":ObsidianTags<CR>", {["desc"] = "Obsidian tags",["expr"] = false,["noremap"] = true,["nowait"] = false,["script"] = false,["silent"] = false,["unique"] = false})
+vim.keymap.set("n", "<leader>fo", ":ObsidianSearch<CR>", {["desc"] = "Obsidian search",["expr"] = false,["noremap"] = true,["nowait"] = false,["script"] = false,["silent"] = false,["unique"] = false})
+vim.keymap.set("n", "<leader>on", ":ObsidianNew<CR>", {["desc"] = "Obsidian new note",["expr"] = false,["noremap"] = true,["nowait"] = false,["script"] = false,["silent"] = false,["unique"] = false})
+vim.keymap.set("n", "<leader>ov", ":ObsidianQuickSwitch<CR>", {["desc"] = "Obsidian quick switch",["expr"] = false,["noremap"] = true,["nowait"] = false,["script"] = false,["silent"] = false,["unique"] = false})
+vim.keymap.set("n", "<leader>olb", ":ObsidianBacklinks<CR>", {["desc"] = "Obsidian backlinks",["expr"] = false,["noremap"] = true,["nowait"] = false,["script"] = false,["silent"] = false,["unique"] = false})
+vim.keymap.set("n", "<leader>oll", ":ObsidianLinks<CR>", {["desc"] = "Obsidian links",["expr"] = false,["noremap"] = true,["nowait"] = false,["script"] = false,["silent"] = false,["unique"] = false})
+vim.keymap.set("n", "<leader>oln", ":ObsidianLinksNew<CR>", {["desc"] = "Obsidian new link",["expr"] = false,["noremap"] = true,["nowait"] = false,["script"] = false,["silent"] = false,["unique"] = false})
+vim.keymap.set("n", "<leader>opt", ":lua require('customLua.obsidian').periodic_notes('daily', os.time())<CR>", {["desc"] = "Obsidian daily today",["expr"] = false,["noremap"] = true,["nowait"] = false,["script"] = false,["silent"] = false,["unique"] = false})
+vim.keymap.set("n", "<leader>opd", ":lua require('customLua.obsidian').periodic_notes('daily', os.time()+86400)<CR>", {["desc"] = "Obsidian daily tomorrow",["expr"] = false,["noremap"] = true,["nowait"] = false,["script"] = false,["silent"] = false,["unique"] = false})
+vim.keymap.set("n", "<leader>opy", ":lua require('customLua.obsidian').periodic_notes('daily', os.time()-86400)<CR>", {["desc"] = "Obsidian daily yesterday",["expr"] = false,["noremap"] = true,["nowait"] = false,["script"] = false,["silent"] = false,["unique"] = false})
+vim.keymap.set("n", "<leader>opm", ":lua require('customLua.obsidian').periodic_notes('monthly', os.time())<CR>", {["desc"] = "Obsidian periodic monthly",["expr"] = false,["noremap"] = true,["nowait"] = false,["script"] = false,["silent"] = false,["unique"] = false})
+vim.keymap.set("n", "<leader>opw", ":lua require('customLua.obsidian').periodic_notes('weekly', os.time())<CR>", {["desc"] = "Obsidian periodic weekly",["expr"] = false,["noremap"] = true,["nowait"] = false,["script"] = false,["silent"] = false,["unique"] = false})
+vim.keymap.set("n", "<leader>opa", ":lua require('customLua.obsidian').periodic_notes('yearly', os.time())<CR>", {["desc"] = "Obsidian periodic yearly",["expr"] = false,["noremap"] = true,["nowait"] = false,["script"] = false,["silent"] = false,["unique"] = false})
+vim.keymap.set("n", "<leader>ot", ":ObsidianTags<CR>", {["desc"] = "Obsidian search or add tags",["expr"] = false,["noremap"] = true,["nowait"] = false,["script"] = false,["silent"] = false,["unique"] = false})
+vim.keymap.set("n", "<leader>ott", ":lua require('customLua.obsidian').addTag('todo/checklist')<CR>", {["desc"] = "Obsidian add todo/checklist tag",["expr"] = false,["noremap"] = true,["nowait"] = false,["script"] = false,["silent"] = false,["unique"] = false})
+vim.keymap.set("n", "<leader>oti", ":lua require('customLua.obsidian').addTag('todo/improvement')<CR>", {["desc"] = "Obsidian add todo/improvement tag",["expr"] = false,["noremap"] = true,["nowait"] = false,["script"] = false,["silent"] = false,["unique"] = false})
+vim.keymap.set("n", "<leader>ots", ":lua require('customLua.obsidian').addTag('todo/suggestion')<CR>", {["desc"] = "Obsidian add todo/suggestion tag",["expr"] = false,["noremap"] = true,["nowait"] = false,["script"] = false,["silent"] = false,["unique"] = false})
+vim.keymap.set("n", "<leader>omq&", ":lua require(\"customLua.obsidian\").add_or_update_field(\"quality\",\"raw\")<CR>", {["desc"] = "Obsidian make quality 'raw'",["expr"] = false,["noremap"] = true,["nowait"] = false,["script"] = false,["silent"] = false,["unique"] = false})
+vim.keymap.set("n", "<leader>omqé", ":lua require(\"customLua.obsidian\").add_or_update_field(\"quality\",\"missing_informations\")<CR>", {["desc"] = "Obsidian make quality 'missing_informations'",["expr"] = false,["noremap"] = true,["nowait"] = false,["script"] = false,["silent"] = false,["unique"] = false})
+vim.keymap.set("n", "<leader>omq\"", ":lua require(\"customLua.obsidian\").add_or_update_field(\"quality\",\"missing_metadata\")<CR>", {["desc"] = "Obsidian make quality 'missing_metadata'",["expr"] = false,["noremap"] = true,["nowait"] = false,["script"] = false,["silent"] = false,["unique"] = false})
+vim.keymap.set("n", "<leader>omq'", ":lua require(\"customLua.obsidian\").add_or_update_field(\"quality\",\"missing_formating\")<CR>", {["desc"] = "Obsidian make quality 'missing_formating'",["expr"] = false,["noremap"] = true,["nowait"] = false,["script"] = false,["silent"] = false,["unique"] = false})
+vim.keymap.set("n", "<leader>omq(", ":lua require(\"customLua.obsidian\").add_or_update_field(\"quality\",\"final\")<CR>", {["desc"] = "Obsidian make quality 'final'",["expr"] = false,["noremap"] = true,["nowait"] = false,["script"] = false,["silent"] = false,["unique"] = false})
+vim.keymap.set("n", "<leader>oms&", ":lua require(\"customLua.obsidian\").add_or_update_field(\"status\",\"prospective\")<CR>", {["desc"] = "Obsidian make status 'prospective'",["expr"] = false,["noremap"] = true,["nowait"] = false,["script"] = false,["silent"] = false,["unique"] = false})
+vim.keymap.set("n", "<leader>omsé", ":lua require(\"customLua.obsidian\").add_or_update_field(\"status\",\"in progress\")<CR>", {["desc"] = "Obsidian make quality 'in progress'",["expr"] = false,["noremap"] = true,["nowait"] = false,["script"] = false,["silent"] = false,["unique"] = false})
+vim.keymap.set("n", "<leader>oms\"", ":lua require(\"customLua.obsidian\").add_or_update_field(\"status\",\"done\")<CR>", {["desc"] = "Obsidian make quality 'done'",["expr"] = false,["noremap"] = true,["nowait"] = false,["script"] = false,["silent"] = false,["unique"] = false})
+vim.keymap.set("n", "<leader>oqn\"", ":lua require(\"customLua.obsidian\").quick_note()<CR>", {["desc"] = "Obsidian quick note",["expr"] = false,["noremap"] = true,["nowait"] = false,["script"] = false,["silent"] = false,["unique"] = false})
+vim.keymap.set("n", "<leader>oqc\"", ":! tmux kill-window<CR>", {["desc"] = "Obsidian quick note",["expr"] = false,["noremap"] = true,["nowait"] = false,["script"] = false,["silent"] = false,["unique"] = false})
+vim.keymap.set({"n"}, "<leader>c0", "<Plug>(git-conflict-none)", {["desc"] = "Choose None [Git-Conflict]",["expr"] = false,["noremap"] = true,["nowait"] = false,["script"] = false,["silent"] = true,["unique"] = false})
+vim.keymap.set({"n"}, "<leader>cb", "<Plug>(git-conflict-both)", {["desc"] = "Choose Both [Git-Conflict]",["expr"] = false,["noremap"] = true,["nowait"] = false,["script"] = false,["silent"] = true,["unique"] = false})
+vim.keymap.set({"n"}, "<leader>co", "<Plug>(git-conflict-ours)", {["desc"] = "Choose Ours [Git-Conflict]",["expr"] = false,["noremap"] = true,["nowait"] = false,["script"] = false,["silent"] = true,["unique"] = false})
+vim.keymap.set({"n"}, "<leader>ct", "<Plug>(git-conflict-theirs)", {["desc"] = "Choose Theirs [Git-Conflict]",["expr"] = false,["noremap"] = true,["nowait"] = false,["script"] = false,["silent"] = true,["unique"] = false})
+vim.keymap.set({"n"}, "[x", "<Plug>(git-conflict-next-conflict)", {["desc"] = "Go to the next Conflict [Git-Conflict]",["expr"] = false,["noremap"] = true,["nowait"] = false,["script"] = false,["silent"] = true,["unique"] = false})
+vim.keymap.set({"n"}, "]x", "<Plug>(git-conflict-prev-conflict)", {["desc"] = "Go to the previous Conflict [Git-Conflict]",["expr"] = false,["noremap"] = true,["nowait"] = false,["script"] = false,["silent"] = true,["unique"] = false})
+vim.keymap.set({"n"}, "gnn", ":lua require('nvim-treesitter.incremental_selection').init_selection()<CR>", {["desc"] = "Init selection [treesitter]",["expr"] = false,["noremap"] = true,["nowait"] = false,["script"] = false,["silent"] = true,["unique"] = false})
+vim.keymap.set({"n","x"}, "grc", "<cmd>lua require('nvim-treesitter.incremental_selection').scope_incremental()<CR>", {["desc"] = "Increment selection by scope [treesitter]",["expr"] = false,["noremap"] = true,["nowait"] = false,["script"] = false,["silent"] = true,["unique"] = false})
+vim.keymap.set({"n","x"}, "grm", "<cmd>lua require('nvim-treesitter.incremental_selection').node_decremental()<CR>", {["desc"] = "Decrement selection by node [treesitter]",["expr"] = false,["noremap"] = true,["nowait"] = false,["script"] = false,["silent"] = true,["unique"] = false})
+vim.keymap.set({"n","x"}, "grn", "<cmd>lua require('nvim-treesitter.incremental_selection').node_incremental()<CR>", {["desc"] = "Increment selection by node [treesitter]",["expr"] = false,["noremap"] = true,["nowait"] = false,["script"] = false,["silent"] = true,["unique"] = false})
+
+
+

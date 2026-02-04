@@ -36,6 +36,11 @@
       gps = "git pull";
 
       ff = "fuck";
+
+      ka = "kubectl apply";
+      kd = "kubectl delete";
+      k = "kubectl";
+      kg = "kubectl get";
     };
 
     history = {

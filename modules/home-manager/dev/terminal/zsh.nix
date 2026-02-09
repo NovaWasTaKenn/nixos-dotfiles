@@ -41,6 +41,13 @@
       kd = "kubectl delete";
       k = "kubectl";
       kg = "kubectl get";
+
+      p = "python";
+      pm = "python manage.py";
+      pmrs = "python manage.py runserver";
+      pmmm = "python manage.py makemigrations";
+      pmmi = "python manage.py migrate";
+      pmcs = "python manage.py collectstatic";
     };
 
     history = {

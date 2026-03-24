@@ -4,5 +4,6 @@
     databricks-cli
     azure-storage-azcopy
     kubectl
+    github-copilot-cli
   ];
 }

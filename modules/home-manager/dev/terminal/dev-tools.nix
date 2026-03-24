@@ -5,5 +5,6 @@
     azure-storage-azcopy
     kubectl
     github-copilot-cli
+    bind
   ];
 }

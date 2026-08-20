@@ -24,8 +24,17 @@
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
-  boot.loader.systemd-boot.configurationLimit = 5;
+  boot.loader.systemd-boot.configurationLimit = 3;
   boot.loader.efi.canTouchEfiVariables = true;
+  boot.kernelPackages = lib.mkIf (lib.versionOlder pkgs.linux.version "6.18.22") (lib.mkDefault pkgs.linuxPackages_6_18);
+
+  nix.optimise.automatic = true;
+
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than 14d";
+  };
 
   # Nixos
   nix.settings.experimental-features = ["nix-command" "flakes"];
@@ -214,10 +223,10 @@
     protonup-qt
   ];
 
-  fonts = {
-    packages = []++ builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts);
-    fontDir.enable = true;
-  };
+  # fonts = {
+  #   packages = with pkgs; [nerd-fonts.jetbrains-mono];
+  #   fontDir.enable = true;
+  # };
 
   programs.neovim.defaultEditor = true;
   # Some programs need SUID wrappers, can be configured further or are

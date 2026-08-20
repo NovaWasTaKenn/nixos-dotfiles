@@ -2,15 +2,15 @@
   description = "Nixos config flake";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
 
     lanzaboote = {
-      url = "github:nix-community/lanzaboote/v0.4.2";
+      url = "github:nix-community/lanzaboote/v1.0.0";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     home-manager = {
-      url = "github:nix-community/home-manager/release-25.05";
+      url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -32,14 +32,17 @@
 
   outputs = inputs @ {self, ...}: let
     system = "x86_64-linux"; # Passer dans dossier profile / plus simple de laisser ici
-    user = "quentin-pro"; # TODO : multi users
-    host = "wsl";
+    user = "quentin"; # TODO : multi users
+    host = "desktop";
 
     pkgs = import inputs.nixpkgs {
       system = system;
       config = {
         allowUnfree = true;
         allowUnfreePredicate = _: true;
+        permittedInsecurePackages = [
+          "qtwebengine-5.15.19"
+        ];
       };
       overlays = [
         (prev: final: {

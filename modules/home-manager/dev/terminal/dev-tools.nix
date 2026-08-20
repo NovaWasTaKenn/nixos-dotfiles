@@ -6,5 +6,10 @@
     kubectl
     github-copilot-cli
     bind
+    cloud-init
+    podman
+    proxmox-auto-install-assistant
+    sops
+    age
   ];
 }

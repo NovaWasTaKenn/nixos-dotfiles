@@ -48,6 +48,10 @@
       pmmm = "python manage.py makemigrations";
       pmmi = "python manage.py migrate";
       pmcs = "python manage.py collectstatic";
+
+      tf = "terraform";
+      tfp = "terraform plan";
+      tfa = "terraform apply";
     };
 
     history = {

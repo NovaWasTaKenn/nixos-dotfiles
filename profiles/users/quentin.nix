@@ -66,7 +66,6 @@ in {
     spotify-player
     libnotify
     myBaseNvim
-    texliveFull
     pandoc
     obsidian-export
     myCli
@@ -74,14 +73,20 @@ in {
     stremio
     proton-pass
     protonvpn-gui
-    protonvpn-cli
     protonmail-desktop
     libreoffice-qt6-fresh
     (discord.override {
       withOpenASAR = true; # can do this here too
       withVencord = true;
     })
-  ]++ builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts);
+    ttop
+    bind
+    mtr
+  ];
+
+  # fonts.packages = with pkgs; [
+  #   nerd-fonts.jetbrains-mono
+  # ];
 
   # Let Home Manager install and manage itself.
 

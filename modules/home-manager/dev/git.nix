@@ -1,15 +1,22 @@
-{config, pkgs, user, ...}:
-
 {
+  config,
+  pkgs,
+  user,
+  ...
+}: {
   programs.git = {
     enable = true;
-    userName = "quentin";
-    userEmail = "quentin.le-nestour@outlook.com";
-    extraConfig = {
-      credential.helper = "${pkgs.git.override { withLibsecret = true; }}/bin/git-credential-libsecret";
+    settings = {
+      user = {
+        name = "quentin";
+        email = "quentin.le-nestour@outlook.com";
+      };
+      push = {
+        autoSetupRemote = true;
+      };
+      credential.helper = "${pkgs.git.override {withLibsecret = true;}}/bin/git-credential-libsecret";
       init.defaultBranch = "main";
       safe.directory = "/home/${user}/.dotfiles";
     };
   };
 }
-

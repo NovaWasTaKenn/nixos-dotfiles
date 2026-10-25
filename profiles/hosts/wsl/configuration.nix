@@ -8,6 +8,7 @@
   lib,
   user,
   host,
+  pkgs-unstable,
   ...
 }: {
   imports = [
@@ -25,6 +26,15 @@
 
   config = {
     generalOptions.users = [user];
+
+    # Home Manager as a NixOS module: `nixos-rebuild switch` manages system + user dotfiles
+    home-manager = {
+      useGlobalPkgs = true;
+      useUserPackages = true;
+      extraSpecialArgs = {inherit inputs pkgs-unstable user host;};
+      users.${user} = import ../../users/${user}.nix;
+      backupFileExtension = "bak";
+    };
 
     # Bootloader.
     #boot.loader.systemd-boot.enable = true;

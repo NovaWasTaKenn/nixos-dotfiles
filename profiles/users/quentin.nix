@@ -14,6 +14,7 @@ in {
     ../../modules/home-manager/dev/terminal/ghostty.nix
     ../../modules/home-manager/dev/terminal/ia.nix
     ../../modules/home-manager/dev/ripgrep.nix
+    ../../modules/home-manager/dev/vscode/main.nix
     ../../modules/home-manager/automation
     ../../globalCustomOptions.nix
     ../../modules/home-manager/gaming.nix
@@ -62,7 +63,6 @@ in {
     unetbootin
     gparted
     ntfs3g
-    obsidian
     spotify-player
     libnotify
     myBaseNvim
@@ -70,7 +70,6 @@ in {
     obsidian-export
     myCli
     unrar-free
-    stremio
     proton-pass
     protonvpn-gui
     protonmail-desktop

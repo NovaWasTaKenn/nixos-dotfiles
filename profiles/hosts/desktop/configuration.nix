@@ -6,11 +6,15 @@
   pkgs,
   inputs,
   lib,
+  user,
+  host,
+  pkgs-unstable,
   ...
 }: {
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
+    inputs.lanzaboote.nixosModules.lanzaboote
     ../../../modules/nixos/graphics/nvidia.nix
     ../../../modules/nixos/steam.nix
     ../../../modules/nixos/networking/ssh.nix
@@ -21,6 +25,15 @@
     ../../../modules/nixos/power/disableSuspend.nix
     ../../../modules/nixos/security/secureBoot.nix
   ];
+
+  # Home Manager as a NixOS module: `nixos-rebuild switch` manages system + user dotfiles
+  home-manager = {
+    useGlobalPkgs = true;
+    useUserPackages = true;
+    extraSpecialArgs = {inherit inputs pkgs-unstable user host;};
+    users.${user} = import ../../users/${user}.nix;
+    backupFileExtension = "bak";
+  };
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;

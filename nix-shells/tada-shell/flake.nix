@@ -128,14 +128,17 @@
         echo "✅ ODBC configuration files created successfully!"
         echo ""
         echo "📍 Working directory: $PWD"
-        venvPath=$projectPath/.python-venv-nixos
-        # Create venv if not exists
-        if [ ! -d $venvPath ]; then
-          echo "🐍 Creating Python virtual environment with $(python --version)"
-          python -m venv $venvPath
+        venvPath=$HOME/venv/.tada-venv
+        nixPython=${python}/bin/python
+        expectedPy=$($nixPython --version 2>&1 | awk '{print $2}')
+        actualPy=$( [ -f $venvPath/bin/python ] && $venvPath/bin/python --version 2>&1 | awk '{print $2}' || echo "none" )
+        if [ ! -d $venvPath ] || [ "$actualPy" != "$expectedPy" ]; then
+          echo "🐍 Creating Python virtual environment with $($nixPython --version) (was: $actualPy)"
+          rm -rf $venvPath
+          $nixPython -m venv $venvPath
           echo "✅ Virtual environment created at $venvPath"
         else
-          echo "♻️  Using existing Python virtual environment"
+          echo "♻️  Using existing Python virtual environment ($($nixPython --version))"
         fi
 
         source $venvPath/bin/activate

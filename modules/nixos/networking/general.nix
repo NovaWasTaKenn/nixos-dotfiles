@@ -1,8 +1,11 @@
 {
   host,
   pkgs,
+  lib,
   ...
-}: {
+}: let
+  isDesktop = host == "desktop";
+in {
   # wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
@@ -24,18 +27,20 @@
       }
     ];
 
-    hosts = {
+    hosts = lib.mkIf isDesktop {
       "192.168.1.79" = ["*.pve.local"];
       "192.168.1.132" = ["node-3.pve.local" "homelab.pve.local"];
       "192.168.1.51" = ["node-4.pve.local"];
     };
 
-    interfaces.enp34s0 = {
-      wakeOnLan.enable = true;
+    interfaces = lib.mkIf isDesktop {
+      enp34s0 = {
+        wakeOnLan.enable = true;
+      };
     };
   };
 
-  systemd.services.homelab-route = {
+  systemd.services.homelab-route = lib.mkIf isDesktop {
     description = "Static route to homelab vnet";
     after = ["network-online.target"];
     wants = ["network-online.target"];
@@ -52,7 +57,7 @@
     enable = true;
   };
 
-  environment.etc = {
+  environment.etc = lib.mkIf isDesktop {
     "systemd/resolved.conf.d/pve.conf".text = ''
       [Resolve]
       DNS=192.168.1.79    # OPNsense WAN IP

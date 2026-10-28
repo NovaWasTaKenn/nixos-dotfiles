@@ -141,6 +141,10 @@
           echo "♻️  Using existing Python virtual environment ($($nixPython --version))"
         fi
 
+        # Clear PYTHONPATH so nix-injected site-packages (e.g. Python 3.12 typing_extensions
+        # pulled in by pythonNvim) don't shadow the venv's own packages.
+        unset PYTHONPATH
+
         source $venvPath/bin/activate
 
         echo "🔌 Virtual environment activated"

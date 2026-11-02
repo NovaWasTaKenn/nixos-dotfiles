@@ -152,11 +152,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1793655938,
-        "narHash": "sha256-6+x4PByB1m1nM/LhZLjsVg9E5rqYN/Vp8z4fj/KGiEY=",
+        "lastModified": 1793659299,
+        "narHash": "sha256-ajHwEd/BC8v2RVwPD9W8LYyMXAgNdUvkRtmbvGqA4/s=",
         "owner": "NovaWasTakenn",
         "repo": "myCli",
-        "rev": "43958afd8cc02be434a1adea271f5b8706fc1005",
+        "rev": "24e5f0d4a7e6615cfd3ab5e839212b98a2ea58b5",
         "type": "github"
       },
       "original": {
@@ -251,11 +251,11 @@
         "nvf": "nvf"
       },
       "locked": {
-        "lastModified": 1793263677,
-        "narHash": "sha256-6lLIoVlRuCgtIq58UV5+EeP6emMXum7zSSchaxuQHgg=",
+        "lastModified": 1793656189,
+        "narHash": "sha256-wg/LIf+4omQsGr7i7km4xg0HLdMtuqURWAl3jADP+5A=",
         "owner": "NovaWasTakenn",
         "repo": "nvimConfigs",
-        "rev": "4d325f94dc2df2dffbb216f4bca9b65aadcace6e",
+        "rev": "9809506aa36bd8d03b0e413bc787bdf28e0eae67",
         "type": "github"
       },
       "original": {

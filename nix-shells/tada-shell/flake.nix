@@ -2,13 +2,8 @@
   description = "Django dev shell with Python 3.10, pyodbc, pycairo, zsh, FreeTDS";
 
   inputs = {
-    nixpkgs-unstable.url = "github:nixos/nixpkgs?ref=nixos-unstable";
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
     nixpkgs-25-05.url = "github:NixOS/nixpkgs/nixos-25.05";
-    nvimConfigs = {
-      url = "github:NovaWasTakenn/nvimConfigs/main";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
-    };
   };
 
   outputs = inputs @ {...}: let
@@ -49,8 +44,6 @@
 
         pkgs-25-05.azure-cli
         zsh
-        # Use nvim from 25.05 with your custom configs
-        inputs.nvimConfigs.packages.${system}.pythonNvim
       ];
 
       shellHook = ''
@@ -141,8 +134,7 @@
           echo "♻️  Using existing Python virtual environment ($($nixPython --version))"
         fi
 
-        # Clear PYTHONPATH so nix-injected site-packages (e.g. Python 3.12 typing_extensions
-        # pulled in by pythonNvim) don't shadow the venv's own packages.
+        # Clear PYTHONPATH so nix-injected site-packages don't shadow the venv's own packages.
         unset PYTHONPATH
 
         source $venvPath/bin/activate

@@ -54,9 +54,7 @@
 
     mkOverlays = system: [
       (prev: final: {
-        myBaseNvim = inputs.nvimConfigs.packages.${system}.baseNvim;
-        dotfilesNvim = inputs.nvimConfigs.packages.${system}.dotfilesNvim;
-        scalaNvim = inputs.nvimConfigs.packages.${system}.scalaNvim;
+        myBaseNvim = inputs.nvimConfigs.packages.${system}.nvim;
         myCli = inputs.myCli.packages.${system}.myCli;
       })
     ];

@@ -14,9 +14,10 @@ in {
     ../../modules/home-manager/dev/terminal/ghostty.nix
     ../../modules/home-manager/dev/terminal/dev-tools.nix
     ../../modules/home-manager/dev/ripgrep.nix
-    ../../modules/home-manager/dev/vscode/main.nix
+    # ../../modules/home-manager/dev/vscode/main.nix
     ../../modules/home-manager/automation
     ../../modules/home-manager/dev/terminal/ia.nix
+    ../../modules/home-manager/syncthing.nix
     ../../globalCustomOptions.nix
   ];
 

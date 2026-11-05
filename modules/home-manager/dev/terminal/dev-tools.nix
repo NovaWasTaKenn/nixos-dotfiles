@@ -1,5 +1,6 @@
 {pkgs, ...}: {
   home.packages = with pkgs; [
+    claude-code
     azure-cli
     databricks-cli
     azure-storage-azcopy

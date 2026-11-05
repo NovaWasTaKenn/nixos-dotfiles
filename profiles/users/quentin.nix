@@ -14,7 +14,7 @@ in {
     ../../modules/home-manager/dev/terminal/ghostty.nix
     ../../modules/home-manager/dev/terminal/ia.nix
     ../../modules/home-manager/dev/ripgrep.nix
-    ../../modules/home-manager/dev/vscode/main.nix
+    # ../../modules/home-manager/dev/vscode/main.nix
     ../../modules/home-manager/automation
     ../../globalCustomOptions.nix
     ../../modules/home-manager/gaming.nix

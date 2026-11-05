@@ -43,6 +43,12 @@ in {
         # Preseed the Obsidian MD extension (default note is asked on first connect)
         "obsidian-md-vsc.defaultVault" = "personal";
         "obsidian-md-vsc.defaultVaultPath" = "${config.home.homeDirectory}/Documents/personal";
+        "explorer.openEditors.visible" = 1;
+        "editor.lineNumbers" = "relative";
+        "workbench.secondarySideBar.defaultVisibility" = "hidden";
+        "workbench.activityBar.location" = "hidden";
+        "workbench.sideBar.location" = "right";
+        "workbench.iconTheme" = "material-icon-theme";
       };
 
       # Simple key -> command binds only.
